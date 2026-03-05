@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Adrienne — Japan 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#1c1c1c;--off-white:#f7f5f2;--rose:#c9897b;--gold:#c9a96e;--charcoal:#3d3d3d;--muted:#6b6b6b}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'DM Sans',sans-serif;color:var(--ink);background:var(--off-white);line-height:1.65}
+.hero{position:relative;height:100vh;min-height:650px;background:linear-gradient(to bottom,rgba(0,0,0,.15)0%,rgba(0,0,0,.5)100%),url('https://images.pexels.com/photos/19035807/pexels-photo-19035807.jpeg?auto=compress&cs=tinysrgb&w=1600') center/cover;display:flex;flex-direction:column;justify-content:flex-end;padding:60px}
+.hero-eyebrow{font-size:13px;letter-spacing:5px;text-transform:uppercase;color:var(--gold);margin-bottom:16px;font-weight:400}
+.hero h1{font-family:'Playfair Display',serif;font-size:80px;font-weight:700;color:white;line-height:1;margin-bottom:12px}
+.hero h1 em{font-style:italic;font-weight:400}
+.hero-sub{font-size:18px;font-weight:300;color:rgba(255,255,255,.8);max-width:550px;margin-bottom:24px}
+.hero-pills{display:flex;gap:12px;flex-wrap:wrap}
+.pill{padding:8px 20px;border:1px solid rgba(255,255,255,.35);font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:white;backdrop-filter:blur(4px)}
+.section{max-width:1100px;margin:0 auto;padding:80px 40px}
+.eyebrow{font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--rose);margin-bottom:10px;font-weight:500}
+h2{font-family:'Playfair Display',serif;font-size:40px;font-weight:600;margin-bottom:20px;line-height:1.15}
+h3{font-family:'Playfair Display',serif;font-size:28px;font-weight:600;margin-bottom:10px}
+.two-part{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.two-part img{width:100%;height:500px;object-fit:cover}
+.two-part p{font-size:16px;color:var(--muted);font-weight:300;margin-bottom:14px}
+.accent-line{width:50px;height:2px;background:var(--rose);margin-bottom:24px}
+.itin-table{width:100%;border-collapse:collapse;margin-top:24px}
+.itin-table th{background:var(--ink);color:white;font-size:12px;letter-spacing:1px;text-transform:uppercase;padding:10px 14px;text-align:left;font-weight:500}
+.itin-table td{padding:10px 14px;font-size:14px;border-bottom:1px solid #e8e5e0;font-weight:300;color:var(--muted)}
+.itin-table tr:nth-child(even) td{background:#f4f2ef}
+.itin-table .day-col{font-weight:500;color:var(--ink);white-space:nowrap;width:100px}
+.itin-table .phase-row td,.itin-table tr.phase-row:nth-child(even) td{background:var(--ink)!important;color:white!important;font-weight:600;font-size:13px;letter-spacing:1px;text-transform:uppercase;padding:8px 14px}
+.tokyo-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;margin-top:40px}
+.tokyo-card{position:relative;overflow:hidden;border-radius:4px;height:340px}
+.tokyo-card img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
+.tokyo-card:hover img{transform:scale(1.03)}
+.tokyo-card .card-content{position:absolute;bottom:0;left:0;right:0;padding:28px;background:linear-gradient(transparent,rgba(0,0,0,.75))}
+.tokyo-card .card-day{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+.tokyo-card h4{font-family:'Playfair Display',serif;font-size:24px;color:white;margin-bottom:6px}
+.tokyo-card p{font-size:13px;color:rgba(255,255,255,.8);font-weight:300}
+.tokyo-card.tall{grid-column:span 2;height:400px}
+.moment-section{background:var(--ink);color:white;padding:80px 40px;text-align:center}
+.moment-section .eyebrow{color:var(--gold)}
+.moment-section h2{color:white}
+.moment-section p{color:rgba(255,255,255,.7);max-width:600px;margin:0 auto 16px;font-weight:300;font-size:16px}
+.osaka-timeline{margin-top:40px}
+.timeline-item{display:grid;grid-template-columns:120px 1fr;gap:24px;padding:24px 0;border-bottom:1px solid #e8e5e0}
+.timeline-date{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--rose);font-weight:500;padding-top:4px}
+.timeline-content h4{font-family:'Playfair Display',serif;font-size:20px;margin-bottom:6px}
+.timeline-content p{font-size:14px;color:var(--muted);font-weight:300}
+.kyoto-feature{display:grid;grid-template-columns:1fr 1fr;gap:0;margin:60px 0}
+.kyoto-feature img{width:100%;height:450px;object-fit:cover}
+.kyoto-feature-text{background:var(--ink);color:white;padding:50px;display:flex;flex-direction:column;justify-content:center}
+.kyoto-feature-text .eyebrow{color:var(--gold)}
+.kyoto-feature-text h2{color:white;font-size:34px}
+.kyoto-feature-text p{color:rgba(255,255,255,.7);font-weight:300;font-size:15px;margin-bottom:12px}
+.included-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:32px}
+.included-block h4{font-family:'Playfair Display',serif;font-size:20px;margin-bottom:14px}
+.included-block ul{list-style:none}
+.included-block li{font-size:14px;color:var(--muted);font-weight:300;padding:5px 0;padding-left:16px;position:relative}
+.included-block li::before{content:'—';position:absolute;left:0;color:var(--rose)}
+.tips-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:32px}
+.tip{background:white;padding:28px;border-radius:4px}
+.tip h5{font-family:'Playfair Display',serif;font-size:17px;margin-bottom:8px}
+.tip p{font-size:13px;color:var(--muted);font-weight:300}
+.footer{text-align:center;padding:80px 40px;background:linear-gradient(135deg,rgba(0,0,0,.6),rgba(0,0,0,.4)),url('https://images.pexels.com/photos/30094291/pexels-photo-30094291.jpeg?auto=compress&cs=tinysrgb&w=1200') center/cover}
+.footer h2{font-family:'Playfair Display',serif;font-size:38px;color:white;margin-bottom:12px}
+.footer p{color:rgba(255,255,255,.7);font-weight:300;font-size:16px}
+@media(max-width:768px){.hero h1{font-size:46px}.two-part,.kyoto-feature,.included-grid{grid-template-columns:1fr}.tokyo-grid{grid-template-columns:1fr}.tokyo-card.tall{grid-column:span 1}.tips-grid{grid-template-columns:1fr}.hero,.section{padding:40px 24px}.moment-section{padding:60px 24px}}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-eyebrow">Your Japan Adventure</div>
+  <h1>Adrienne,<br><em>go find yourself.</em></h1>
+  <p class="hero-sub">Solo in Tokyo. Family in Osaka. A girls' trip to Kyoto. Two weeks, one country, and the kind of trip that changes how you see the world.</p>
+  <div class="hero-pills">
+    <div class="pill">Nov 15 – 29, 2026</div>
+    <div class="pill">Tokyo · 4 Nights Solo</div>
+    <div class="pill">Osaka · 10 Nights Family</div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="two-part">
+    <div>
+      <div class="eyebrow">The Trip</div>
+      <h2>Two adventures in one</h2>
+      <div class="accent-line"></div>
+      <p>First: four days solo in Tokyo — one of the most electrifying cities on earth, entirely at your pace. Spa days, street food, tiny bars, and world-class art.</p>
+      <p>Then: the bullet train to Osaka to join the family for Sam's birthday, ten days of Kansai life, and a girls' overnight in Kyoto with Sam and the kids. Oh — and we'll be celebrating your birthday too.</p>
+      <p>You've traveled enough to know that the best trips are the ones where you let the place surprise you. Japan will do that every single day.</p>
+    </div>
+    <img src="https://images.pexels.com/photos/2091034/pexels-photo-2091034.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Woman walking through Fushimi Inari torii gates, Kyoto">
+  </div>
+</div>
+
+<div class="section" style="padding-top:0">
+  <div class="eyebrow">At a Glance</div>
+  <h2>Your Full Itinerary</h2>
+  <div class="accent-line"></div>
+  <table class="itin-table">
+    <thead><tr><th>Date</th><th>Day</th><th>Plan</th></tr></thead>
+    <tbody>
+      <tr class="phase-row"><td colspan="3">Part 1 — Tokyo Solo</td></tr>
+      <tr><td class="day-col">Sat Nov 15</td><td>1</td><td>Arrive Tokyo. Consider Shibuya Crossing at night, yakitori in Nonbei Yokocho.</td></tr>
+      <tr><td class="day-col">Mon Nov 16</td><td>2</td><td>Suggestions: Harajuku, Omotesando, Meiji Shrine, Shibuya Sky at sunset, Ebisu wine bars.</td></tr>
+      <tr><td class="day-col">Tue Nov 17</td><td>3</td><td>Highlights: Senso-ji Asakusa (early AM), teamLab Borderless, Roppongi dinner.</td></tr>
+      <tr><td class="day-col">Wed Nov 18</td><td>4</td><td>Ideas: Thermae-Yu spa, Shinjuku Gyoen park (autumn colour!), Golden Gai for your last night.</td></tr>
+      <tr class="phase-row"><td colspan="3">Part 2 — Shinkansen to Osaka</td></tr>
+      <tr><td class="day-col">Thu Nov 19</td><td>5</td><td>Bullet train to Osaka (watch for Mt. Fuji!). Sam's birthday teppanyaki dinner.</td></tr>
+      <tr class="phase-row"><td colspan="3">Part 3 — Osaka &amp; Family Time</td></tr>
+      <tr><td class="day-col">Fri Nov 20</td><td>6</td><td>Osaka walkabout — Dotonbori, Shinsaibashi. Last day with Dan &amp; Connie.</td></tr>
+      <tr><td class="day-col">Sat Nov 21</td><td>7</td><td>Uji day trip (tea town, Byodo-in). D&amp;C farewell + YOUR BIRTHDAY dinner!</td></tr>
+      <tr><td class="day-col">Sun Nov 22</td><td>8</td><td>D&amp;C depart. Rest day.</td></tr>
+      <tr><td class="day-col">Mon Nov 23</td><td>9</td><td>Andy flies to Vancouver. Explore Osaka with Sam + kids.</td></tr>
+      <tr><td class="day-col">Tue Nov 24</td><td>10</td><td>Homeschool AM → Girls' Kyoto trip! Train to Kyoto. Nishiki Market. Gion.</td></tr>
+      <tr><td class="day-col">Wed Nov 25</td><td>11</td><td>Full day Kyoto — Higashiyama temples or Arashiyama bamboo grove.</td></tr>
+      <tr><td class="day-col">Thu Nov 26</td><td>12</td><td>Kyoto → home. Afternoon homeschool.</td></tr>
+      <tr><td class="day-col">Fri Nov 27</td><td>13</td><td>Flex day — USJ, Osaka exploring, or rest.</td></tr>
+      <tr><td class="day-col">Sat–Sun Nov 28–29</td><td>14–15</td><td>Last day + departure. Airport car to KIX. Safe travels!</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="section" style="padding-top:0">
+  <div class="eyebrow">Part One</div>
+  <h2>Tokyo Solo</h2>
+  <p style="color:var(--muted);font-weight:300;font-size:16px;max-width:650px">These are suggestions, not a schedule. Think of them as a menu to pick from — wander between them, skip what doesn't call to you, and let yourself get lost. The best moments in Tokyo are the ones you don't plan.</p>
+  <div class="tokyo-grid">
+    <div class="tokyo-card">
+      <img src="https://images.pexels.com/photos/5860950/pexels-photo-5860950.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Shibuya Crossing at night, Tokyo">
+      <div class="card-content">
+        <div class="card-day">Sat Nov 15 — Arrival</div>
+        <h4>Shibuya at Night</h4>
+        <p>The world's most famous intersection, lit up in neon. A tiny yakitori bar in Nonbei Yokocho makes a perfect first-night dinner.</p>
+      </div>
+    </div>
+    <div class="tokyo-card">
+      <img src="https://images.pexels.com/photos/31252465/pexels-photo-31252465.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Red torii gate in forest, shrine">
+      <div class="card-content">
+        <div class="card-day">Mon Nov 16 — Suggestion</div>
+        <h4>Harajuku &amp; Meiji Shrine</h4>
+        <p>Takeshita Street chaos meets Omotesando's architectural calm. Meiji Shrine is a massive forest in the middle of the city. Consider Shibuya Sky at sunset for panoramic views.</p>
+      </div>
+    </div>
+    <div class="tokyo-card tall">
+      <img src="https://images.pexels.com/photos/31021358/pexels-photo-31021358.jpeg?auto=compress&cs=tinysrgb&w=1200&h=500&fit=crop" alt="Ornate roof of Senso-ji Temple, Asakusa, Tokyo">
+      <div class="card-content">
+        <div class="card-day">Tue Nov 17 — Don't miss this one</div>
+        <h4>Senso-ji &amp; teamLab Borderless</h4>
+        <p>Tokyo's oldest temple is magical early morning before the crowds. And teamLab Borderless is the one thing everyone says you have to do — immersive digital art that feels like walking inside a dream. Book tickets at teamlab.art well in advance.</p>
+      </div>
+    </div>
+    <div class="tokyo-card">
+      <img src="https://images.pexels.com/photos/19758359/pexels-photo-19758359.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Narrow Japanese alley with lanterns at night">
+      <div class="card-content">
+        <div class="card-day">Wed Nov 18 — Treat Yourself</div>
+        <h4>Spa Day &amp; Golden Gai</h4>
+        <p>Thermae-Yu in Shinjuku is a multi-floor spa/onsen perfect for a solo morning. For your last night, Golden Gai's six tiny alleys of 4-seat bars are solo traveler paradise.</p>
+      </div>
+    </div>
+    <div class="tokyo-card">
+      <img src="https://images.pexels.com/photos/20627936/pexels-photo-20627936.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Shinkansen bullet train at station">
+      <div class="card-content">
+        <div class="card-day">Thu Nov 19 — Bullet Train Day</div>
+        <h4>Shinkansen to Osaka</h4>
+        <p>Grab an ekiben bento at Tokyo Station, board the shinkansen, and watch for Mt. Fuji out the right-side window. Arrive in time for Sam's birthday dinner.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="moment-section">
+  <div class="eyebrow">Part Two</div>
+  <h2>Two Birthdays in Japan</h2>
+  <p>Thursday evening, November 19. You arrive from Tokyo just in time for Sam's birthday — Kobe beef teppanyaki dinner, cooked right in front of you. All nine of us around the grill.</p>
+  <p>Two days later, it's your turn. Saturday the 21st — a day trip to the tea town of Uji, then back to Osaka for a combined farewell dinner for Dan &amp; Connie and a birthday celebration for you.</p>
+  <p style="color:var(--gold);margin-top:24px"><em>Welcome to the family.</em></p>
+</div>
+
+<div class="section">
+  <div class="eyebrow">Part Three</div>
+  <h2>Osaka &amp; Family Time</h2>
+  <p style="color:var(--muted);font-weight:300;font-size:16px;max-width:650px;margin-bottom:20px">The pace shifts. Four kids under 7 set the tempo. It's a different kind of travel — but you'll see Japan through their eyes, and that has its own magic.</p>
+  <div class="osaka-timeline">
+    <div class="timeline-item">
+      <div class="timeline-date">Fri Nov 20</div>
+      <div class="timeline-content"><h4>Osaka Walkabout</h4><p>First full day in Osaka. No big agenda — Dotonbori, Shinsaibashi, or just the neighbourhood. Dan &amp; Connie are still here. Enjoy the overlap.</p></div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date">Sat Nov 21</div>
+      <div class="timeline-content"><h4>Uji Day Trip + YOUR Birthday Dinner!</h4><p>A peaceful tea town 30 minutes away. Byodo-in Temple (it's on the 10-yen coin), matcha ice cream, river walk. That evening: a combined farewell dinner for Dan &amp; Connie and birthday celebration for you. Happy birthday in Japan!</p></div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date">Sun Nov 22</div>
+      <div class="timeline-content"><h4>Rest Day</h4><p>Dan &amp; Connie depart. Quiet day at the Airbnb. Recharge.</p></div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date">Mon Nov 23</div>
+      <div class="timeline-content"><h4>Andy Departs for Vancouver</h4><p>Andy flies back for his work week. It's you, Sam, and four kids. You've got this.</p></div>
+    </div>
+  </div>
+</div>
+
+<div class="kyoto-feature">
+  <img src="https://images.pexels.com/photos/96420/pexels-photo-96420.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Fushimi Inari orange torii pathway, Kyoto">
+  <div class="kyoto-feature-text">
+    <div class="eyebrow">The Highlight</div>
+    <h2>Girls' Trip to Kyoto</h2>
+    <p>Tuesday after homeschool, you and Sam pack up the kids and take the train to Kyoto for two nights. Apartment hotel with a kitchen. Nishiki Market for lunch. Kamo River for the kids to run.</p>
+    <p>Wednesday is a full free day — Higashiyama temples, Arashiyama bamboo grove, or just wandering Gion. No pressure. The accomplishment is the trip itself.</p>
+    <p>Thursday morning, pack up, train home. You just navigated Kyoto with four kids in a foreign country. Not bad.</p>
+    <p style="margin-top:16px;color:var(--gold)"><em>Nov 24–26 · 2 nights · Cheat sheet provided</em></p>
+  </div>
+</div>
+
+<div class="section">
+  <div class="osaka-timeline">
+    <div class="timeline-item">
+      <div class="timeline-date">Fri Nov 27</div>
+      <div class="timeline-content"><h4>Flex Day</h4><p>Universal Studios Japan (Nintendo World!), more Osaka exploring, or a well-earned rest day.</p></div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date">Sat–Sun<br>Nov 28–29</div>
+      <div class="timeline-content"><h4>Final Days &amp; Departure</h4><p>Sunday: departure day. Airport car to KIX arranged. Safe travels — and thank you for everything.</p></div>
+    </div>
+  </div>
+</div>
+
+<div style="background:white;padding:80px 40px">
+  <div style="max-width:1100px;margin:0 auto">
+    <div class="eyebrow">The Details</div>
+    <h2>What's Included &amp; Tips</h2>
+    <div class="included-grid">
+      <div class="included-block">
+        <h4>Included</h4>
+        <ul>
+          <li>10 nights at Osaka Airbnb (Nov 19–29)</li>
+          <li>Airport car transfer (1-way, KIX departure)</li>
+          <li>Sam's birthday teppanyaki dinner</li>
+          <li>Your birthday / farewell dinner (Nov 21)</li>
+          <li>Uji day trip</li>
+          <li>Girls' Kyoto overnight (2 nights, your share)</li>
+          <li>Kyoto cheat sheet with directions &amp; itinerary</li>
+          <li>Trip planning &amp; booking help — Tokyo hotels, teamLab tickets, shinkansen, whatever you need</li>
+        </ul>
+      </div>
+      <div class="included-block">
+        <h4>Not Included</h4>
+        <ul>
+          <li>Flights to/from Japan</li>
+          <li>Tokyo accommodation &amp; expenses (4 nights)</li>
+          <li>Shinkansen Tokyo → Osaka</li>
+          <li>Personal meals outside included dinners</li>
+          <li>Universal Studios tickets (if you go)</li>
+          <li>Travel insurance (strongly recommended)</li>
+        </ul>
+      </div>
+    </div>
+    <div class="tips-grid" style="margin-top:48px">
+      <div class="tip"><h5>What to Wear</h5><p>Layers. 15–18°C days, 7–10°C evenings. Comfortable walking shoes — 15,000+ steps/day in Tokyo. Slip-ons for temples.</p></div>
+      <div class="tip"><h5>Money &amp; Phone</h5><p>Japan is cash-heavy. 7-Eleven ATMs accept foreign cards. Get an eSIM before you leave. Google Maps is essential.</p></div>
+      <div class="tip"><h5>Book Now</h5><p>teamLab Borderless tickets at teamlab.art (they sell out!). Tokyo hotel in Shibuya or Shinjuku.</p></div>
+      <div class="tip"><h5>Golden Gai</h5><p>Some bars have cover charges (¥500–1,000), posted on the door. Totally normal. One drink per bar, hop to the next.</p></div>
+      <div class="tip"><h5>The Shinkansen</h5><p>Reserved seats recommended. Green Car is business class if you want to treat yourself. Ekiben bento boxes at the station are the move.</p></div>
+      <div class="tip"><h5>For Kyoto</h5><p>Pack light for 2 nights. Carrier or stroller for the kids (not both). Konbini everywhere for emergency supplies.</p></div>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  <h2>See you at the birthday dinner.</h2>
+  <p style="margin-top:12px">November 15 – 29, 2026 · Tokyo &amp; Osaka, Japan</p>
+</div>
+</body>
+</html>
