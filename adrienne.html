@@ -67,9 +67,21 @@ h3{font-family:'Playfair Display',serif;font-size:28px;font-weight:600;margin-bo
 .footer h2{font-family:'Playfair Display',serif;font-size:38px;color:white;margin-bottom:12px}
 .footer p{color:rgba(255,255,255,.7);font-weight:300;font-size:16px}
 @media(max-width:768px){.hero h1{font-size:46px}.two-part,.kyoto-feature,.included-grid{grid-template-columns:1fr}.tokyo-grid{grid-template-columns:1fr}.tokyo-card.tall{grid-column:span 1}.tips-grid{grid-template-columns:1fr}.hero,.section{padding:40px 24px}.moment-section{padding:60px 24px}}
+/* Password gate */
+#gate-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:#1a1a1a;z-index:9999;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:16px;font-family:"DM Sans",sans-serif}
+#gate-overlay h2{font-family:"Playfair Display",serif;font-size:36px;color:white;margin-bottom:8px}
+#gate-overlay p{color:rgba(255,255,255,.5);font-size:14px;font-weight:300;margin-bottom:16px}
+#gate-overlay input{background:transparent;border:1px solid rgba(255,255,255,.3);color:white;padding:14px 24px;font-size:15px;text-align:center;font-family:"DM Sans",sans-serif;outline:none;width:260px;letter-spacing:1px}
+#gate-overlay input::placeholder{color:rgba(255,255,255,.3)}
+#gate-overlay input:focus{border-color:rgba(255,255,255,.6)}
+#gate-overlay button{padding:12px 32px;background:transparent;border:1px solid rgba(255,255,255,.25);color:white;font-size:13px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;font-family:"DM Sans",sans-serif;transition:all .3s}
+#gate-overlay button:hover{background:rgba(255,255,255,.1)}
+.gate-error{color:#c0392b;font-size:13px;font-weight:300;min-height:20px}
 </style>
 </head>
 <body>
+<div id="gate-overlay"><h2>Japan 2026</h2><p>Enter password to continue</p><input type="password" id="pw" placeholder="Password" onkeydown="if(event.key==='Enter')check()"><button onclick="check()">Enter</button><div class="gate-error" id="err"></div></div>
+<script>function check(){if(document.getElementById("pw").value.toLowerCase()==="sanche"){document.getElementById("gate-overlay").style.display="none";sessionStorage.setItem("jp26","1")}else{document.getElementById("err").textContent="Try again"}}if(sessionStorage.getItem("jp26")==="1"){document.getElementById("gate-overlay").style.display="none"}</script>
 
 <div class="hero">
   <div class="hero-eyebrow">Your Japan Adventure</div>

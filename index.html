@@ -14,15 +14,35 @@ p{font-weight:300;color:rgba(255,255,255,.6);margin-bottom:40px;font-size:16px}
 a{display:block;padding:18px 32px;margin-bottom:16px;border:1px solid rgba(255,255,255,.25);color:white;text-decoration:none;font-size:15px;letter-spacing:1px;transition:all .3s}
 a:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.5)}
 .sub{font-size:12px;color:rgba(255,255,255,.3);margin-top:32px;letter-spacing:1px}
+/* Password gate */
+#gate{display:flex;flex-direction:column;align-items:center;gap:16px}
+#gate input{background:transparent;border:1px solid rgba(255,255,255,.3);color:white;padding:14px 24px;font-size:15px;text-align:center;font-family:'Outfit',sans-serif;outline:none;width:260px;letter-spacing:1px}
+#gate input::placeholder{color:rgba(255,255,255,.3)}
+#gate input:focus{border-color:rgba(255,255,255,.6)}
+#gate button{padding:12px 32px;background:transparent;border:1px solid rgba(255,255,255,.25);color:white;font-size:13px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;font-family:'Outfit',sans-serif;transition:all .3s}
+#gate button:hover{background:rgba(255,255,255,.1)}
+.error{color:#c0392b;font-size:13px;font-weight:300;min-height:20px}
+#content{display:none}
 </style>
 </head>
 <body>
 <div class="container">
 <h1>Japan 2026</h1>
 <p>November 5 – December 16 · Osaka</p>
+<div id="gate">
+<input type="password" id="pw" placeholder="Enter password" onkeydown="if(event.key==='Enter')check()">
+<button onclick="check()">Enter</button>
+<div class="error" id="err"></div>
+</div>
+<div id="content">
 <a href="dan-and-connie.html">Dan & Connie's Tour</a>
 <a href="adrienne.html">Adrienne's Tour</a>
 <div class="sub">KANSAI FAMILY ADVENTURE</div>
 </div>
+</div>
+<script>
+function check(){var p=document.getElementById('pw').value.toLowerCase();if(p==='sanche'){document.getElementById('gate').style.display='none';document.getElementById('content').style.display='block';sessionStorage.setItem('jp26','1')}else{document.getElementById('err').textContent='Try again'}}
+if(sessionStorage.getItem('jp26')==='1'){document.getElementById('gate').style.display='none';document.getElementById('content').style.display='block'}
+</script>
 </body>
 </html>
