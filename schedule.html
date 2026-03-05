@@ -141,8 +141,8 @@ if(sessionStorage.getItem('jp26')==='1'){document.getElementById('gate-overlay')
 const days = [
 // [date, dow, type, typeLabel, plan, detail, tags, detailOnly]
 // Week 0
-["Nov 5","Thu","travel","Travel","Depart Vancouver → KIX","Evening/overnight flight",["dad"],false],
-["Nov 6","Fri","travel","Travel","Arrive KIX → Nishikujo Airbnb","Transit, unpack, find groceries, rest",["dad"],false],
+["Nov 5","Thu","travel","Travel","Depart Vancouver → KIX","Evening/overnight flight",["family"],false],
+["Nov 6","Fri","travel","Travel","Arrive KIX → Nishikujo Airbnb","Transit, unpack, find groceries, rest",["family"],false],
 ["Nov 7","Sat","settle","Settle","Settle in / explore neighbourhood","Find essentials, rest up, explore Nishikujo",[],false],
 ["Nov 8","Sun","settle","Settle","Local explore","D&C arrive! Airport car pickup.",["dc"],false],
 // Week 1
@@ -162,14 +162,14 @@ const days = [
 ["Nov 21","Sat","activity","Activity","<strong>Uji Day Trip + Farewell/Birthday Dinner</strong>","Tea town, Byodo-in. D&C farewell + Adrienne's birthday!",["dc","adr"],false],
 ["Nov 22","Sun","rest","Rest","Rest / farewells","D&C depart — airport car to KIX",[" adr"],false],
 // Week 3
-["Nov 23","Mon","travel","Travel","Andy → Vancouver","Korean Air KIX→ICN→YVR. Arrive 3:30pm.",["adr"],false],
+["Nov 23","Mon","travel","Travel","Andy → Vancouver","Korean Air KIX→ICN→YVR. Arrive 3:30pm.",["andy","adr"],false],
 ["Nov 24","Tue","kyoto","Girls Trip","<strong>Girls' Kyoto Trip — Day 1</strong>","Homeschool AM. Train to Kyoto ~1pm. Nishiki Market, Gion.",["adr","girls"],false],
 ["Nov 25","Wed","kyoto","Girls Trip","<strong>Girls' Kyoto Trip — Day 2</strong>","Full day Kyoto. Higashiyama or Arashiyama.",["adr","girls"],false],
 ["Nov 26","Thu","kyoto","Girls Trip","<strong>Girls' Kyoto → Home</strong>","Morning Kyoto, train home. Afternoon homeschool.",["adr"],false],
 ["Nov 27","Fri","activity","Activity","Flex day","Possible USJ for girls, Osaka exploring, or rest",["adr"],false],
 ["Nov 28","Sat","rest","Rest","Rest day","",["adr"],true],
-["Nov 29","Sun","travel","Travel","Adrienne departs / Andy returns","Airport car for Adrienne. Andy departs YVR.",[],false],
-["Nov 30","Mon","travel","Travel","Andy arrives Japan","Arrive KIX, resettle, recover",[],false],
+["Nov 29","Sun","travel","Travel","Adrienne departs / Andy returns","Airport car for Adrienne. Andy departs YVR.",["andy"],false],
+["Nov 30","Mon","travel","Travel","Andy arrives Japan","Arrive KIX, resettle, recover",["andy"],false],
 // Week 4
 ["Dec 1","Tue","homeschool","School","Home day","Homeschool + remote work. Back to routine.",[],true],
 ["Dec 2","Wed","open","Open","Open","",[], true],
@@ -203,8 +203,8 @@ const tagMap = {
 "dc":{label:"D&C",cls:"tag-dc"},
 "adr":{label:"Adrienne",cls:"tag-adr"},
 "adr-tokyo":{label:"Adrienne (Tokyo)",cls:"tag-adr"},
-"dad":{label:"Dad",cls:"tag-dad"},
-"girls":{label:"Girls Trip",cls:"tag-girls"},
+"family":{label:"Family",cls:"tag-dad"},"andy":{label:"Andy",cls:"tag-dad"},
+"girls":{label:"Girls + William",cls:"tag-girls"},
 };
 
 function render(){
