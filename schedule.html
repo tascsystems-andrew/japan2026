@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Japan 2026 — Schedule</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#1a1a1a;--cream:#faf8f4;--warm:#d4a574;--slate:#4a5568;--green:#8b9e7e;--blue:#6b8cae;--red:#c0392b;--purple:#8e7ba4;--pink:#c9897b;--orange:#d4874d}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);line-height:1.5}
+
+/* Password gate */
+#gate-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:#1a1a1a;z-index:9999;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:16px;font-family:'Outfit',sans-serif}
+#gate-overlay h2{font-family:'Cormorant Garamond',serif;font-size:36px;color:white}
+#gate-overlay p{color:rgba(255,255,255,.5);font-size:14px;font-weight:300}
+#gate-overlay input{background:transparent;border:1px solid rgba(255,255,255,.3);color:white;padding:14px 24px;font-size:15px;text-align:center;font-family:'Outfit',sans-serif;outline:none;width:260px;letter-spacing:1px}
+#gate-overlay input::placeholder{color:rgba(255,255,255,.3)}
+#gate-overlay input:focus{border-color:rgba(255,255,255,.6)}
+#gate-overlay button{padding:12px 32px;background:transparent;border:1px solid rgba(255,255,255,.25);color:white;font-size:13px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;font-family:'Outfit',sans-serif;transition:all .3s}
+#gate-overlay button:hover{background:rgba(255,255,255,.1)}
+.gate-error{color:#c0392b;font-size:13px;font-weight:300;min-height:20px}
+
+/* Header */
+.header{background:var(--ink);color:white;padding:40px;text-align:center}
+.header h1{font-family:'Cormorant Garamond',serif;font-size:42px;font-weight:700;margin-bottom:4px}
+.header p{font-weight:300;color:rgba(255,255,255,.6);font-size:15px}
+.nav-links{margin-top:16px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.nav-links a{color:rgba(255,255,255,.5);text-decoration:none;font-size:12px;letter-spacing:1px;text-transform:uppercase;padding:6px 14px;border:1px solid rgba(255,255,255,.15);transition:all .3s}
+.nav-links a:hover{color:white;border-color:rgba(255,255,255,.4)}
+
+/* Toggle */
+.toggle-bar{max-width:1100px;margin:0 auto;padding:24px 24px 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.toggle-btn{display:flex;background:white;border-radius:6px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+.toggle-btn button{padding:10px 20px;border:none;background:transparent;font-family:'Outfit',sans-serif;font-size:13px;font-weight:500;cursor:pointer;color:var(--slate);letter-spacing:.5px;transition:all .2s}
+.toggle-btn button.active{background:var(--ink);color:white}
+.legend{display:flex;gap:14px;flex-wrap:wrap}
+.legend-item{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--slate);font-weight:400;letter-spacing:.3px}
+.legend-dot{width:10px;height:10px;border-radius:2px}
+
+/* Calendar */
+.calendar{max-width:1100px;margin:0 auto;padding:24px}
+
+/* Week row */
+.week{margin-bottom:2px}
+.week-label{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--warm);font-weight:500;padding:16px 0 6px;margin-top:12px}
+.days{display:flex;flex-direction:column;gap:2px}
+
+/* Day row */
+.day-row{display:grid;grid-template-columns:90px 70px 1fr;background:white;border-radius:4px;overflow:hidden;min-height:42px;align-items:stretch;transition:all .2s}
+.day-row:hover{box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.day-date{padding:10px 14px;font-weight:500;font-size:13px;display:flex;align-items:center}
+.day-type{padding:10px 8px;font-size:10px;letter-spacing:1px;text-transform:uppercase;font-weight:600;display:flex;align-items:center;justify-content:center;color:white;text-align:center}
+.day-content{padding:10px 14px;font-size:13px;font-weight:300;color:var(--slate);display:flex;align-items:center}
+.day-content strong{font-weight:500;color:var(--ink)}
+
+/* Type colors */
+.type-travel{background:#5a6c7d}
+.type-settle{background:#8b9e7e}
+.type-activity{background:var(--warm)}
+.type-homeschool{background:var(--green)}
+.type-rest{background:#aaa}
+.type-birthday{background:var(--red)}
+.type-work{background:#6b7b8d}
+.type-open{background:#ccc}
+.type-wind{background:#b8a9c4}
+.type-kyoto{background:var(--purple)}
+
+/* People tags */
+.people{margin-left:auto;display:flex;gap:4px;flex-shrink:0;padding-left:12px}
+.tag{font-size:9px;letter-spacing:.5px;text-transform:uppercase;padding:3px 8px;border-radius:3px;font-weight:500;white-space:nowrap}
+.tag-dc{background:#e8d5c4;color:#8b6b4a}
+.tag-adr{background:#ddd5e8;color:#6b5a7e}
+.tag-dad{background:#d5e0e8;color:#4a6b7e}
+.tag-girls{background:#e8d5e0;color:#7e4a6b}
+
+/* Detail row (full view only) */
+.day-detail{display:none;grid-column:1/-1;padding:0 14px 10px 174px;font-size:12px;color:#888;font-weight:300;line-height:1.6}
+.day-row.expanded .day-detail{display:block}
+
+/* Simple mode hides some rows */
+body.simple .detail-only{display:none}
+body.simple .day-detail{display:none!important}
+
+/* Mobile */
+@media(max-width:700px){
+.day-row{grid-template-columns:80px 55px 1fr}
+.day-date{font-size:12px;padding:8px 10px}
+.day-type{font-size:9px;padding:8px 4px}
+.day-content{font-size:12px;padding:8px 10px;flex-wrap:wrap}
+.people{margin-left:0;margin-top:4px;width:100%}
+.header h1{font-size:32px}
+.toggle-bar{flex-direction:column;align-items:flex-start}
+.legend{gap:8px}
+}
+</style>
+</head>
+<body>
+
+<div id="gate-overlay">
+<h2>Japan 2026</h2>
+<p>Enter password to continue</p>
+<input type="password" id="pw" placeholder="Password" onkeydown="if(event.key==='Enter')check()">
+<button onclick="check()">Enter</button>
+<div class="gate-error" id="err"></div>
+</div>
+<script>
+function check(){if(document.getElementById('pw').value.toLowerCase()==='sanche'){document.getElementById('gate-overlay').style.display='none';sessionStorage.setItem('jp26','1')}else{document.getElementById('err').textContent='Try again'}}
+if(sessionStorage.getItem('jp26')==='1'){document.getElementById('gate-overlay').style.display='none'}
+</script>
+
+<div class="header">
+<h1>Japan 2026</h1>
+<p>November 5 – December 16 · Master Schedule</p>
+<div class="nav-links">
+<a href="index.html">Home</a>
+<a href="dan-and-connie.html">Dan & Connie</a>
+<a href="adrienne.html">Adrienne</a>
+</div>
+</div>
+
+<div class="toggle-bar">
+<div class="toggle-btn">
+<button class="active" onclick="setView('full',this)">Full View</button>
+<button onclick="setView('simple',this)">Simple View</button>
+</div>
+<div class="legend">
+<div class="legend-item"><div class="legend-dot" style="background:var(--warm)"></div>Activity</div>
+<div class="legend-item"><div class="legend-dot" style="background:var(--green)"></div>Homeschool</div>
+<div class="legend-item"><div class="legend-dot" style="background:#5a6c7d"></div>Travel</div>
+<div class="legend-item"><div class="legend-dot" style="background:var(--red)"></div>Birthday</div>
+<div class="legend-item"><div class="legend-dot" style="background:var(--purple)"></div>Girls Trip</div>
+<div class="legend-item"><div class="legend-dot" style="background:#aaa"></div>Rest</div>
+<div class="legend-item"><div class="legend-dot" style="background:#ccc"></div>Open</div>
+</div>
+</div>
+
+<div class="calendar" id="cal"></div>
+
+<script>
+const days = [
+// [date, dow, type, typeLabel, plan, detail, tags, detailOnly]
+// Week 0
+["Nov 5","Thu","travel","Travel","Depart Vancouver → KIX","Evening/overnight flight",["dad"],false],
+["Nov 6","Fri","travel","Travel","Arrive KIX → Nishikujo Airbnb","Transit, unpack, find groceries, rest",["dad"],false],
+["Nov 7","Sat","settle","Settle","Settle in / explore neighbourhood","Find essentials, rest up, explore Nishikujo",[],false],
+["Nov 8","Sun","settle","Settle","Local explore","D&C arrive! Airport car pickup.",["dc"],false],
+// Week 1
+["Nov 9","Mon","activity","Activity","<strong>Osaka Day Tour</strong>","Castle, Kuromon Market, Shinsekai",["dc"],false],
+["Nov 10","Tue","homeschool","School","Home day","Homeschool + remote work. D&C self-guided Osaka.",["dc"],true],
+["Nov 11","Wed","activity","Activity","<strong>Kyoto Day Tour</strong>","Fushimi Inari, Kiyomizu-dera, Gion",["dc"],false],
+["Nov 12","Thu","activity","Activity","<strong>Shinkansen to Kobe!</strong>","Homeschool AM, bullet train PM. Kitano Ijinkan.",["dc"],false],
+["Nov 13","Fri","activity","Activity","<strong>Kobe</strong>","Nankinmachi, Meriken Park, Kobe beef dinner",["dc"],false],
+["Nov 14","Sat","activity","Activity","<strong>Kinosaki Onsen</strong>","Train to onsen town. Ryokan, 7 bathhouses, snow crab kaiseki!",["dc"],false],
+["Nov 15","Sun","activity","Activity","<strong>Himeji Castle</strong>","UNESCO World Heritage. White Heron Castle.",["dc","adr-tokyo"],false],
+["Nov 16","Mon","activity","Activity","Himeji → return to Osaka","Morning at castle/gardens, JR train home",["dc"],false],
+// Week 2
+["Nov 17","Tue","homeschool","School","Home day","Homeschool + remote work. D&C self-guided Kyoto or Nara.",["dc","adr-tokyo"],true],
+["Nov 18","Wed","activity","Activity","<strong>Universal Studios Japan</strong>","Full day — Nintendo World, Harry Potter, rides!",["dc","adr-tokyo"],false],
+["Nov 19","Thu","birthday","Birthday","<strong>Sam's Birthday!</strong>","Homeschool AM. Adrienne arrives from Tokyo! Teppanyaki dinner for 9.",["dc","adr"],false],
+["Nov 20","Fri","rest","Rest","Light day / Osaka walkabout","Explore at your own pace. Dotonbori, Shinsaibashi.",["dc","adr"],false],
+["Nov 21","Sat","activity","Activity","<strong>Uji Day Trip + Farewell/Birthday Dinner</strong>","Tea town, Byodo-in. D&C farewell + Adrienne's birthday!",["dc","adr"],false],
+["Nov 22","Sun","rest","Rest","Rest / farewells","D&C depart — airport car to KIX",[" adr"],false],
+// Week 3
+["Nov 23","Mon","travel","Travel","Andy → Vancouver","Korean Air KIX→ICN→YVR. Arrive 3:30pm.",["adr"],false],
+["Nov 24","Tue","kyoto","Girls Trip","<strong>Girls' Kyoto Trip — Day 1</strong>","Homeschool AM. Train to Kyoto ~1pm. Nishiki Market, Gion.",["adr","girls"],false],
+["Nov 25","Wed","kyoto","Girls Trip","<strong>Girls' Kyoto Trip — Day 2</strong>","Full day Kyoto. Higashiyama or Arashiyama.",["adr","girls"],false],
+["Nov 26","Thu","kyoto","Girls Trip","<strong>Girls' Kyoto → Home</strong>","Morning Kyoto, train home. Afternoon homeschool.",["adr"],false],
+["Nov 27","Fri","activity","Activity","Flex day","Possible USJ for girls, Osaka exploring, or rest",["adr"],false],
+["Nov 28","Sat","rest","Rest","Rest day","",["adr"],true],
+["Nov 29","Sun","travel","Travel","Adrienne departs / Andy returns","Airport car for Adrienne. Andy departs YVR.",[],false],
+["Nov 30","Mon","travel","Travel","Andy arrives Japan","Arrive KIX, resettle, recover",[],false],
+// Week 4
+["Dec 1","Tue","homeschool","School","Home day","Homeschool + remote work. Back to routine.",[],true],
+["Dec 2","Wed","open","Open","Open","",[], true],
+["Dec 3","Thu","homeschool","School","Home day","Homeschool + remote work",[],true],
+["Dec 4","Fri","activity","Activity","<strong>Nagoya — travel + settle</strong>","Shinkansen to Nagoya! Check into hotel.",[],false],
+["Dec 5","Sat","activity","Activity","<strong>Nagoya — SCMAGLEV Museum + Linimo</strong>","Railway museum, simulators, maglev ride!",[],false],
+["Dec 6","Sun","activity","Activity","<strong>Nagoya — Castle + explore</strong>","Nagoya Castle, city exploring",[],false],
+["Dec 7","Mon","activity","Activity","Nagoya → home","Shinkansen back to Osaka",[],false],
+// Week 5
+["Dec 8","Tue","homeschool","School","Home day","Homeschool + remote work",[],true],
+["Dec 9","Wed","open","Open","Open","Day trip option: Nara, Minoh, or rest",[],true],
+["Dec 10","Thu","homeschool","School","Home day","Homeschool + remote work",[],true],
+["Dec 11","Fri","open","Open","Open","Potential: Snow trip (Tsuruga or Gozaisho)",[],false],
+["Dec 12","Sat","open","Open","Open","Potential: Snow weekend continued",[],false],
+["Dec 13","Sun","open","Open","Open","Potential: Our own Kyoto visit",[],false],
+["Dec 14","Mon","wind","Wind Down","Wind down","Packing, souvenirs, last errands",[],false],
+["Dec 15","Tue","wind","Wind Down","Wind down","Final pack up, clean Airbnb",[],false],
+["Dec 16","Wed","travel","Travel","<strong>Depart KIX → Vancouver</strong>","Fly home!",[],false],
+];
+
+const weeks = [
+{label:"Week 0 — Arrive & Settle", start:0, end:3},
+{label:"Week 1 — Kobe / Kinosaki / Himeji", start:4, end:11},
+{label:"Week 2 — USJ, Birthdays & Uji", start:12, end:17},
+{label:"Week 3 — Vancouver / Girls' Kyoto", start:18, end:25},
+{label:"Week 4 — Nagoya", start:26, end:32},
+{label:"Week 5 — Flex & Wind Down", start:33, end:41},
+];
+
+const tagMap = {
+"dc":{label:"D&C",cls:"tag-dc"},
+"adr":{label:"Adrienne",cls:"tag-adr"},
+"adr-tokyo":{label:"Adrienne (Tokyo)",cls:"tag-adr"},
+"dad":{label:"Dad",cls:"tag-dad"},
+"girls":{label:"Girls Trip",cls:"tag-girls"},
+};
+
+function render(){
+const cal=document.getElementById('cal');
+let html='';
+weeks.forEach(w=>{
+html+=`<div class="week"><div class="week-label">${w.label}</div><div class="days">`;
+for(let i=w.start;i<=w.end;i++){
+const d=days[i];
+const [date,dow,type,typeLabel,plan,detail,tags,detailOnly]=d;
+const dOnly=detailOnly?'detail-only':'';
+let tagsHtml='';
+tags.forEach(t=>{
+const tm=tagMap[t.trim()];
+if(tm)tagsHtml+=`<span class="tag ${tm.cls}">${tm.label}</span>`;
+});
+html+=`<div class="day-row ${dOnly}">
+<div class="day-date">${dow} ${date}</div>
+<div class="day-type type-${type}">${typeLabel}</div>
+<div class="day-content">${plan}${tagsHtml?'<div class="people">'+tagsHtml+'</div>':''}</div>
+${detail?'<div class="day-detail">'+detail+'</div>':''}
+</div>`;
+}
+html+=`</div></div>`;
+});
+cal.innerHTML=html;
+
+// Click to expand details
+document.querySelectorAll('.day-row').forEach(row=>{
+row.style.cursor='pointer';
+row.addEventListener('click',()=>row.classList.toggle('expanded'));
+});
+}
+
+function setView(mode,btn){
+document.body.className=mode==='simple'?'simple':'';
+document.querySelectorAll('.toggle-btn button').forEach(b=>b.classList.remove('active'));
+btn.classList.add('active');
+}
+
+render();
+</script>
+
+<div style="text-align:center;padding:40px;font-size:12px;color:#aaa;font-weight:300">
+Tap any row for more details · Updated March 2026
+</div>
+</body>
+</html>
