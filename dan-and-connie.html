@@ -9,6 +9,16 @@
 :root{--ink:#1a1a1a;--cream:#faf8f4;--warm:#d4a574;--sage:#8b9e7e;--slate:#4a5568;--red:#c0392b}
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'Outfit',sans-serif;color:var(--ink);background:var(--cream);line-height:1.6}
+/* Password gate */
+#gate-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:#1a1a1a;z-index:9999;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:16px;font-family:'Outfit',sans-serif}
+#gate-overlay h2{font-family:'Cormorant Garamond',serif;font-size:36px;color:white}
+#gate-overlay p{color:rgba(255,255,255,.5);font-size:14px;font-weight:300}
+#gate-overlay input{background:transparent;border:1px solid rgba(255,255,255,.3);color:white;padding:14px 24px;font-size:15px;text-align:center;font-family:'Outfit',sans-serif;outline:none;width:260px;letter-spacing:1px}
+#gate-overlay input::placeholder{color:rgba(255,255,255,.3)}
+#gate-overlay input:focus{border-color:rgba(255,255,255,.6)}
+#gate-overlay button{padding:12px 32px;background:transparent;border:1px solid rgba(255,255,255,.25);color:white;font-size:13px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;font-family:'Outfit',sans-serif;transition:all .3s}
+#gate-overlay button:hover{background:rgba(255,255,255,.1)}
+.gate-error{color:#c0392b;font-size:13px;font-weight:300;min-height:20px}
 .hero{position:relative;height:100vh;min-height:600px;background:linear-gradient(135deg,rgba(0,0,0,.35)0%,rgba(0,0,0,.1)50%,rgba(0,0,0,.45)100%),url('https://images.pexels.com/photos/28544608/pexels-photo-28544608.jpeg?auto=compress&cs=tinysrgb&w=1600') center/cover;display:flex;align-items:flex-end;padding:60px}
 .hero-content{max-width:700px}
 .hero-tag{font-family:'Outfit';font-weight:300;font-size:14px;letter-spacing:4px;text-transform:uppercase;color:var(--warm);margin-bottom:16px}
@@ -41,20 +51,13 @@ body{font-family:'Outfit',sans-serif;color:var(--ink);background:var(--cream);li
 .strip-overlay h3{font-family:'Cormorant Garamond',serif;font-size:26px;color:white;font-weight:600}
 .strip-overlay p{font-size:13px;color:rgba(255,255,255,.8);font-weight:300}
 .full-img{width:100%;height:350px;object-fit:cover;display:block}
-
-/* ITINERARY TABLE */
 .itin-table{width:100%;border-collapse:collapse;margin-top:24px}
 .itin-table th{background:#2C3E50;color:white;font-size:12px;letter-spacing:1px;text-transform:uppercase;padding:10px 14px;text-align:left;font-weight:500}
 .itin-table td{padding:10px 14px;font-size:14px;border-bottom:1px solid #e8e5e0;font-weight:300;color:var(--slate)}
 .itin-table tr:nth-child(even) td{background:#f9f7f4}
 .itin-table .day-col{font-weight:500;color:var(--ink);white-space:nowrap;width:100px}
 .itin-table .type-col{font-size:11px;letter-spacing:1px;text-transform:uppercase;font-weight:500;width:90px}
-.type-activity{color:var(--warm)}
-.type-homeschool{color:var(--sage)}
-.type-rest{color:#888}
-.type-travel{color:var(--red)}
-.type-birthday{color:#c0392b}
-
+.type-activity{color:var(--warm)}.type-homeschool{color:var(--sage)}.type-rest{color:#888}.type-travel{color:var(--red)}.type-birthday{color:#c0392b}
 .details-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:32px}
 .detail-block h4{font-family:'Cormorant Garamond',serif;font-size:22px;margin-bottom:12px}
 .detail-block ul{list-style:none;padding:0}
@@ -66,27 +69,17 @@ body{font-family:'Outfit',sans-serif;color:var(--ink);background:var(--cream);li
 .footer h2{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:600;margin-bottom:12px}
 .footer p{font-weight:300;color:rgba(255,255,255,.7);font-size:16px}
 @media(max-width:768px){.hero h1{font-size:42px}.intro,.phase-header,.details-grid{grid-template-columns:1fr}.highlight-strip{grid-template-columns:1fr}.hero{padding:30px}.section{padding:40px 20px}}
-/* Password gate */
-#gate-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:#1a1a1a;z-index:9999;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:16px;font-family:"Outfit",sans-serif}
-#gate-overlay h2{font-family:"Cormorant Garamond",serif;font-size:36px;color:white;margin-bottom:8px}
-#gate-overlay p{color:rgba(255,255,255,.5);font-size:14px;font-weight:300;margin-bottom:16px}
-#gate-overlay input{background:transparent;border:1px solid rgba(255,255,255,.3);color:white;padding:14px 24px;font-size:15px;text-align:center;font-family:"Outfit",sans-serif;outline:none;width:260px;letter-spacing:1px}
-#gate-overlay input::placeholder{color:rgba(255,255,255,.3)}
-#gate-overlay input:focus{border-color:rgba(255,255,255,.6)}
-#gate-overlay button{padding:12px 32px;background:transparent;border:1px solid rgba(255,255,255,.25);color:white;font-size:13px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;font-family:"Outfit",sans-serif;transition:all .3s}
-#gate-overlay button:hover{background:rgba(255,255,255,.1)}
-.gate-error{color:#c0392b;font-size:13px;font-weight:300;min-height:20px}
 </style>
 </head>
 <body>
 <div id="gate-overlay"><h2>Japan 2026</h2><p>Enter password to continue</p><input type="password" id="pw" placeholder="Password" onkeydown="if(event.key==='Enter')check()"><button onclick="check()">Enter</button><div class="gate-error" id="err"></div></div>
-<script>function check(){if(document.getElementById("pw").value.toLowerCase()==="sanche"){document.getElementById("gate-overlay").style.display="none";sessionStorage.setItem("jp26","1")}else{document.getElementById("err").textContent="Try again"}}if(sessionStorage.getItem("jp26")==="1"){document.getElementById("gate-overlay").style.display="none"}</script>
+<script>function check(){if(document.getElementById('pw').value.toLowerCase()==='sanche'){document.getElementById('gate-overlay').style.display='none';sessionStorage.setItem('jp26','1')}else{document.getElementById('err').textContent='Try again'}}if(sessionStorage.getItem('jp26')==='1'){document.getElementById('gate-overlay').style.display='none'}</script>
 
 <div class="hero">
   <div class="hero-content">
     <div class="hero-tag">Your Japan Adventure</div>
     <h1>Dan &amp; Connie</h1>
-    <p>Two weeks through the heart of Kansai — Osaka, Kobe, a traditional onsen town, Japan's greatest castle, and so much more.</p>
+    <p>Two weeks through the heart of Kansai — Osaka, Kobe, Japan's greatest castle, Kyoto, Universal Studios, and so much more.</p>
     <div class="hero-date">November 8 – 22, 2026 &nbsp;·&nbsp; 14 Nights</div>
   </div>
 </div>
@@ -98,7 +91,7 @@ body{font-family:'Outfit',sans-serif;color:var(--ink);background:var(--cream);li
       <h2>Your home base is Osaka</h2>
       <div class="divider"></div>
       <p>You'll be staying with us in Nishikujo — a real neighbourhood a short walk from the train station. From here, all of Kansai is within reach: Kyoto 45 minutes, Kobe 25, Nara 30.</p>
-      <p>On guided days, we'll be your personal tour guides. On homeschool days (Tuesdays and Thursdays), you'll explore independently with self-guided itineraries. Your two weeks include a bullet train ride, a night in a traditional onsen ryokan with snow crab, Japan's most spectacular castle, Universal Studios, and a birthday dinner you won't forget.</p>
+      <p>On guided days, we'll be your personal tour guides. On homeschool days (Tuesdays and Thursdays), you'll explore independently with self-guided itineraries. Your two weeks include a bullet train ride, a Kobe beef dinner, Japan's most spectacular castle, a hot spring day trip, Universal Studios, and a birthday dinner you won't forget.</p>
     </div>
     <img class="intro-img" src="https://images.pexels.com/photos/1798631/pexels-photo-1798631.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Dotonbori neon streets, Osaka">
   </div>
@@ -110,16 +103,16 @@ body{font-family:'Outfit',sans-serif;color:var(--ink);background:var(--cream);li
     <div class="strip-overlay"><h3>Kyoto</h3><p>Ancient temples &amp; torii gates</p></div>
   </div>
   <div class="strip-item">
-    <img src="https://images.pexels.com/photos/30094291/pexels-photo-30094291.jpeg?auto=compress&cs=tinysrgb&w=700&h=500&fit=crop" alt="Japanese temple in autumn">
-    <div class="strip-overlay"><h3>Kinosaki Onsen</h3><p>Hot springs &amp; snow crab</p></div>
-  </div>
-  <div class="strip-item">
     <img src="https://images.pexels.com/photos/32675907/pexels-photo-32675907.jpeg?auto=compress&cs=tinysrgb&w=700&h=500&fit=crop" alt="Himeji Castle, Japan">
     <div class="strip-overlay"><h3>Himeji Castle</h3><p>Japan's finest original castle</p></div>
   </div>
+  <div class="strip-item">
+    <img src="https://images.pexels.com/photos/31339224/pexels-photo-31339224.jpeg?auto=compress&cs=tinysrgb&w=700&h=500&fit=crop" alt="Byodo-in Temple, Uji">
+    <div class="strip-overlay"><h3>Uji</h3><p>Tea town &amp; Byodo-in Temple</p></div>
+  </div>
 </div>
 
-<!-- ITINERARY SCHEDULE -->
+<!-- ITINERARY -->
 <div class="section">
   <div class="section-label">At a Glance</div>
   <h2>Your 14-Day Itinerary</h2>
@@ -133,14 +126,14 @@ body{font-family:'Outfit',sans-serif;color:var(--ink);background:var(--cream);li
       <tr><td class="day-col">Wed Nov 11</td><td>4</td><td class="type-col type-activity">Guided</td><td>Kyoto Day Tour — Fushimi Inari, Kiyomizu-dera, Gion.</td></tr>
       <tr><td class="day-col">Thu Nov 12</td><td>5</td><td class="type-col type-activity">Guided</td><td>Shinkansen to Kobe! Kitano Ijinkan. Check into Kobe hotel.</td></tr>
       <tr><td class="day-col">Fri Nov 13</td><td>6</td><td class="type-col type-activity">Guided</td><td>Kobe — Nankinmachi, Meriken Park. Kobe beef dinner.</td></tr>
-      <tr><td class="day-col">Sat Nov 14</td><td>7</td><td class="type-col type-activity">Guided</td><td>Train to Kinosaki Onsen. Ryokan, onsen hopping, snow crab kaiseki.</td></tr>
-      <tr><td class="day-col">Sun Nov 15</td><td>8</td><td class="type-col type-activity">Guided</td><td>Himeji Castle — UNESCO World Heritage Site. Stay Himeji.</td></tr>
+      <tr><td class="day-col">Sat Nov 14</td><td>7</td><td class="type-col type-activity">Guided</td><td>Train to Himeji. Castle &amp; Koko-en Garden. Return to Kobe.</td></tr>
+      <tr><td class="day-col">Sun Nov 15</td><td>8</td><td class="type-col type-activity">Guided</td><td>Arima Onsen day trip — hot spring town 30 min from Kobe.</td></tr>
       <tr><td class="day-col">Mon Nov 16</td><td>9</td><td class="type-col type-rest">Travel</td><td>Return to Osaka. Rest afternoon.</td></tr>
       <tr><td class="day-col">Tue Nov 17</td><td>10</td><td class="type-col type-homeschool">Self-Guided</td><td>Homeschool day. Self-guided Kyoto or Nara.</td></tr>
       <tr><td class="day-col">Wed Nov 18</td><td>11</td><td class="type-col type-activity">Activity</td><td>Universal Studios Japan — full day, all of us!</td></tr>
       <tr><td class="day-col">Thu Nov 19</td><td>12</td><td class="type-col type-birthday">Birthday</td><td>Sam's Birthday! Homeschool AM. Adrienne arrives. Teppanyaki dinner.</td></tr>
       <tr><td class="day-col">Fri Nov 20</td><td>13</td><td class="type-col type-rest">Rest</td><td>Light day. Osaka walkabout at your pace.</td></tr>
-      <tr><td class="day-col">Sat Nov 21</td><td>14</td><td class="type-col type-activity">Guided</td><td>Uji day trip. Farewell dinner + Adrienne's birthday!</td></tr>
+      <tr><td class="day-col">Sat Nov 21</td><td>14</td><td class="type-col type-activity">Guided</td><td>Uji day trip — tea town, Byodo-in. Farewell + Adrienne's birthday dinner!</td></tr>
       <tr><td class="day-col">Sun Nov 22</td><td>15</td><td class="type-col type-travel">Travel</td><td>Departure day. Airport car to KIX. Safe travels!</td></tr>
     </tbody>
   </table>
@@ -183,8 +176,8 @@ body{font-family:'Outfit',sans-serif;color:var(--ink);background:var(--cream);li
     <div class="phase-header">
       <img class="phase-img" src="https://images.pexels.com/photos/33229961/pexels-photo-33229961.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Himeji Castle in autumn">
       <div class="phase-text">
-        <h3>The Hyogo Circuit</h3>
-        <p>The centrepiece of your trip. A bullet train to Kobe, two nights exploring the harbour city, then north by limited express to Kinosaki Onsen — a 1,400-year-old hot spring town where you'll stroll the lantern-lit streets in yukata and wooden sandals, soak in seven different bathhouses, and feast on snow crab. Then south to Himeji for Japan's most breathtaking castle before heading home.</p>
+        <h3>Kobe &amp; Himeji</h3>
+        <p>The centrepiece of your trip. A bullet train to Kobe — a stylish harbour city wedged between mountains and sea. Two nights exploring Chinatown, the waterfront, and the world-famous beef. Then a morning train to Himeji for Japan's most breathtaking castle, and a day trip to the ancient hot spring town of Arima before heading home.</p>
       </div>
     </div>
     <div class="day-grid">
@@ -197,19 +190,19 @@ body{font-family:'Outfit',sans-serif;color:var(--ink);background:var(--cream);li
         </div>
       </div>
       <div class="day-card">
-        <img src="https://images.pexels.com/photos/30094291/pexels-photo-30094291.jpeg?auto=compress&cs=tinysrgb&w=600&h=300&fit=crop" alt="Japanese temple in autumn foliage">
+        <img src="https://images.pexels.com/photos/32675907/pexels-photo-32675907.jpeg?auto=compress&cs=tinysrgb&w=600&h=300&fit=crop" alt="Himeji Castle">
         <div class="day-card-body">
           <div class="day-label">Sat Nov 14</div>
-          <h4>Kinosaki Onsen</h4>
-          <p>A charming hot spring town in the mountains. Change into yukata, grab your onsen pass, and hop between seven public bathhouses. Evening snow crab kaiseki dinner at the ryokan.</p>
+          <h4>Himeji Castle</h4>
+          <p>The White Heron Castle — UNESCO World Heritage Site, one of 12 original Japanese castles. Five stories, stunning views, and genuinely awe-inspiring architecture. Just 30 minutes from Kobe by train.</p>
         </div>
       </div>
       <div class="day-card">
-        <img src="https://images.pexels.com/photos/32675907/pexels-photo-32675907.jpeg?auto=compress&cs=tinysrgb&w=600&h=300&fit=crop" alt="Himeji Castle">
+        <img src="https://images.pexels.com/photos/30094291/pexels-photo-30094291.jpeg?auto=compress&cs=tinysrgb&w=600&h=300&fit=crop" alt="Japanese autumn temple">
         <div class="day-card-body">
           <div class="day-label">Sun Nov 15</div>
-          <h4>Himeji Castle</h4>
-          <p>The White Heron Castle — UNESCO World Heritage Site, one of 12 original Japanese castles. Five stories, stunning views, and genuinely awe-inspiring architecture.</p>
+          <h4>Arima Onsen Day Trip</h4>
+          <p>A charming 1,000-year-old hot spring town tucked in the mountains just 30 minutes from Kobe. Soak in the famous golden waters at the public bathhouses and stroll the quaint streets.</p>
         </div>
       </div>
     </div>
@@ -221,7 +214,7 @@ body{font-family:'Outfit',sans-serif;color:var(--ink);background:var(--cream);li
     <div class="phase-header">
       <div class="phase-text">
         <h3>Second Week Highlights</h3>
-        <p>Universal Studios Japan with the whole crew, Sam's birthday Kobe beef teppanyaki dinner with all nine of us around the grill, a day trip to the serene tea town of Uji, and a farewell dinner together. The pace eases off — these days are about enjoying each other's company.</p>
+        <p>Universal Studios Japan with the whole crew, Sam's birthday Kobe beef teppanyaki dinner with all nine of us around the grill, a day trip to the serene tea town of Uji, and a combined farewell and birthday dinner for Adrienne. The pace eases off — these days are about enjoying each other's company.</p>
       </div>
       <img class="phase-img" src="https://images.pexels.com/photos/31339224/pexels-photo-31339224.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Byodo-in Temple, Uji">
     </div>
@@ -239,14 +232,13 @@ body{font-family:'Outfit',sans-serif;color:var(--ink);background:var(--cream);li
         <div class="day-card-body">
           <div class="day-label">Sat Nov 21</div>
           <h4>Uji, Farewell &amp; Adrienne's Birthday</h4>
-          <p>A peaceful tea town with Byodo-in Temple (it's on the 10-yen coin!), matcha ice cream, and a river walk. Back to Osaka for a combined farewell dinner for Dan &amp; Connie and Adrienne's birthday celebration.</p>
+          <p>A peaceful tea town with Byodo-in Temple (it's on the 10-yen coin!), matcha ice cream, and a river walk. Back to Osaka for a farewell dinner for you and a birthday celebration for Adrienne.</p>
         </div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- FULL WIDTH -->
 <img class="full-img" src="https://images.pexels.com/photos/4956721/pexels-photo-4956721.jpeg?auto=compress&cs=tinysrgb&w=1600&h=400&fit=crop" alt="Fushimi Inari torii gates">
 
 <!-- DETAILS -->
@@ -261,17 +253,17 @@ body{font-family:'Outfit',sans-serif;color:var(--ink);background:var(--cream);li
         <li>14 nights at our Osaka Airbnb</li>
         <li><strong>Airport car transfers</strong> — KIX pickup &amp; dropoff</li>
         <li><strong>Shinkansen</strong> bullet train to Kobe</li>
-        <li>All trains for the Kobe → Kinosaki → Himeji circuit</li>
-        <li>Kobe hotel (2 nights), Kinosaki ryokan (1 night), Himeji hotel (1 night)</li>
+        <li>All trains for the Kobe / Himeji / Arima weekend</li>
+        <li>Kobe hotel (3 nights)</li>
       </ul>
     </div>
     <div class="detail-block">
       <h4>Experiences &amp; Dining</h4>
       <ul>
-        <li><strong>Guided tours:</strong> Osaka, Kyoto, Kobe, Kinosaki, Himeji</li>
+        <li><strong>Guided tours:</strong> Osaka, Kyoto, Kobe, Himeji, Arima</li>
         <li>Self-guided itineraries for Tue/Thu</li>
-        <li><strong>Kinosaki onsen pass</strong> — all 7 bathhouses</li>
-        <li><strong>Snow crab kaiseki dinner</strong> at ryokan</li>
+        <li><strong>Himeji Castle</strong> visit</li>
+        <li><strong>Arima Onsen</strong> hot spring day trip</li>
         <li>Universal Studios Japan tickets</li>
         <li>Sam's birthday teppanyaki dinner</li>
         <li>Uji day trip + farewell/birthday dinner</li>
@@ -285,14 +277,14 @@ body{font-family:'Outfit',sans-serif;color:var(--ink);background:var(--cream);li
         <li>Day backpack for trips</li>
         <li>Cash — 7-Eleven ATMs accept foreign cards</li>
         <li>eSIM or pocket WiFi for data</li>
-        <li>Modesty towel for onsen (optional!)</li>
+        <li>Modesty towel for Arima onsen (optional!)</li>
       </ul>
     </div>
     <div class="detail-block">
       <h4>Good To Know</h4>
       <ul>
         <li><strong>Season:</strong> Early autumn colour, pre-peak crowds</li>
-        <li><strong>November = crab season</strong> in Kinosaki</li>
+        <li><strong>Arima Onsen</strong> — public baths ~¥700/person</li>
         <li><strong>IC Cards:</strong> Suica/ICOCA at airport, load ¥5,000</li>
         <li><strong>Google Maps</strong> works perfectly for transit</li>
         <li><strong>Adrienne arrives Nov 19</strong> — you overlap Nov 19–22</li>
