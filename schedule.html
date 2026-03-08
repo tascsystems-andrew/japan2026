@@ -141,9 +141,9 @@ if(sessionStorage.getItem('jp26')==='1'){document.getElementById('gate-overlay')
 const days = [
 // [date, dow, type, typeLabel, plan, detail, tags, detailOnly]
 // Week 0
-["Nov 5","Thu","travel","Travel","Depart Vancouver → KIX","Evening/overnight flight",["family"],false],
-["Nov 6","Fri","travel","Travel","Arrive KIX → Nishikujo Airbnb","Transit, unpack, find groceries, rest",["family"],false],
-["Nov 7","Sat","settle","Settle","Settle in / explore neighbourhood","Find essentials, rest up, explore Nishikujo",[],false],
+["Nov 5","Thu","travel","Travel","Depart Vancouver → KIX","Evening/overnight flight. D&C fly with us!",["family","dc"],false],
+["Nov 6","Fri","travel","Travel","Arrive KIX → Nishikujo Airbnb","Transit, unpack, find groceries, rest",["family","dc"],false],
+["Nov 7","Sat","settle","Settle","Settle in / explore neighbourhood","Find essentials, rest up, explore Nishikujo",["dc"],false],
 ["Nov 8","Sun","settle","Settle","Local explore","D&C arrive! Airport car pickup.",["dc"],false],
 // Week 1
 ["Nov 9","Mon","activity","Activity","<strong>Osaka Day Tour</strong>","Castle, Kuromon Market, Shinsekai",["dc"],false],
@@ -158,11 +158,11 @@ const days = [
 ["Nov 17","Tue","homeschool","School","Home day","Homeschool + remote work. D&C self-guided Kyoto or Nara.",["dc","adr-tokyo"],true],
 ["Nov 18","Wed","activity","Activity","<strong>Universal Studios Japan</strong>","Full day — Nintendo World, Harry Potter, rides!",["dc","adr-tokyo"],false],
 ["Nov 19","Thu","birthday","Birthday","<strong>Sam's Birthday!</strong>","Homeschool AM. Adrienne arrives from Tokyo! Teppanyaki dinner for 9.",["dc","adr"],false],
-["Nov 20","Fri","rest","Rest","Light day / Osaka walkabout","Explore at your own pace. Dotonbori, Shinsaibashi.",["dc","adr"],false],
+["Nov 20","Fri","activity","Activity","<strong>CUPNOODLES Museum + Osaka walkabout</strong>","Make your own custom Cup Noodle in Ikeda (30 min train). Afternoon explore Osaka.",["dc","adr"],false],
 ["Nov 21","Sat","activity","Activity","<strong>Uji Day Trip + Farewell/Birthday Dinner</strong>","Tea town, Byodo-in. D&C farewell + Adrienne's birthday!",["dc","adr"],false],
-["Nov 22","Sun","rest","Rest","Rest / farewells","D&C depart — airport car to KIX",[" adr"],false],
+["Nov 22","Sun","rest","Rest","Rest day","",["dc","adr"],false],
 // Week 3
-["Nov 23","Mon","travel","Travel","Andy → Vancouver","Korean Air KIX→ICN→YVR. Arrive 3:30pm.",["andy","adr"],false],
+["Nov 23","Mon","travel","Travel","Andy + D&C → Vancouver","Korean Air KIX→ICN→YVR. Arrive 3:30pm.",["andy","dc","adr"],false],
 ["Nov 24","Tue","kyoto","Girls Trip","<strong>Girls' Kyoto Trip — Day 1</strong>","Homeschool AM. Train to Kyoto ~1pm. Nishiki Market, Gion.",["adr","girls"],false],
 ["Nov 25","Wed","kyoto","Girls Trip","<strong>Girls' Kyoto Trip — Day 2</strong>","Full day Kyoto. Higashiyama or Arashiyama.",["adr","girls"],false],
 ["Nov 26","Thu","kyoto","Girls Trip","<strong>Girls' Kyoto → Home</strong>","Morning Kyoto, train home. Afternoon homeschool.",["adr"],false],
