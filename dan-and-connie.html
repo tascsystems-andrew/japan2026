@@ -57,6 +57,12 @@ body{font-family:'Outfit',sans-serif;color:var(--ink);background:var(--cream);li
 .itin-table tr:nth-child(even) td{background:#f9f7f4}
 .itin-table .day-col{font-weight:500;color:var(--ink);white-space:nowrap;width:100px}
 .itin-table .type-col{font-size:11px;letter-spacing:1px;text-transform:uppercase;font-weight:500;width:90px}
+.alt-separator td{background:linear-gradient(135deg,#f7f3ed 0%,#f0ebe3 100%) !important;border-bottom:1px solid rgba(212,165,116,.25) !important;padding:8px 14px !important}
+.alt-separator .alt-label{display:inline-block;font-size:10px;letter-spacing:2px;text-transform:uppercase;font-weight:500;color:white;background:var(--warm);padding:3px 10px;border-radius:2px}
+.alt-separator .alt-label-end{display:inline-block;font-size:10px;letter-spacing:2px;text-transform:uppercase;font-weight:400;color:var(--warm);padding:3px 0}
+.alt-row td{background:rgba(212,165,116,.06) !important;border-bottom:1px solid rgba(212,165,116,.15) !important;color:var(--slate)}
+.alt-row .day-col{color:var(--warm) !important}
+.alt-row .type-col{color:var(--warm) !important}
 .type-activity{color:var(--warm)}.type-homeschool{color:var(--sage)}.type-rest{color:#888}.type-travel{color:var(--red)}.type-birthday{color:#c0392b}
 .details-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:32px}
 .detail-block h4{font-family:'Cormorant Garamond',serif;font-size:22px;margin-bottom:12px}
@@ -68,7 +74,21 @@ body{font-family:'Outfit',sans-serif;color:var(--ink);background:var(--cream);li
 .footer{text-align:center;padding:60px 40px;background:var(--ink);color:white}
 .footer h2{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:600;margin-bottom:12px}
 .footer p{font-weight:300;color:rgba(255,255,255,.7);font-size:16px}
-@media(max-width:768px){.hero h1{font-size:42px}.intro,.phase-header,.details-grid{grid-template-columns:1fr}.highlight-strip{grid-template-columns:1fr}.hero{padding:30px}.section{padding:40px 20px}}
+@media(max-width:768px){.hero h1{font-size:42px}.intro,.phase-header,.details-grid{grid-template-columns:1fr}.highlight-strip{grid-template-columns:1fr}.hero{padding:30px}.section{padding:40px 20px}.alt-path-grid{grid-template-columns:1fr}.alt-path{padding:40px 20px}.alt-path-inner{padding:28px}}
+/* Alternate path */
+.alt-path{position:relative;margin:0 auto;max-width:1100px;padding:60px 40px}
+.alt-path-inner{border:1px solid rgba(212,165,116,.35);border-radius:8px;padding:48px;background:linear-gradient(135deg,#fdfcfa 0%,#f7f3ed 100%)}
+.alt-path-badge{display:inline-block;font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:500;color:white;background:var(--warm);padding:6px 16px;border-radius:3px;margin-bottom:20px}
+.alt-path-inner h3{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:600;margin-bottom:8px;color:var(--ink)}
+.alt-path-inner>p{font-size:15px;color:var(--slate);font-weight:300;max-width:700px;margin-bottom:32px;line-height:1.7}
+.alt-path-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
+.alt-day{background:white;border-radius:6px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,.06)}
+.alt-day img{width:100%;height:180px;object-fit:cover}
+.alt-day-body{padding:20px}
+.alt-day-label{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--sage);font-weight:500;margin-bottom:6px}
+.alt-day h4{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:600;margin-bottom:8px}
+.alt-day p{font-size:14px;color:var(--slate);font-weight:300;line-height:1.5}
+.alt-note{font-size:13px;color:var(--slate);font-weight:300;font-style:italic;margin-top:24px;padding-top:20px;border-top:1px solid rgba(0,0,0,.06)}
 </style>
 </head>
 <body>
@@ -131,9 +151,17 @@ body{font-family:'Outfit',sans-serif;color:var(--ink);background:var(--cream);li
       <tr><td class="day-col">Fri Nov 13</td><td>9</td><td class="type-col type-activity">Guided</td><td>Kobe — Nankinmachi Chinatown, the Meriken Park waterfront, and an evening of authentic Kobe beef.</td></tr>
       <tr><td class="day-col">Sat Nov 14</td><td>10</td><td class="type-col type-activity">Guided</td><td>Himeji Castle — Japan's most spectacular original castle and a UNESCO World Heritage Site. 30-minute train from Kobe.</td></tr>
       <tr><td class="day-col">Sun Nov 15</td><td>11</td><td class="type-col type-activity">Guided</td><td>Final morning in Kobe — harbour views and last exploring before the train home to Osaka.</td></tr>
+      <tr class="alt-separator"><td colspan="4"><span class="alt-label">Optional Alternate — Days 8–10</span></td></tr>
+      <tr class="alt-row"><td class="day-col">Thu Nov 12</td><td>8</td><td class="type-col type-activity">Alternate</td><td>Mt. Fuji Side Trip — train to Kawaguchiko. Check into a lakeside ryokan with onsen and mountain views.</td></tr>
+      <tr class="alt-row"><td class="day-col">Fri Nov 13</td><td>9</td><td class="type-col type-activity">Alternate</td><td>Explore Lake Kawaguchi — mountain scenery, autumn colours, and the iconic Fuji backdrop.</td></tr>
+      <tr class="alt-row"><td class="day-col">Sat Nov 14</td><td>10</td><td class="type-col type-activity">Alternate</td><td>Return via Kanazawa — Kenroku-en Garden, the samurai district, and Omi-cho Market.</td></tr>
+      <tr class="alt-separator"><td colspan="4"><span class="alt-label-end">End alternate — resume standard itinerary</span></td></tr>
       <tr><td class="day-col">Mon Nov 16</td><td>12</td><td class="type-col type-rest">Rest</td><td>Rest day. A well-earned pause after a week on the move.</td></tr>
       <tr><td class="day-col">Tue Nov 17</td><td>13</td><td class="type-col type-homeschool">Self-Guided</td><td>Morning at leisure. Afternoon visit to the CUPNOODLES Museum — design your own cup and pick your toppings.</td></tr>
       <tr><td class="day-col">Wed Nov 18</td><td>14</td><td class="type-col type-activity">Activity</td><td>Universal Studios Japan — Nintendo World, Harry Potter, and a full day of rides. Just 10 minutes from our door.</td></tr>
+      <tr class="alt-separator"><td colspan="4"><span class="alt-label">Optional Alternate — Day 14</span></td></tr>
+      <tr class="alt-row"><td class="day-col">Wed Nov 18</td><td>14</td><td class="type-col type-activity">Alternate</td><td>Kobe Day Trip — bullet train to Kobe for Nankinmachi Chinatown, the waterfront, and a Kobe beef lunch. Return to Osaka that evening.</td></tr>
+      <tr class="alt-separator"><td colspan="4"><span class="alt-label-end">End alternate — resume standard itinerary</span></td></tr>
       <tr><td class="day-col">Thu Nov 19</td><td>15</td><td class="type-col type-birthday">Birthday</td><td>Sam's Birthday. Morning at leisure, then Adrienne arrives from Tokyo. Birthday dinner together that evening.</td></tr>
       <tr><td class="day-col">Fri Nov 20</td><td>16</td><td class="type-col type-activity">Guided</td><td>Osaka highlights tour — a second look at the city's best, now with Adrienne joining the group.</td></tr>
       <tr><td class="day-col">Sat Nov 21</td><td>17</td><td class="type-col type-activity">Guided</td><td>Day trip to Uji — a serene tea town with Byodo-in Temple. Back for Adrienne's birthday dinner that evening.</td></tr>
@@ -217,6 +245,50 @@ body{font-family:'Outfit',sans-serif;color:var(--ink);background:var(--cream);li
           <p>Nankinmachi (Chinatown), Meriken Park waterfront, the harbour area. Cap it off with the real deal — authentic Kobe beef dinner.</p>
         </div>
       </div>
+    </div>
+  </div>
+
+  <!-- ALTERNATE PATH -->
+  <div class="alt-path">
+    <div class="alt-path-inner">
+      <div class="alt-path-badge">Optional Alternate</div>
+      <h3>Alternate Paths</h3>
+      <p>We're keeping two possible swaps on the table. Instead of the Kobe &amp; Himeji multi-day block, there's the option to journey to the iconic Mt. Fuji region — stay at a lakeside ryokan with private onsen, take in one of Japan's most legendary views, and return via the historic city of Kanazawa. And separately, on Day 14, the option to swap Universal Studios for a Kobe day trip instead.</p>
+      <div class="alt-path-grid">
+        <div class="alt-day">
+          <img src="https://images.pexels.com/photos/3408354/pexels-photo-3408354.jpeg?auto=compress&cs=tinysrgb&w=600&h=300&fit=crop" alt="Mt. Fuji and Lake Kawaguchiko">
+          <div class="alt-day-body">
+            <div class="alt-day-label">Day 8 — Thu Nov 12</div>
+            <h4>Travel to Kawaguchiko</h4>
+            <p>Train from Osaka to the Fuji Five Lakes region. Check into a traditional ryokan on the shores of Lake Kawaguchi — hot spring baths with Mt. Fuji views.</p>
+          </div>
+        </div>
+        <div class="alt-day">
+          <img src="https://images.pexels.com/photos/3225528/pexels-photo-3225528.jpeg?auto=compress&cs=tinysrgb&w=600&h=300&fit=crop" alt="Lake Kawaguchi autumn scenery">
+          <div class="alt-day-body">
+            <div class="alt-day-label">Day 9 — Fri Nov 13</div>
+            <h4>Lake Kawaguchi</h4>
+            <p>A full day exploring the lake, mountain scenery, and surrounding trails. Late-autumn colours framing Japan's most iconic peak.</p>
+          </div>
+        </div>
+        <div class="alt-day">
+          <img src="https://images.pexels.com/photos/2187605/pexels-photo-2187605.jpeg?auto=compress&cs=tinysrgb&w=600&h=300&fit=crop" alt="Kanazawa traditional garden">
+          <div class="alt-day-body">
+            <div class="alt-day-label">Day 10 — Sat Nov 14</div>
+            <h4>Return via Kanazawa</h4>
+            <p>Head west through Kanazawa — one of Japan's best-preserved castle towns. Kenroku-en Garden, the samurai district, and fresh seafood at Omi-cho Market before the train home.</p>
+          </div>
+        </div>
+        <div class="alt-day">
+          <img src="https://images.pexels.com/photos/2187456/pexels-photo-2187456.jpeg?auto=compress&cs=tinysrgb&w=600&h=300&fit=crop" alt="Kobe harbour and cityscape">
+          <div class="alt-day-body">
+            <div class="alt-day-label">Day 14 — Wed Nov 18</div>
+            <h4>Kobe Day Trip</h4>
+            <p>Instead of Universal Studios — a bullet train to Kobe for Nankinmachi Chinatown, the Meriken Park waterfront, and an authentic Kobe beef lunch. Back in Osaka by evening.</p>
+          </div>
+        </div>
+      </div>
+      <p class="alt-note">These are possible alternatives to the standard itinerary above. We'll make the final call together closer to the trip — no need to decide now.</p>
     </div>
   </div>
 
