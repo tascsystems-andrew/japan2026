@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sandy — Japan 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#1a1a1a;--cream:#faf8f4;--warm:#d4a574;--sage:#8b9e7e;--slate:#4a5568;--red:#c0392b;--bamboo:#4a6741}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Outfit',sans-serif;color:var(--ink);background:var(--cream);line-height:1.6}
+/* Password gate */
+#gate-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:#1a1a1a;z-index:9999;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:16px;font-family:'Outfit',sans-serif}
+#gate-overlay h2{font-family:'Cormorant Garamond',serif;font-size:36px;color:white}
+#gate-overlay p{color:rgba(255,255,255,.5);font-size:14px;font-weight:300}
+#gate-overlay input{background:transparent;border:1px solid rgba(255,255,255,.3);color:white;padding:14px 24px;font-size:15px;text-align:center;font-family:'Outfit',sans-serif;outline:none;width:260px;letter-spacing:1px}
+#gate-overlay input::placeholder{color:rgba(255,255,255,.3)}
+#gate-overlay input:focus{border-color:rgba(255,255,255,.6)}
+#gate-overlay button{padding:12px 32px;background:transparent;border:1px solid rgba(255,255,255,.25);color:white;font-size:13px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;font-family:'Outfit',sans-serif;transition:all .3s}
+#gate-overlay button:hover{background:rgba(255,255,255,.1)}
+.gate-error{color:#c0392b;font-size:13px;font-weight:300;min-height:20px}
+.hero{position:relative;height:100vh;min-height:600px;background:linear-gradient(135deg,rgba(0,0,0,.4)0%,rgba(0,0,0,.15)50%,rgba(0,0,0,.5)100%),url('https://images.pexels.com/photos/19693266/pexels-photo-19693266.jpeg?auto=compress&cs=tinysrgb&w=1600') center/cover;display:flex;align-items:flex-end;padding:60px}
+.hero-content{max-width:700px}
+.hero-tag{font-family:'Outfit';font-weight:300;font-size:14px;letter-spacing:4px;text-transform:uppercase;color:var(--warm);margin-bottom:16px}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:68px;font-weight:700;color:white;line-height:1.05;margin-bottom:16px}
+.hero p{font-family:'Outfit';font-weight:300;font-size:18px;color:rgba(255,255,255,.85);max-width:520px}
+.hero-date{display:inline-block;margin-top:24px;padding:10px 24px;border:1px solid rgba(255,255,255,.4);font-size:13px;letter-spacing:2px;text-transform:uppercase;color:white}
+.section{max-width:1100px;margin:0 auto;padding:80px 40px}
+.section-label{font-weight:300;font-size:12px;letter-spacing:4px;text-transform:uppercase;color:var(--warm);margin-bottom:12px}
+.section h2{font-family:'Cormorant Garamond',serif;font-size:42px;font-weight:600;margin-bottom:24px;line-height:1.15}
+.section p{font-size:16px;color:var(--slate);max-width:700px;margin-bottom:16px;font-weight:300}
+.intro{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.intro-img{width:100%;height:450px;object-fit:cover;border-radius:4px}
+.callout{background:white;border-left:3px solid var(--warm);padding:24px 28px;border-radius:0 6px 6px 0;margin:32px 0;max-width:700px}
+.callout h4{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:600;margin-bottom:8px;color:var(--ink)}
+.callout p{font-size:14px;color:var(--slate);font-weight:300;margin:0}
+.callout em{font-style:italic;color:var(--bamboo)}
+.phase{margin-bottom:80px}
+.phase-header{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-bottom:40px}
+.phase-img{width:100%;height:380px;object-fit:cover;border-radius:4px}
+.phase-text{display:flex;flex-direction:column;justify-content:center}
+.phase-text h3{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:600;margin-bottom:12px}
+.phase-text p{font-size:15px;color:var(--slate);font-weight:300}
+.day-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:24px;margin-top:32px}
+.day-card{background:white;border-radius:6px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,.06)}
+.day-card img{width:100%;height:200px;object-fit:cover}
+.day-card-body{padding:20px}
+.day-label{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--warm);font-weight:500;margin-bottom:6px}
+.day-card h4{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;margin-bottom:8px}
+.day-card p{font-size:14px;color:var(--slate);font-weight:300;line-height:1.5}
+.full-img{width:100%;height:300px;object-fit:cover;display:block}
+.schedule-table{width:100%;border-collapse:collapse;margin-top:24px}
+.schedule-table th{text-align:left;padding:12px 16px;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--warm);border-bottom:2px solid var(--warm);font-weight:500}
+.schedule-table td{padding:12px 16px;font-size:14px;color:var(--slate);font-weight:300;border-bottom:1px solid rgba(0,0,0,.06)}
+.schedule-table td:first-child{font-weight:500;color:var(--ink);white-space:nowrap}
+.schedule-table td strong{font-weight:500;color:var(--ink)}
+.includes{margin-top:40px}
+.includes h3{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:600;margin-bottom:16px}
+.includes ul{list-style:none;padding:0}
+.includes li{font-size:14px;color:var(--slate);font-weight:300;padding:8px 0;border-bottom:1px solid rgba(0,0,0,.06)}
+.includes li strong{font-weight:500;color:var(--ink)}
+.bigbird-quote{background:linear-gradient(135deg,#f5f0e8,#eee8dc);padding:40px;border-radius:8px;margin:40px 0;text-align:center}
+.bigbird-quote blockquote{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:400;font-style:italic;color:var(--ink);line-height:1.4;max-width:600px;margin:0 auto 12px}
+.bigbird-quote cite{font-family:'Outfit',sans-serif;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--warm);font-style:normal}
+.footer{text-align:center;padding:40px;font-size:12px;color:var(--slate);font-weight:300;letter-spacing:1px}
+@media(max-width:768px){
+  .hero h1{font-size:42px}
+  .hero{padding:30px}
+  .intro,.phase-header{grid-template-columns:1fr}
+  .section{padding:40px 20px}
+  .day-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<div id="gate-overlay">
+  <h2>Japan 2026</h2>
+  <p>Enter the password to continue</p>
+  <input type="password" id="gate-pw" placeholder="Password" onkeydown="if(event.key==='Enter')checkGate()">
+  <button onclick="checkGate()">Enter</button>
+  <div class="gate-error" id="gate-err"></div>
+</div>
+
+<div id="content" style="display:none">
+
+  <div class="hero">
+    <div class="hero-content">
+      <div class="hero-tag">Japan 2026</div>
+      <h1>Sandy's Kyoto Weekend</h1>
+      <p>A final weekend in Japan with the grandkids — capped with an overnight in the ancient capital, walking in Big Bird's footsteps.</p>
+      <div class="hero-date">December 12 – 15, 2026</div>
+    </div>
+  </div>
+
+  <!-- INTRO -->
+  <div class="section">
+    <div class="intro">
+      <div>
+        <div class="section-label">The Invitation</div>
+        <h2>Come Close Out the Adventure</h2>
+        <p>We're wrapping up six incredible weeks in Japan, and we'd love you to be there for the final chapter. Fly in Friday, spend the weekend soaking in Osaka with the grandkids, then hop a train to Kyoto for an overnight trip to the city Big Bird once got lost in.</p>
+        <p>The kids will be buzzing from a month and a half of temples, bullet trains, and too much takoyaki — and they'll be thrilled to show Grandma everything they've learned.</p>
+      </div>
+      <img class="intro-img" src="https://images.pexels.com/photos/1798631/pexels-photo-1798631.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Dotonbori neon streets, Osaka">
+    </div>
+  </div>
+
+  <!-- BIG BIRD CALLOUT -->
+  <div class="section" style="padding-top:0">
+    <div class="bigbird-quote">
+      <blockquote>"I'm homesick for Japan and I haven't even left."</blockquote>
+      <cite>— Big Bird, Big Bird in Japan (1988)</cite>
+    </div>
+
+    <div class="callout">
+      <h4>Why Kyoto? Because Big Bird went there.</h4>
+      <p>In the 1988 Sesame Street special <em>Big Bird in Japan</em>, Big Bird and Barkley get separated from their tour group in Tokyo and make their way to Kyoto by shinkansen. Once there, they wander into <em>Sanjusangendo Temple</em>, where Barkley is spooked by the 1,001 golden Kannon statues. They also encounter the <em>Tale of the Bamboo Cutter</em> — Japan's oldest fairy tale — set in <em>Arashiyama's bamboo forest</em>. We'll visit both.</p>
+    </div>
+  </div>
+
+  <!-- SCHEDULE TABLE -->
+  <div class="section" style="padding-top:0">
+    <div class="section-label">At a Glance</div>
+    <h2>Your Weekend</h2>
+    <table class="schedule-table">
+      <thead>
+        <tr><th>Day</th><th>Where</th><th>What</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Thu Dec 11</strong></td><td>Osaka</td><td><em>Optional early arrival.</em> Settle into the Airbnb, evening stroll through Dotonbori with the family. Jet-lag nap encouraged.</td></tr>
+        <tr><td><strong>Fri Dec 12</strong></td><td>Osaka</td><td>Arrive at KIX (or settle in if you came Thursday). Afternoon with the grandkids — neighbourhood walk, local treats, Osaka Castle park if the energy's there. Welcome dinner together.</td></tr>
+        <tr><td><strong>Sat Dec 13</strong></td><td>Osaka → Kyoto</td><td><strong>The Big Bird Kyoto Tour.</strong> Train to Kyoto (~30 min). Sanjusangendo Temple (1,001 statues), Arashiyama bamboo forest, maybe Kiyomizu-dera. Kyoto hotel overnight.</td></tr>
+        <tr><td><strong>Sun Dec 14</strong></td><td>Kyoto → Osaka</td><td>Morning Kyoto — Nishiki Market or one more temple. Train back to Osaka. Final family afternoon and farewell dinner.</td></tr>
+        <tr><td><strong>Mon Dec 15</strong></td><td>Osaka → KIX</td><td>Depart. Car transfer to Kansai International Airport.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- PHASE: KYOTO -->
+  <div class="section">
+    <div class="section-label">The Main Event</div>
+    <div class="phase">
+      <div class="phase-header">
+        <img class="phase-img" src="https://images.pexels.com/photos/4956721/pexels-photo-4956721.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Fushimi Inari torii gates, Kyoto">
+        <div class="phase-text">
+          <h3>Kyoto Overnight</h3>
+          <p>An overnight trip to Japan's ancient capital — temples, bamboo forests, market streets, and the places Big Bird walked in 1988. Kyoto is just 30 minutes from Osaka by train, but staying the night means you can take your time, linger over dinner, and wake up in one of the most beautiful cities in the world.</p>
+        </div>
+      </div>
+      <div class="day-grid">
+        <div class="day-card">
+          <img src="https://images.pexels.com/photos/5169558/pexels-photo-5169558.jpeg?auto=compress&cs=tinysrgb&w=600&h=300&fit=crop" alt="Golden Buddhist statues in a temple">
+          <div class="day-card-body">
+            <div class="day-label">Sat Dec 13 — Morning</div>
+            <h4>Sanjusangendo Temple</h4>
+            <p>Japan's longest wooden building, housing 1,001 golden statues of Kannon, the goddess of mercy — standing in ten rows, stretching into the distance. This is where Barkley got spooked and ran away in Big Bird in Japan. No photos allowed inside, but you'll remember it forever. ¥600 adults, ¥300 kids.</p>
+          </div>
+        </div>
+        <div class="day-card">
+          <img src="https://images.pexels.com/photos/19693266/pexels-photo-19693266.jpeg?auto=compress&cs=tinysrgb&w=600&h=300&fit=crop" alt="Arashiyama Bamboo Grove, Kyoto">
+          <div class="day-card-body">
+            <div class="day-label">Sat Dec 13 — Afternoon</div>
+            <h4>Arashiyama Bamboo Grove</h4>
+            <p>The towering bamboo forest on the western edge of Kyoto — the same forest that inspired the Tale of the Bamboo Cutter, the fairy tale at the heart of Big Bird in Japan. In December the crowds thin out, and the light filtering through the bamboo is magical. Free and open all day.</p>
+          </div>
+        </div>
+        <div class="day-card">
+          <img src="https://images.pexels.com/photos/1134166/pexels-photo-1134166.jpeg?auto=compress&cs=tinysrgb&w=600&h=300&fit=crop" alt="Kyoto evening street scene">
+          <div class="day-card-body">
+            <div class="day-label">Sat Dec 13 — Evening</div>
+            <h4>Kyoto by Night</h4>
+            <p>Check in to the hotel, freshen up, then a walk through Gion or Pontocho for dinner. December is peak autumn in Kyoto — temples and gardens may still be lit up with fall illuminations. End the night with a warm bowl of udon.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FULL WIDTH IMAGE -->
+  <img class="full-img" src="https://images.pexels.com/photos/2091034/pexels-photo-2091034.jpeg?auto=compress&cs=tinysrgb&w=1600&h=400&fit=crop" alt="Fushimi Inari torii gates pathway">
+
+  <!-- WHAT'S INCLUDED -->
+  <div class="section">
+    <div class="includes">
+      <div class="section-label">The Details</div>
+      <h3>What's Included</h3>
+      <ul>
+        <li><strong>Accommodation</strong> — shared family Airbnb in Osaka (Fri & Sun nights) + Kyoto hotel (Sat night)</li>
+        <li><strong>Kyoto train tickets</strong> — return trip Osaka ↔ Kyoto for the group</li>
+        <li><strong>Temple admissions</strong> — Sanjusangendo and any other temples visited</li>
+        <li><strong>Airport transfer</strong> — car from Airbnb to KIX on departure day</li>
+        <li><strong>Meals</strong> — welcome dinner Friday, all meals Saturday in Kyoto, farewell dinner Sunday</li>
+      </ul>
+    </div>
+
+    <div class="callout" style="margin-top:40px">
+      <h4>Good to Know</h4>
+      <p><strong>Flights:</strong> You'll need to book your own flights to Kansai International Airport (KIX). Direct options from Vancouver are limited — most routes connect through Tokyo (NRT/HND), Seoul (ICN), or Taipei (TPE).</p>
+      <p style="margin-top:8px"><strong>Weather:</strong> Mid-December in Osaka/Kyoto averages 5–10°C (40–50°F). Pack layers and a warm coat. The kids will be in full winter mode by then.</p>
+      <p style="margin-top:8px"><strong>Flexibility:</strong> If you can come Thursday the 11th, you'll have an extra day to recover from the flight and settle in. The schedule above works either way.</p>
+    </div>
+  </div>
+
+  <!-- CLOSING -->
+  <div class="section" style="text-align:center;padding-bottom:40px">
+    <div class="bigbird-quote">
+      <blockquote>"You know, it's weird. She shows up out of nowhere, helps me and Barkley, and then just disappears."</blockquote>
+      <cite>— Big Bird, on Kaguya-hime</cite>
+    </div>
+    <p style="max-width:500px;margin:24px auto 0;text-align:center">The bamboo forest is waiting. The grandkids are too.<br>Come close out this trip with us.</p>
+  </div>
+
+  <div class="footer">
+    Japan 2026 — Sandy's Kyoto Weekend
+  </div>
+
+</div>
+
+<script>
+function checkGate(){
+  var pw=document.getElementById('gate-pw').value.toLowerCase().trim();
+  if(pw==='sanche'){
+    document.getElementById('gate-overlay').style.display='none';
+    document.getElementById('content').style.display='block';
+  } else {
+    document.getElementById('gate-err').textContent='Incorrect password';
+  }
+}
+</script>
+</body>
+</html>

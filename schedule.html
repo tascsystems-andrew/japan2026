@@ -73,6 +73,7 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);li
 .tag-adr{background:#ddd5e8;color:#6b5a7e}
 .tag-dad{background:#d5e0e8;color:#4a6b7e}
 .tag-girls{background:#e8d5e0;color:#7e4a6b}
+.tag-sandy{background:#d5e8d8;color:#4a7e52}
 
 /* Detail row (full view only) */
 .day-detail{display:none;grid-column:1/-1;padding:0 14px 10px 174px;font-size:12px;color:#888;font-weight:300;line-height:1.6}
@@ -116,6 +117,7 @@ if(sessionStorage.getItem('jp26')==='1'){document.getElementById('gate-overlay')
 <a href="index.html">Home</a>
 <a href="dan-and-connie.html">Dan & Connie</a>
 <a href="adrienne.html">Adrienne</a>
+<a href="sandy.html">Sandy</a>
 </div>
 </div>
 
@@ -182,11 +184,11 @@ const days = [
 ["Dec 8","Tue","homeschool","School","Home day","Homeschool + remote work",[],true],
 ["Dec 9","Wed","open","Open","Open","Day trip option: Nara, Minoh, or rest",[],true],
 ["Dec 10","Thu","homeschool","School","Home day","Homeschool + remote work",[],true],
-["Dec 11","Fri","open","Open","Open","Potential: Snow trip (Tsuruga or Gozaisho)",[],false],
-["Dec 12","Sat","open","Open","Open","Potential: Snow weekend continued",[],false],
-["Dec 13","Sun","open","Open","Open","Potential: Our own Kyoto visit",[],false],
-["Dec 14","Mon","wind","Wind Down","Wind down","Packing, souvenirs, last errands",[],false],
-["Dec 15","Tue","wind","Wind Down","Wind down","Final pack up, clean Airbnb",[],false],
+["Dec 11","Fri","open","Open","Open","Sandy may arrive (optional early arrival). Settle in, evening Dotonbori stroll.",[],false],
+["Dec 12","Sat","activity","Activity","<strong>Sandy Arrives</strong>","Sandy arrives KIX. Afternoon with grandkids — neighbourhood walk, Osaka Castle park. Welcome dinner.",["family","sandy"],false],
+["Dec 13","Sun","activity","Activity","<strong>Kyoto Overnight</strong>","Big Bird Kyoto Tour: Sanjusangendo Temple (1,001 statues), Arashiyama bamboo forest. Kyoto hotel overnight.",["family","sandy"],false],
+["Dec 14","Mon","activity","Activity","<strong>Kyoto → Home</strong>","Morning Kyoto (Nishiki Market or temple). Train back to Osaka. Final family afternoon, farewell dinner.",["family","sandy"],false],
+["Dec 15","Tue","wind","Wind Down","Sandy departs / Wind down","Sandy departs KIX (car transfer). Family: final packing, clean Airbnb.",["sandy"],false],
 ["Dec 16","Wed","travel","Travel","<strong>Depart KIX → Vancouver</strong>","Fly home!",[],false],
 ];
 
@@ -205,6 +207,7 @@ const tagMap = {
 "adr-tokyo":{label:"Adrienne (Tokyo)",cls:"tag-adr"},
 "family":{label:"Family",cls:"tag-dad"},"andy":{label:"Andy",cls:"tag-dad"},
 "girls":{label:"Girls + William",cls:"tag-girls"},
+"sandy":{label:"Sandy",cls:"tag-sandy"},
 };
 
 function render(){
