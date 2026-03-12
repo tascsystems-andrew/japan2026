@@ -38,6 +38,7 @@ body{font-family:'Outfit',sans-serif;color:var(--ink);background:var(--cream);li
 .phase-text h3{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:600;margin-bottom:12px}
 .phase-text p{font-size:15px;color:var(--slate);font-weight:300}
 .day-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:24px;margin-top:32px}
+.day-grid-2x2{grid-template-columns:repeat(2,1fr)}
 .day-card{background:white;border-radius:6px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,.06)}
 .day-card img{width:100%;height:200px;object-fit:cover}
 .day-card-body{padding:20px}
@@ -74,7 +75,7 @@ body{font-family:'Outfit',sans-serif;color:var(--ink);background:var(--cream);li
 .footer{text-align:center;padding:60px 40px;background:var(--ink);color:white}
 .footer h2{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:600;margin-bottom:12px}
 .footer p{font-weight:300;color:rgba(255,255,255,.7);font-size:16px}
-@media(max-width:768px){.hero h1{font-size:42px}.intro,.phase-header,.details-grid{grid-template-columns:1fr}.highlight-strip{grid-template-columns:1fr}.hero{padding:30px}.section{padding:40px 20px}.alt-path-grid{grid-template-columns:1fr}.alt-path{padding:40px 20px}.alt-path-inner{padding:28px}}
+@media(max-width:768px){.hero h1{font-size:42px}.intro,.phase-header,.details-grid{grid-template-columns:1fr}.highlight-strip{grid-template-columns:1fr}.hero{padding:30px}.section{padding:40px 20px}.alt-path-grid{grid-template-columns:1fr}.alt-path{padding:40px 20px}.alt-path-inner{padding:28px}.day-grid-2x2{grid-template-columns:1fr}}
 /* Alternate path */
 .alt-path{position:relative;margin:0 auto;max-width:1100px;padding:60px 40px}
 .alt-path-inner{border:1px solid rgba(212,165,116,.35);border-radius:8px;padding:48px;background:linear-gradient(135deg,#fdfcfa 0%,#f7f3ed 100%)}
@@ -215,7 +216,7 @@ body{font-family:'Outfit',sans-serif;color:var(--ink);background:var(--cream);li
         <p>The centrepiece of your trip — a four-day bullet train journey east along the historic Tokaido corridor. Mt. Fuji views from the foot of the mountain itself, a fairytale forest village straight out of a Ghibli film, mandarin orange picking, fighter jets at an air force museum, and a hot spring ryokan with kaiseki dinner on the shores of Lake Hamana. Two cities, four days, all connected by Japan's most iconic train.</p>
       </div>
     </div>
-    <div class="day-grid">
+    <div class="day-grid day-grid-2x2">
       <div class="day-card">
         <img src="https://images.pexels.com/photos/3408354/pexels-photo-3408354.jpeg?auto=compress&cs=tinysrgb&w=600&h=300&fit=crop" alt="Mt. Fuji">
         <div class="day-card-body">
@@ -271,7 +272,7 @@ body{font-family:'Outfit',sans-serif;color:var(--ink);background:var(--cream);li
         </div>
       </div>
       <div class="day-card">
-        <img src="https://images.pexels.com/photos/1907244/pexels-photo-1907244.jpeg?auto=compress&cs=tinysrgb&w=600&h=300&fit=crop" alt="Japanese ramen noodles">
+        <img src="https://byfood.b-cdn.net/api/public/assets/9519/content?optimizer=image" alt="CUPNOODLES Museum Osaka Ikeda">
         <div class="day-card-body">
           <div class="day-label">Tue Nov 17</div>
           <h4>CUPNOODLES Museum</h4>
