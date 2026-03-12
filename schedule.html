@@ -176,6 +176,200 @@ const days = [
 ["Dec 1","Tue","homeschool","School","Home day","Homeschool + remote work. Back to routine.",[],true],
 ["Dec 2","Wed","open","Open","Open","",[], true],
 ["Dec 3","Thu","homeschool","School","Home day","Homeschool + remote work",[],true],
+["Dec 4","Fri","activity","Activity","<strong>Nagoya Weekend</strong>","Shinkansen to Nagoya. SCMAGLEV Railway Museum + Linimo maglev ride. Nagoya hotel (Expedia, paid).",["family"],false],
+["Dec 5","Sat","activity","Activity","<strong>Nagoya Day 2</strong>","Nagoya Castle, city exploring. Second night Nagoya hotel.",["family"],false],
+["Dec 6","Sun","activity","Activity","<strong>Nagoya → Home</strong>","Morning Nagoya flex. Shinkansen home to Osaka.",["family"],false],
+["Dec 7","Mon","open","Open","Open","Recovery / rest day",[],false],
+// Week 5
+["Dec 8","Tue","homeschool","School","Home day","Homeschool + remote work",[],true],
+["Dec 9","Wed","open","Open","Open","Day trip option: Nara, Minoh, or rest",[],true],
+["Dec 10","Thu","homeschool","School","Home day","Homeschool + remote work",[],true],
+["Dec 11","Fri","open","Open","Open","Sandy may arrive (optional early arrival). Settle in, evening Dotonbori stroll.",[],false],
+["Dec 12","Sat","activity","Activity","<strong>Sandy Arrives</strong>","Sandy arrives KIX. Afternoon with grandkids — neighbourhood walk, Osaka Castle park. Welcome dinner.",["family","sandy"],false],
+["Dec 13","Sun","activity","Activity","<strong>Kyoto Overnight</strong>","Big Bird Kyoto Tour: Sanjusangendo Temple (1,001 statues), Arashiyama bamboo forest. Kyoto hotel overnight.",["family","sandy"],false],
+["Dec 14","Mon","activity","Activity","<strong>Kyoto → Home</strong>","Morning Kyoto (Nishiki Market or temple). Train back to Osaka. Final family afternoon, farewell dinner.",["family","sandy"],false],
+["Dec 15","Tue","wind","Wind Down","Sandy departs / Wind down","Sandy departs KIX (car transfer). Family: final packing, clean Airbnb.",["sandy"],false],
+["Dec 16","Wed","travel","Travel","<strong>Depart KIX → Vancouver</strong>","Fly home!",[],false],
+];
+
+const weeks = [
+{label:"Week 0 — Arrive & Settle", start:0, end:3},
+{label:"Week 1 — Kyoto / Shinkansen Crawl / Hamamatsu", start:4, end:11},
+{label:"Week 2 — USJ, Birthdays & Uji", start:12, end:17},
+{label:"Week 3 — Vancouver / Girls' Kyoto", start:18, end:25},
+{label:"Week 4 — Open / Day Trips", start:26, end:32},
+{label:"Week 5 — Flex & Wind Down", start:33, end:41},
+];
+
+const tagMap = {
+"dc":{label:"D&C",cls:"tag-dc"},
+"adr":{label:"Adrienne",cls:"tag-adr"},
+"adr-tokyo":{label:"Adrienne (Tokyo)",cls:"tag-adr"},
+"family":{label:"Family",cls:"tag-dad"},"andy":{label:"Andy",cls:"tag-dad"},
+"girls":{label:"Girls + William",cls:"tag-girls"},
+"sandy":{label:"Sandy",cls:"tag-sandy"},
+};
+
+function render(){
+const cal=document.getElementById('cal');
+let html='';
+weeks.forEach(w=>{
+html+=`<div class="week"><div class="week-label">${w.label}</div><div class="days">`;
+for(let i=w.start;i<=w.end;i++){
+const d=days[i];
+const [date,dow,type,typeLabel,plan,detail,tags,detailOnly]=d;
+const dOnly=detailOnly?'detail-only':'';
+let tagsHtml='';
+tags.forEach(t=>{
+const tm=tagMap[t.trim()];
+if(tm)tagsHtml+=`<span class="tag ${tm.cls}">${tm.label}</span>`;
+});
+html+=`<div class="day-row ${dOnly}">
+<div class="day-date">${dow} ${date}</div>
+<div class="day-type type-${type}">${typeLabel}</div>
+<div class="day-content">${plan}${tagsHtml?'<div class="people">'+tagsHtml+'</div>':''}</div>
+${detail?'<div class="day-detail">'+detail+'</div>':''}
+</div>`;
+}
+html+=`</div></div>`;
+});
+cal.innerHTML=html;
+
+// Click to expand details
+document.querySelectorAll('.day-row').forEach(row=>{
+row.style.cursor='pointer';
+row.addEventListener('click',()=>row.classList.toggle('expanded'));
+});
+}
+
+function setView(mode,btn){
+document.body.className=mode==='simple'?'simple':'';
+document.querySelectorAll('.toggle-btn button').forEach(b=>b.classList.remove('active'));
+btn.classList.add('active');
+}
+
+render();
+</script>
+
+<div style="text-align:center;padding:40px;font-size:12px;color:#aaa;font-weight:300">
+Tap any row for more details · Updated March 2026
+</div>
+</body>
+</html>.type-work{background:#6b7b8d}
+.type-open{background:#ccc}
+.type-wind{background:#b8a9c4}
+.type-kyoto{background:var(--purple)}
+
+/* People tags */
+.people{margin-left:auto;display:flex;gap:4px;flex-shrink:0;padding-left:12px}
+.tag{font-size:9px;letter-spacing:.5px;text-transform:uppercase;padding:3px 8px;border-radius:3px;font-weight:500;white-space:nowrap}
+.tag-dc{background:#e8d5c4;color:#8b6b4a}
+.tag-adr{background:#ddd5e8;color:#6b5a7e}
+.tag-dad{background:#d5e0e8;color:#4a6b7e}
+.tag-girls{background:#e8d5e0;color:#7e4a6b}
+.tag-sandy{background:#d5e8d8;color:#4a7e52}
+
+/* Detail row (full view only) */
+.day-detail{display:none;grid-column:1/-1;padding:0 14px 10px 174px;font-size:12px;color:#888;font-weight:300;line-height:1.6}
+.day-row.expanded .day-detail{display:block}
+
+/* Simple mode hides some rows */
+body.simple .detail-only{display:none}
+body.simple .day-detail{display:none!important}
+
+/* Mobile */
+@media(max-width:700px){
+.day-row{grid-template-columns:80px 55px 1fr}
+.day-date{font-size:12px;padding:8px 10px}
+.day-type{font-size:9px;padding:8px 4px}
+.day-content{font-size:12px;padding:8px 10px;flex-wrap:wrap}
+.people{margin-left:0;margin-top:4px;width:100%}
+.header h1{font-size:32px}
+.toggle-bar{flex-direction:column;align-items:flex-start}
+.legend{gap:8px}
+}
+</style>
+</head>
+<body>
+
+<div id="gate-overlay">
+<h2>Japan 2026</h2>
+<p>Enter password to continue</p>
+<input type="password" id="pw" placeholder="Password" onkeydown="if(event.key==='Enter')check()">
+<button onclick="check()">Enter</button>
+<div class="gate-error" id="err"></div>
+</div>
+<script>
+function check(){if(document.getElementById('pw').value.toLowerCase()==='sanche'){document.getElementById('gate-overlay').style.display='none';sessionStorage.setItem('jp26','1')}else{document.getElementById('err').textContent='Try again'}}
+if(sessionStorage.getItem('jp26')==='1'){document.getElementById('gate-overlay').style.display='none'}
+</script>
+
+<div class="header">
+<h1>Japan 2026</h1>
+<p>November 5 – December 16 · Master Schedule</p>
+<div class="nav-links">
+<a href="index.html">Home</a>
+<a href="dan-and-connie.html">Dan & Connie</a>
+<a href="adrienne.html">Adrienne</a>
+<a href="sandy.html">Sandy</a>
+</div>
+</div>
+
+<div class="toggle-bar">
+<div class="toggle-btn">
+<button class="active" onclick="setView('full',this)">Full View</button>
+<button onclick="setView('simple',this)">Simple View</button>
+</div>
+<div class="legend">
+<div class="legend-item"><div class="legend-dot" style="background:var(--warm)"></div>Activity</div>
+<div class="legend-item"><div class="legend-dot" style="background:var(--green)"></div>Homeschool</div>
+<div class="legend-item"><div class="legend-dot" style="background:#5a6c7d"></div>Travel</div>
+<div class="legend-item"><div class="legend-dot" style="background:var(--red)"></div>Birthday</div>
+<div class="legend-item"><div class="legend-dot" style="background:var(--purple)"></div>Girls Trip</div>
+<div class="legend-item"><div class="legend-dot" style="background:#aaa"></div>Rest</div>
+<div class="legend-item"><div class="legend-dot" style="background:#ccc"></div>Open</div>
+</div>
+</div>
+
+<div class="calendar" id="cal"></div>
+
+<script>
+const days = [
+// [date, dow, type, typeLabel, plan, detail, tags, detailOnly]
+// Week 0
+["Nov 5","Thu","travel","Travel","Depart Vancouver → KIX","Evening/overnight flight. D&C fly with us!",["family","dc"],false],
+["Nov 6","Fri","activity","Arrive & Explore","Arrive KIX → Airbnb. Evening in Umeda","Unpack, then Umeda — Loft shopping, sushi train welcome dinner.",["family","dc"],false],
+["Nov 7","Sat","activity","Activity","<strong>Osaka Walking Tour</strong>","Guided walk hitting the wow highlights of Osaka.",["family","dc"],false],
+["Nov 8","Sun","rest","Rest","Relax Day","Low-key day. See and shop as we want. Church.",["family","dc"],false],
+// Week 1
+["Nov 9","Mon","activity","Activity","<strong>Kyoto Day Tour</strong>","Fushimi Inari, Kiyomizu-dera, Gion. Family day trip. D&C stay overnight for self-guided day tomorrow.",["family","dc"],false],
+["Nov 10","Tue","homeschool","School","Home day","Family home — homeschool + remote work. D&C self-guided Kyoto.",["dc"],true],
+["Nov 11","Wed","activity","Activity","<strong>Osaka Touring</strong>","Full day exploring Osaka together.",["family","dc"],false],
+["Nov 12","Thu","activity","Activity","<strong>Shinkansen to Shin-Fuji!</strong>","Morning school/work, 10am shinkansen east. Ekiben lunch on the train! Mt. Fuji World Heritage Centre, Sengen Shrine.",["family","dc"],false],
+["Nov 13","Fri","activity","Activity","<strong>Hamamatsu — Air Park &amp; Costco</strong>","Shinkansen to Hamamatsu. JASDF Air Park (fighter jets, free!). Hamamatsu gyoza lunch. Costco afternoon. Hotel overnight.",["family","dc"],false],
+["Nov 14","Sat","activity","Activity","<strong>Nukumori no Mori → Ryokan</strong>","Head to Kanzanji area. Nukumori no Mori fairytale village (real-life Ghibli!). Afternoon check-in Kanzanji Onsen ryokan, Lake Hamana. Kaiseki dinner included.",["family","dc"],false],
+["Nov 15","Sun","activity","Activity","<strong>Orange Picking → Home</strong>","Morning mandarin orange picking near Kanzanji. Shinkansen home to Osaka.",["family","dc"],false],
+["Nov 16","Mon","rest","Rest","Relax Day — Osaka","Rest and recharge at the Airbnb.",["family","dc"],false],
+// Week 2
+["Nov 17","Tue","homeschool","School","Home day","Morning school/work. D&C self-guided. CUPNOODLES Museum in the afternoon.",["dc"],true],
+["Nov 18","Wed","activity","Activity","<strong>Universal Studios Japan</strong>","Full day — Nintendo World, Harry Potter, rides!",["family","dc"],false],
+["Nov 19","Thu","birthday","Birthday","<strong>Sam's Birthday!</strong>","School/work AM. D&C morning self-guided. Adrienne arrives! Birthday dinner.",["dc","adr"],false],
+["Nov 20","Fri","activity","Activity","<strong>Osaka Highlights Tour</strong>","Osaka touring day — mainly for Adrienne to see the highlights.",["family","dc","adr"],false],
+["Nov 21","Sat","activity","Activity","<strong>Uji Day Trip + Adrienne's Birthday</strong>","Uji tea town, Byodo-in. Birthday dinner for Adrienne!",["family","dc","adr"],false],
+["Nov 22","Sun","rest","Rest","Bonus Day","Relax, pack, last exploring. Prep for departure.",["family","dc","adr"],false],
+// Week 3
+["Nov 23","Mon","travel","Travel","Andy + D&C → Vancouver","Blast off! Korean Air KIX→ICN→YVR. Sam & Adrienne prep for Kyoto on the 24th.",["andy","dc","adr"],false],
+["Nov 24","Tue","kyoto","Girls Trip","<strong>Girls' Kyoto Trip — Day 1</strong>","Homeschool AM. Train to Kyoto ~1pm. Nishiki Market, Gion.",["adr","girls"],false],
+["Nov 25","Wed","kyoto","Girls Trip","<strong>Girls' Kyoto Trip — Day 2</strong>","Full day Kyoto. Higashiyama or Arashiyama.",["adr","girls"],false],
+["Nov 26","Thu","kyoto","Girls Trip","<strong>Girls' Kyoto → Home</strong>","Morning Kyoto, train home. Afternoon homeschool.",["adr"],false],
+["Nov 27","Fri","activity","Activity","Flex day","Possible USJ for girls, Osaka exploring, or rest",["adr"],false],
+["Nov 28","Sat","rest","Rest","Rest day","",["adr"],true],
+["Nov 29","Sun","travel","Travel","Adrienne departs / Andy returns","Airport car for Adrienne. Andy departs YVR.",["andy"],false],
+["Nov 30","Mon","travel","Travel","Andy arrives Japan","Arrive KIX, resettle, recover",["andy"],false],
+// Week 4
+["Dec 1","Tue","homeschool","School","Home day","Homeschool + remote work. Back to routine.",[],true],
+["Dec 2","Wed","open","Open","Open","",[], true],
+["Dec 3","Thu","homeschool","School","Home day","Homeschool + remote work",[],true],
 ["Dec 4","Fri","open","Open","Open","Day trip option? Weeks 4–5 are flexible.",[],false],
 ["Dec 5","Sat","open","Open","Open","Weekend — potential day trip or rest",[],false],
 ["Dec 6","Sun","open","Open","Open","Weekend",[],false],
