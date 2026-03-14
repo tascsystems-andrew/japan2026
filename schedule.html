@@ -229,7 +229,10 @@ cal.innerHTML=html;
 // Click to expand details
 document.querySelectorAll('.day-row').forEach(row=>{
 row.style.cursor='pointer';
-row.addEventListener('click',()=>row.classList.toggle('expanded'));
+row.addEventListener('click',(e)=>{
+if(e.target.tagName==='A')return;
+row.classList.toggle('expanded');
+});
 });
 }
 
@@ -237,6 +240,10 @@ function setView(mode,btn){
 document.body.className=mode==='simple'?'simple':'';
 document.querySelectorAll('.toggle-btn button').forEach(b=>b.classList.remove('active'));
 btn.classList.add('active');
+document.querySelectorAll('.day-row').forEach(row=>{
+if(mode==='simple'){row.classList.remove('expanded')}
+else{row.classList.add('expanded')}
+});
 }
 
 render();
