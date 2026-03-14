@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kobe Day Trip — Japan 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#1a1a1a;--cream:#faf8f4;--warm:#d4a574;--sage:#8b9e7e;--slate:#4a5568;--red:#c0392b;--gold:#b8860b}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Outfit',sans-serif;color:var(--ink);background:var(--cream);line-height:1.6}
+#gate-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:#1a1a1a;z-index:9999;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:16px;font-family:'Outfit',sans-serif}
+#gate-overlay h2{font-family:'Cormorant Garamond',serif;font-size:36px;color:white}
+#gate-overlay p{color:rgba(255,255,255,.5);font-size:14px;font-weight:300}
+#gate-overlay input{background:transparent;border:1px solid rgba(255,255,255,.3);color:white;padding:14px 24px;font-size:15px;text-align:center;font-family:'Outfit',sans-serif;outline:none;width:260px;letter-spacing:1px}
+#gate-overlay input::placeholder{color:rgba(255,255,255,.3)}
+#gate-overlay input:focus{border-color:rgba(255,255,255,.6)}
+#gate-overlay button{padding:12px 32px;background:transparent;border:1px solid rgba(255,255,255,.25);color:white;font-size:13px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;font-family:'Outfit',sans-serif;transition:all .3s}
+#gate-overlay button:hover{background:rgba(255,255,255,.1)}
+.gate-error{color:#c0392b;font-size:13px;font-weight:300;min-height:20px}
+.hero{position:relative;height:60vh;min-height:400px;background:linear-gradient(135deg,rgba(0,0,0,.35)0%,rgba(0,0,0,.1)50%,rgba(0,0,0,.45)100%),url('https://www.agoda.com/wp-content/uploads/2024/07/kobe-port-tower-japan.jpg') center/cover;display:flex;align-items:flex-end;padding:60px}
+.hero-content{max-width:700px}
+.hero-tag{font-family:'Outfit';font-weight:300;font-size:13px;letter-spacing:4px;text-transform:uppercase;color:var(--warm);margin-bottom:12px}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:56px;font-weight:700;color:white;line-height:1.05;margin-bottom:12px}
+.hero p{font-family:'Outfit';font-weight:300;font-size:16px;color:rgba(255,255,255,.85);max-width:500px}
+.hero-date{display:inline-block;margin-top:20px;padding:8px 20px;border:1px solid rgba(255,255,255,.4);font-size:12px;letter-spacing:2px;text-transform:uppercase;color:white}
+.section{max-width:900px;margin:0 auto;padding:60px 40px}
+.section-label{font-weight:300;font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--warm);margin-bottom:10px}
+.section h2{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:600;margin-bottom:20px;line-height:1.15}
+.section p{font-size:15px;color:var(--slate);max-width:700px;margin-bottom:14px;font-weight:300}
+.intro-note{background:white;border-left:3px solid var(--warm);padding:20px 24px;border-radius:0 6px 6px 0;margin:24px 0;font-size:14px;color:var(--slate);font-weight:300;line-height:1.6}
+.intro-note strong{font-weight:500;color:var(--ink)}
+.alt-badge{display:inline-block;padding:6px 14px;border:1px solid var(--gold);border-radius:4px;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:16px}
+.stop{display:grid;grid-template-columns:80px 1fr;gap:0}
+.stop-time{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:600;color:var(--warm);padding:32px 0;text-align:right;padding-right:24px;border-right:2px solid #e0d8ce}
+.stop-body{padding:24px 0 24px 24px}
+.stop-body h3{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;margin-bottom:6px}
+.stop-body .subtitle{font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--sage);font-weight:500;margin-bottom:10px}
+.stop-body p{font-size:14px;color:var(--slate);font-weight:300;line-height:1.6;margin-bottom:8px}
+.stop-body .tip{font-size:13px;color:var(--gold);font-style:italic;margin-top:6px}
+.stop-body .kid-note{font-size:13px;color:var(--sage);margin-top:6px;padding:8px 12px;background:rgba(139,158,126,.08);border-radius:4px}
+.stop-img{width:100%;height:220px;object-fit:cover;border-radius:6px;margin-bottom:14px}
+.divider{height:1px;background:#e0d8ce;margin:0 0 0 104px}
+.transport{display:grid;grid-template-columns:80px 1fr;gap:0}
+.transport-time{padding:12px 0;text-align:right;padding-right:24px;border-right:2px dashed #e0d8ce}
+.transport-body{padding:12px 0 12px 24px;font-size:13px;color:var(--sage);font-weight:300;font-style:italic}
+.map-link{display:inline-block;margin-top:8px;padding:6px 14px;border:1px solid var(--warm);border-radius:4px;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--warm);text-decoration:none;font-weight:500;transition:all .3s}
+.map-link:hover{background:var(--warm);color:white}
+.nav-links{display:flex;gap:16px;margin-bottom:20px;flex-wrap:wrap}
+.nav-links a{font-size:13px;color:var(--warm);text-decoration:none;letter-spacing:1px;text-transform:uppercase;font-weight:400}
+.nav-links a:hover{text-decoration:underline}
+.nav-links .current{color:var(--ink);font-weight:500}
+.footer{text-align:center;padding:40px;font-size:12px;color:var(--slate);font-weight:300;letter-spacing:1px}
+@media(max-width:768px){.hero h1{font-size:36px}.hero{padding:30px;height:50vh}.section{padding:40px 20px}.stop{grid-template-columns:60px 1fr}.divider{margin-left:84px}.transport{grid-template-columns:60px 1fr}}
+</style>
+</head>
+<body>
+<div id="gate-overlay"><h2>Japan 2026</h2><p>Enter password to continue</p><input type="password" id="gate-pw" placeholder="Password" onkeydown="if(event.key==='Enter')checkGate()"><button onclick="checkGate()">Enter</button><div class="gate-error" id="gate-err"></div></div>
+<div id="content" style="display:none">
+
+  <div class="hero">
+    <div class="hero-content">
+      <div class="hero-tag">Alternate Day · Everyone Together</div>
+      <h1>Kobe Day Trip</h1>
+      <p>A harbour city with world-famous beef, a mountain ropeway, Chinatown, and views that go forever — 30 minutes from Osaka.</p>
+      <div class="hero-date">Alternate for Universal Studios Day</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="nav-links">
+      <a href="dan-and-connie.html">← Tour Overview</a>
+      <span class="current">Kobe Alt</span>
+    </div>
+    <div class="alt-badge">Alternate Day Plan</div>
+    <div class="section-label">Plan B</div>
+    <h2>If We Skip Universal</h2>
+    <p>If the group decides to skip USJ — or if we want to save it for another day — Kobe is the perfect swap. It's only 30 minutes by train from Osaka, feels completely different, and packs a world-class day into a short trip. Harbour views, a ropeway up the mountain, the best beef on the planet, and a Chinatown that's been running since 1868.</p>
+
+    <div class="intro-note">
+      <strong>Getting there:</strong> JR Special Rapid from Osaka Station to Sannomiya Station (Kobe's main hub) — about 22 minutes, covered by Suica/ICOCA. No shinkansen needed. Trains run every 10–15 minutes all day.
+    </div>
+  </div>
+
+  <div class="section" style="padding-top:0">
+
+    <div class="stop">
+      <div class="stop-time">9:30</div>
+      <div class="stop-body">
+        <h3>Depart Osaka</h3>
+        <div class="subtitle">JR Osaka Station → JR Sannomiya Station</div>
+        <p>Grab the JR Special Rapid from Osaka Station — it's the fastest regular train, no reserved seats needed. 22 minutes and you're in a completely different city. Kobe is compact and walkable once you're at Sannomiya.</p>
+      </div>
+    </div>
+
+    <div class="transport">
+      <div class="transport-time"></div>
+      <div class="transport-body">🚃 JR Special Rapid (~22 min). Then walk north from Sannomiya (~15 min uphill) to Shin-Kobe area.</div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="stop">
+      <div class="stop-time">10:30</div>
+      <div class="stop-body">
+        <h3>Nunobiki Herb Garden & Ropeway</h3>
+        <div class="subtitle">Shin-Kobe · Ropeway ¥1,800 adults RT, ¥900 ages 6–11, free under 6 · 10:00–17:00</div>
+        <img class="stop-img" src="https://images.pexels.com/photos/3408353/pexels-photo-3408353.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Kobe ropeway mountain view">
+        <p>A gondola ride straight up the mountainside behind Kobe — in about 10 minutes you're at 400 metres elevation with panoramic views of the city, the harbour, and Osaka Bay stretching out below. The herb garden at the top is terraced into the hillside with walking paths, greenhouses, a foot bath, and a café.</p>
+        <p>November means autumn foliage — the mountain will be lit up in reds and oranges. On a clear day you can see all the way to Osaka and even Awaji Island.</p>
+        <div class="kid-note">🧒 <strong>Kids love:</strong> The ropeway ride itself (glass-sided gondolas floating over the city), the wide terraced paths to run on, and the panoramic views. There's also a small playground area near the middle station.</div>
+        <p class="tip">Tip: Take the ropeway to the top, then walk down through the gardens to the middle station. The downhill walk is easy and you see everything without tiring legs.</p>
+        <a href="https://maps.google.com/?q=Kobe+Nunobiki+Herb+Garden" target="_blank" class="map-link">Open in Maps</a>
+      </div>
+    </div>
+
+    <div class="transport">
+      <div class="transport-time"></div>
+      <div class="transport-body">🚡 Ropeway down, then walk south through Kitano area (~10 min)</div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="stop">
+      <div class="stop-time">12:00</div>
+      <div class="stop-body">
+        <h3>Kitano Ijinkan District</h3>
+        <div class="subtitle">Kitano · Some houses ¥500–1,000, exteriors free · 9:00–18:00</div>
+        <p>A hillside neighbourhood of Western-style mansions built by foreign traders and diplomats in the late 1800s — when Kobe was one of the first ports Japan opened to the world. The houses are a mix of American, British, French, and German architecture, painted in bright colours and set along charming cobblestone streets.</p>
+        <p>You don't need to go inside every house — the neighbourhood itself is the experience. Wander the streets, peek through gates, and enjoy the European-meets-Japanese atmosphere. Starbucks Kitano (inside a converted 1907 American colonial house) is worth a stop just for the building.</p>
+        <div class="kid-note">🧒 <strong>Kids love:</strong> The cobblestone streets, the colourful buildings that look like something out of a storybook, and the trick art museum if you want to pop in (3D optical illusion photos).</div>
+        <a href="https://maps.google.com/?q=Kitano+Ijinkan+Kobe" target="_blank" class="map-link">Open in Maps</a>
+      </div>
+    </div>
+
+    <div class="transport">
+      <div class="transport-time"></div>
+      <div class="transport-body">🚶 Walk downhill toward Sannomiya (~10 min) for lunch</div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="stop">
+      <div class="stop-time">13:00</div>
+      <div class="stop-body">
+        <h3>Kobe Beef Lunch</h3>
+        <div class="subtitle">Sannomiya area</div>
+        <p>You can't come to Kobe and not eat the beef. Lunch sets are significantly cheaper than dinner — many restaurants around Sannomiya offer Kobe beef teppanyaki lunch courses that would cost double at dinner. The beef is cooked on a hot plate in front of you, sliced thin, and melts like butter.</p>
+        <p>The Sannomiya and Tor Road area is packed with Kobe beef restaurants. Look for places with an A5 certification and a lunch menu — the quality is the same as dinner, just smaller portions and better prices.</p>
+        <div class="kid-note">🧒 <strong>Kids love:</strong> Watching the chef cook on the teppan right in front of them. Most places also do hamburger steaks or simpler cuts for kids who aren't ready for full-fat wagyu.</div>
+        <p class="tip">Tip: Lunch reservations are recommended for the better places, especially on weekends. We can book in advance.</p>
+      </div>
+    </div>
+
+    <div class="transport">
+      <div class="transport-time"></div>
+      <div class="transport-body">🚶 Walk south from Sannomiya to Nankinmachi (~10 min)</div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="stop">
+      <div class="stop-time">14:30</div>
+      <div class="stop-body">
+        <h3>Nankinmachi (Kobe Chinatown)</h3>
+        <div class="subtitle">Motomachi · Free · Open all day</div>
+        <p>One of Japan's three great Chinatowns — and one of the oldest, established when the port opened in 1868. It's a compact, colourful strip of about 100 shops and restaurants squeezed between ornate Chinese gates. The street food here is the draw — pork buns (nikuman), sesame dango, xiaolongbao, roasted chestnuts, and bubble tea.</p>
+        <p>It's a quick stop — 30 to 45 minutes is plenty — but the street food is excellent and the atmosphere is fun. A nice palate shift after the Kobe beef.</p>
+        <div class="kid-note">🧒 <strong>Kids love:</strong> The giant pork buns (nikuman — fluffy white buns with savoury filling), the colourful gates and lanterns, and picking snacks from the street stalls.</div>
+        <a href="https://maps.google.com/?q=Nankinmachi+Kobe+Chinatown" target="_blank" class="map-link">Open in Maps</a>
+      </div>
+    </div>
+
+    <div class="transport">
+      <div class="transport-time"></div>
+      <div class="transport-body">🚶 Walk south toward the harbour (~10 min)</div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="stop">
+      <div class="stop-time">15:30</div>
+      <div class="stop-body">
+        <h3>Meriken Park & Kobe Harbour</h3>
+        <div class="subtitle">Meriken Park · Free · Open all day</div>
+        <img class="stop-img" src="https://www.agoda.com/wp-content/uploads/2024/07/kobe-port-tower-japan.jpg" alt="Kobe Port Tower and harbour">
+        <p>Kobe's waterfront — a wide, modern park on the harbour with the iconic red Kobe Port Tower (recently renovated with a rooftop deck), the Kobe Maritime Museum's white sail-shaped roof, and the "BE KOBE" monument that's become the city's signature photo spot.</p>
+        <p>The park is flat, open, and perfect for the end of the day — let the kids run while the adults sit on a bench and watch the ships. The sunset over the harbour is beautiful if timing works out.</p>
+        <div class="kid-note">🧒 <strong>Kids love:</strong> The wide open space to run, the harbour and ships, climbing on the BE KOBE letters for a photo, and the Kobe Earthquake Memorial (a preserved section of collapsed wharf that's strangely fascinating for kids).</div>
+        <p class="tip">Tip: The BE KOBE sign gets a queue for photos on weekends. Go early or late for a clean shot. The sign is at the east end of the park near the Oriental Hotel.</p>
+        <a href="https://maps.google.com/?q=Meriken+Park+Kobe" target="_blank" class="map-link">Open in Maps</a>
+      </div>
+    </div>
+
+    <div class="transport">
+      <div class="transport-time"></div>
+      <div class="transport-body">🚶 Walk to Motomachi or Sannomiya Station (~10–15 min)</div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="stop">
+      <div class="stop-time">17:00</div>
+      <div class="stop-body">
+        <h3>Head Home</h3>
+        <div class="subtitle">JR Sannomiya → JR Osaka Station (~22 min)</div>
+        <p>Same train back — JR Special Rapid from Sannomiya to Osaka. You'll be home by 5:30, full of Kobe beef and pork buns, with a camera full of harbour sunsets and ropeway views. Not a bad Plan B.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="section" style="padding-top:0">
+    <div class="intro-note">
+      <strong>Why Kobe works as a swap:</strong> It's close (22 min by train), it's a completely different vibe from Osaka, the beef alone justifies the trip, and the ropeway + harbour combo gives you mountain and sea in one day. If USJ gets rained out or the group isn't feeling a theme park, this is an excellent fallback.
+    </div>
+  </div>
+
+  <div class="footer">
+    Japan 2026 — Kobe Day Trip (Alternate) · <a href="dan-and-connie.html" style="color:var(--warm)">Back to tour</a>
+  </div>
+
+</div>
+<script>function checkGate(){var p=document.getElementById('gate-pw').value.toLowerCase().trim();if(p==='sanche'){document.getElementById('gate-overlay').style.display='none';document.getElementById('content').style.display='block';sessionStorage.setItem('jp26','1')}else{document.getElementById('gate-err').textContent='Try again'}}if(sessionStorage.getItem('jp26')==='1'){document.getElementById('gate-overlay').style.display='none';document.getElementById('content').style.display='block'}</script>
+</body>
+</html>
