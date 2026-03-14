@@ -40,6 +40,8 @@ body{font-family:'Outfit',sans-serif;color:var(--ink);background:var(--cream);li
 .day-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:24px;margin-top:32px}
 .day-grid-2x2{grid-template-columns:repeat(2,1fr)}
 .day-card{background:white;border-radius:6px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,.06)}
+a.day-card{display:block;transition:box-shadow .3s}
+a.day-card:hover{box-shadow:0 4px 20px rgba(0,0,0,.12)}
 .day-card img{width:100%;height:200px;object-fit:cover}
 .day-card-body{padding:20px}
 .day-label{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--warm);font-weight:500;margin-bottom:6px}
@@ -148,10 +150,10 @@ body{font-family:'Outfit',sans-serif;color:var(--ink);background:var(--cream);li
       <tr><td class="day-col">Mon Nov 9</td><td>5</td><td class="type-col type-activity">Guided</td><td>Kyoto Day Tour — Kiyomizu-dera, Gion, Nijo Castle's nightingale floors, and maybe the Railway Museum. You stay overnight in Kyoto. <a href="family-kyoto-day.html" style="color:var(--warm)">See the day plan →</a></td></tr>
       <tr><td class="day-col">Tue Nov 10</td><td>6</td><td class="type-col type-homeschool">Self-Guided</td><td>A full day to explore Kyoto on your own — Arashiyama bamboo grove, Kinkaku-ji, Nishiki Market, Gekkeikan sake tasting. <a href="dc-kyoto-day.html" style="color:var(--warm)">See your itinerary →</a></td></tr>
       <tr><td class="day-col">Wed Nov 11</td><td>7</td><td class="type-col type-activity">Guided</td><td>Osaka deep dive — the neighbourhoods, markets, and flavours we haven't covered yet.</td></tr>
-      <tr><td class="day-col">Thu Nov 12</td><td>8</td><td class="type-col type-activity">Guided</td><td>The Tokaido Shinkansen Crawl begins. Bullet train east to Shin-Fuji — ekiben lunch on the train. Afternoon at the Mt. Fuji World Heritage Centre and Fujisan Hongu Sengen Shrine. Kodama to Shizuoka — hotel overnight.</td></tr>
-      <tr><td class="day-col">Fri Nov 13</td><td>9</td><td class="type-col type-activity">Guided</td><td>D&amp;C visit <strong>Tamiya Headquarters</strong> in Shizuoka (archive room, showroom, shop). Family heads to Hamamatsu for JASDF Air Park and gyoza lunch. Everyone meets up at Hamamatsu Station for a Costco run. Hotel in Hamamatsu.</td></tr>
-      <tr><td class="day-col">Sat Nov 14</td><td>10</td><td class="type-col type-activity">Guided</td><td>Head to Kanzanji area — Nukumori no Mori fairytale village. Afternoon check-in at Kanzanji Onsen ryokan on Lake Hamana. Kaiseki dinner included.</td></tr>
-      <tr><td class="day-col">Sun Nov 15</td><td>11</td><td class="type-col type-activity">Guided</td><td>Mandarin orange picking near Kanzanji. Shinkansen home to Osaka.</td></tr>
+      <tr><td class="day-col">Thu Nov 12</td><td>8</td><td class="type-col type-activity">Guided</td><td>The Tokaido Shinkansen Crawl begins. Bullet train east to Shin-Fuji — ekiben lunch on the train. Afternoon at the Mt. Fuji World Heritage Centre and Fujisan Hongu Sengen Shrine. Kodama to Shizuoka — hotel overnight. <a href="crawl-day1.html" style="color:#d4a574">Day guide →</a></td></tr>
+      <tr><td class="day-col">Fri Nov 13</td><td>9</td><td class="type-col type-activity">Guided</td><td>D&amp;C visit <strong>Tamiya Headquarters</strong> in Shizuoka (archive room, showroom, shop). Family heads to Hamamatsu for JASDF Air Park and gyoza lunch. Everyone meets up at Hamamatsu Station for a Costco run. Hotel in Hamamatsu. <a href="crawl-day2.html" style="color:#d4a574">Day guide →</a></td></tr>
+      <tr><td class="day-col">Sat Nov 14</td><td>10</td><td class="type-col type-activity">Guided</td><td>Head to Kanzanji area — Nukumori no Mori fairytale village. Afternoon check-in at Kanzanji Onsen ryokan on Lake Hamana. Kaiseki dinner included. <a href="crawl-day3.html" style="color:#d4a574">Day guide →</a></td></tr>
+      <tr><td class="day-col">Sun Nov 15</td><td>11</td><td class="type-col type-activity">Guided</td><td>Mandarin orange picking near Kanzanji. Shinkansen home to Osaka. <a href="crawl-day4.html" style="color:#d4a574">Day guide →</a></td></tr>
       <tr><td class="day-col">Mon Nov 16</td><td>12</td><td class="type-col type-rest">Rest</td><td>Rest day. A well-earned pause after a week on the move.</td></tr>
       <tr><td class="day-col">Tue Nov 17</td><td>13</td><td class="type-col type-homeschool">Self-Guided</td><td>While the family visits the CUPNOODLES Museum, you head to the Suntory Yamazaki Distillery — the birthplace of Japanese whisky. <a href="dc-yamazaki-day.html" style="color:var(--warm)">See your itinerary →</a></td></tr>
       <tr><td class="day-col">Wed Nov 18</td><td>14</td><td class="type-col type-activity">Activity</td><td>Universal Studios Japan — Nintendo World, Harry Potter, and a full day of rides. Just 10 minutes from our door.</td></tr>
@@ -219,38 +221,42 @@ body{font-family:'Outfit',sans-serif;color:var(--ink);background:var(--cream);li
       </div>
     </div>
     <div class="day-grid day-grid-2x2">
-      <div class="day-card">
+      <a href="crawl-day1.html" class="day-card" style="text-decoration:none;color:inherit">
         <img src="https://images.pexels.com/photos/3408354/pexels-photo-3408354.jpeg?auto=compress&cs=tinysrgb&w=600&h=300&fit=crop" alt="Mt. Fuji">
         <div class="day-card-body">
           <div class="day-label">Thu Nov 12</div>
           <h4>Shin-Fuji &amp; Shizuoka</h4>
           <p>Ekiben lunch on the shinkansen as the countryside unfolds. Arrive at the foot of Mt. Fuji for the World Heritage Centre and the ancient Sengen Shrine. Then a short Kodama hop to Shizuoka — Japan's model-making capital — for the night.</p>
+          <span style="display:inline-block;margin-top:8px;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:#d4a574;font-weight:500">See day guide →</span>
         </div>
-      </div>
-      <div class="day-card">
+      </a>
+      <a href="crawl-day2.html" class="day-card" style="text-decoration:none;color:inherit">
         <img src="https://images.pexels.com/photos/3225528/pexels-photo-3225528.jpeg?auto=compress&cs=tinysrgb&w=600&h=300&fit=crop" alt="JASDF Air Park fighter jets">
         <div class="day-card-body">
           <div class="day-label">Fri Nov 13</div>
           <h4>Tamiya HQ, Fighter Jets &amp; Gyoza</h4>
           <p>Dan &amp; Connie start the morning at <strong>Tamiya Headquarters</strong> in Shizuoka — the archive room, showroom with full-size race cars, and the Tamiya shop. Meanwhile, the family shinkansens ahead to Hamamatsu for the JASDF Air Park (real fighter jets, cockpit simulators, free!) and Hamamatsu gyoza for lunch. Everyone meets up at Hamamatsu Station for a Costco run and hotel overnight.</p>
+          <span style="display:inline-block;margin-top:8px;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:#d4a574;font-weight:500">See day guide →</span>
         </div>
-      </div>
-      <div class="day-card">
+      </a>
+      <a href="crawl-day3.html" class="day-card" style="text-decoration:none;color:inherit">
         <img src="https://media-cdn.tripadvisor.com/media/photo-s/0f/0a/c0/e2/photo1jpg.jpg" alt="Nukumori no Mori fairytale village">
         <div class="day-card-body">
           <div class="day-label">Sat Nov 14</div>
           <h4>Nukumori no Mori &amp; Onsen</h4>
           <p>Head to the Kanzanji area and step into a real-life Ghibli village — whimsical mushroom-shaped cottages, winding stone paths, gelato, and an owl café. Afternoon check-in at a Kanzanji Onsen ryokan on Lake Hamana. Hot springs and kaiseki dinner included.</p>
+          <span style="display:inline-block;margin-top:8px;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:#d4a574;font-weight:500">See day guide →</span>
         </div>
-      </div>
-      <div class="day-card">
+      </a>
+      <a href="crawl-day4.html" class="day-card" style="text-decoration:none;color:inherit">
         <img src="https://static.trip101.com/paragraph_media/pictures/002/816/682/large/pick-juicy-japanese-mandarin-oranges-at-maruu-toyama-farm.jpg?1692756599" alt="Japanese mandarin orange picking">
         <div class="day-card-body">
           <div class="day-label">Sun Nov 15</div>
           <h4>Orange Picking &amp; Home</h4>
           <p>Before heading home, a morning of seasonal mandarin orange picking in the fields near Kanzanji — November is peak season and the kids will love it. Then shinkansen back to Osaka in time for a relaxed evening.</p>
+          <span style="display:inline-block;margin-top:8px;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:#d4a574;font-weight:500">See day guide →</span>
         </div>
-      </div>
+      </a>
     </div>
   </div>
 
@@ -337,7 +343,7 @@ body{font-family:'Outfit',sans-serif;color:var(--ink);background:var(--cream);li
     <div class="detail-block">
       <h4>Experiences &amp; Dining</h4>
       <ul>
-        <li><strong>Guided tours:</strong> Osaka walking tour, Kyoto, Tokaido Shinkansen Crawl</li>
+        <li><strong>Guided tours:</strong> Osaka walking tour, Kyoto, Tokaido Shinkansen Crawl (<a href="crawl-day1.html" style="color:var(--warm)">Day 1</a> · <a href="crawl-day2.html" style="color:var(--warm)">2</a> · <a href="crawl-day3.html" style="color:var(--warm)">3</a> · <a href="crawl-day4.html" style="color:var(--warm)">4</a>)</li>
         <li><strong>Self-guided itineraries</strong> for Tue/Thu free days — <a href="dc-kyoto-day.html" style="color:var(--warm)">Kyoto day</a> · <a href="dc-yamazaki-day.html" style="color:var(--warm)">Yamazaki day</a></li>
         <li><strong>Kyoto overnight</strong> + full self-guided Kyoto day</li>
         <li><strong>Suntory Yamazaki Distillery</strong> — Japanese whisky tasting (D&amp;C exclusive!)</li>

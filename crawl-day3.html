@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Day 3: Nukumori no Mori & Onsen — Japan 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#1a1a1a;--cream:#faf8f4;--warm:#d4a574;--sage:#8b9e7e;--slate:#4a5568;--red:#c0392b;--gold:#b8860b}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Outfit',sans-serif;color:var(--ink);background:var(--cream);line-height:1.6}
+#gate-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:#1a1a1a;z-index:9999;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:16px;font-family:'Outfit',sans-serif}
+#gate-overlay h2{font-family:'Cormorant Garamond',serif;font-size:36px;color:white}
+#gate-overlay p{color:rgba(255,255,255,.5);font-size:14px;font-weight:300}
+#gate-overlay input{background:transparent;border:1px solid rgba(255,255,255,.3);color:white;padding:14px 24px;font-size:15px;text-align:center;font-family:'Outfit',sans-serif;outline:none;width:260px;letter-spacing:1px}
+#gate-overlay input::placeholder{color:rgba(255,255,255,.3)}
+#gate-overlay input:focus{border-color:rgba(255,255,255,.6)}
+#gate-overlay button{padding:12px 32px;background:transparent;border:1px solid rgba(255,255,255,.25);color:white;font-size:13px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;font-family:'Outfit',sans-serif;transition:all .3s}
+#gate-overlay button:hover{background:rgba(255,255,255,.1)}
+.gate-error{color:#c0392b;font-size:13px;font-weight:300;min-height:20px}
+.hero{position:relative;height:60vh;min-height:400px;background:linear-gradient(135deg,rgba(0,0,0,.35)0%,rgba(0,0,0,.1)50%,rgba(0,0,0,.45)100%),url('https://media-cdn.tripadvisor.com/media/photo-s/0f/0a/c0/e2/photo1jpg.jpg') center/cover;display:flex;align-items:flex-end;padding:60px}
+.hero-content{max-width:700px}
+.hero-tag{font-family:'Outfit';font-weight:300;font-size:13px;letter-spacing:4px;text-transform:uppercase;color:var(--warm);margin-bottom:12px}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:56px;font-weight:700;color:white;line-height:1.05;margin-bottom:12px}
+.hero p{font-family:'Outfit';font-weight:300;font-size:16px;color:rgba(255,255,255,.85);max-width:500px}
+.hero-date{display:inline-block;margin-top:20px;padding:8px 20px;border:1px solid rgba(255,255,255,.4);font-size:12px;letter-spacing:2px;text-transform:uppercase;color:white}
+.section{max-width:900px;margin:0 auto;padding:60px 40px}
+.section-label{font-weight:300;font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--warm);margin-bottom:10px}
+.section h2{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:600;margin-bottom:20px;line-height:1.15}
+.section p{font-size:15px;color:var(--slate);max-width:700px;margin-bottom:14px;font-weight:300}
+.intro-note{background:white;border-left:3px solid var(--warm);padding:20px 24px;border-radius:0 6px 6px 0;margin:24px 0;font-size:14px;color:var(--slate);font-weight:300;line-height:1.6}
+.intro-note strong{font-weight:500;color:var(--ink)}
+.stop{display:grid;grid-template-columns:80px 1fr;gap:0}
+.stop-time{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:600;color:var(--warm);padding:32px 0;text-align:right;padding-right:24px;border-right:2px solid #e0d8ce}
+.stop-body{padding:24px 0 24px 24px}
+.stop-body h3{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;margin-bottom:6px}
+.stop-body .subtitle{font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--sage);font-weight:500;margin-bottom:10px}
+.stop-body p{font-size:14px;color:var(--slate);font-weight:300;line-height:1.6;margin-bottom:8px}
+.stop-body .tip{font-size:13px;color:var(--gold);font-style:italic;margin-top:6px}
+.stop-body .kid-note{font-size:13px;color:var(--sage);margin-top:6px;padding:8px 12px;background:rgba(139,158,126,.08);border-radius:4px}
+.stop-img{width:100%;height:220px;object-fit:cover;border-radius:6px;margin-bottom:14px}
+.divider{height:1px;background:#e0d8ce;margin:0 0 0 104px}
+.transport{display:grid;grid-template-columns:80px 1fr;gap:0}
+.transport-time{padding:12px 0;text-align:right;padding-right:24px;border-right:2px dashed #e0d8ce}
+.transport-body{padding:12px 0 12px 24px;font-size:13px;color:var(--sage);font-weight:300;font-style:italic}
+.map-link{display:inline-block;margin-top:8px;padding:6px 14px;border:1px solid var(--warm);border-radius:4px;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--warm);text-decoration:none;font-weight:500;transition:all .3s}
+.map-link:hover{background:var(--warm);color:white}
+.onsen-note{background:linear-gradient(135deg,#f5efe5,#eee5d5);border-radius:8px;padding:28px;margin:32px 0}
+.onsen-note h3{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;margin-bottom:10px}
+.onsen-note p{font-size:14px;color:var(--slate);font-weight:300;line-height:1.6;margin-bottom:8px}
+.nav-links{display:flex;gap:16px;margin-bottom:20px;flex-wrap:wrap}
+.nav-links a{font-size:13px;color:var(--warm);text-decoration:none;letter-spacing:1px;text-transform:uppercase;font-weight:400}
+.nav-links a:hover{text-decoration:underline}
+.nav-links .current{color:var(--ink);font-weight:500}
+.footer{text-align:center;padding:40px;font-size:12px;color:var(--slate);font-weight:300;letter-spacing:1px}
+@media(max-width:768px){.hero h1{font-size:36px}.hero{padding:30px;height:50vh}.section{padding:40px 20px}.stop{grid-template-columns:60px 1fr}.divider{margin-left:84px}.transport{grid-template-columns:60px 1fr}}
+</style>
+</head>
+<body>
+<div id="gate-overlay"><h2>Japan 2026</h2><p>Enter password to continue</p><input type="password" id="gate-pw" placeholder="Password" onkeydown="if(event.key==='Enter')checkGate()"><button onclick="checkGate()">Enter</button><div class="gate-error" id="gate-err"></div></div>
+<div id="content" style="display:none">
+
+  <div class="hero">
+    <div class="hero-content">
+      <div class="hero-tag">Shinkansen Crawl · Day 3 of 4</div>
+      <h1>Nukumori no Mori & Onsen</h1>
+      <p>A fairytale forest village, then a hot spring ryokan on the shores of Lake Hamana — the most magical day of the crawl.</p>
+      <div class="hero-date">Saturday, November 14</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="nav-links">
+      <a href="dan-and-connie.html">← Tour Overview</a>
+      <a href="crawl-day2.html">← Day 2</a>
+      <span class="current">Day 3</span>
+      <a href="crawl-day4.html">Day 4 →</a>
+    </div>
+    <div class="section-label">Day 3</div>
+    <h2>Into the Forest, Then Into the Water</h2>
+    <p>Today we leave Hamamatsu city and head west to the Kanzanji area on the shores of Lake Hamana. The morning is a real-life Ghibli village. The afternoon and evening are for soaking in hot springs and eating a kaiseki dinner at a traditional ryokan. This is the day everyone will remember.</p>
+  </div>
+
+  <div class="section" style="padding-top:0">
+
+    <div class="stop">
+      <div class="stop-time">9:00</div>
+      <div class="stop-body">
+        <h3>Check Out — Richmond Hotel</h3>
+        <div class="subtitle">Pack up and head west</div>
+        <p>Check out of the hotel and grab a taxi to the Kanzanji area (~30 min from Hamamatsu Station). Everything today is within a few minutes of each other once you're out there.</p>
+      </div>
+    </div>
+
+    <div class="transport">
+      <div class="transport-time"></div>
+      <div class="transport-body">🚕 Taxi from Hamamatsu Station to Nukumori no Mori (~30 min, ~¥5,000–6,000). Or Entetsu Bus #30 (~40 min, much cheaper but slower with luggage.</div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="stop">
+      <div class="stop-time">10:00</div>
+      <div class="stop-body">
+        <h3>Nukumori no Mori</h3>
+        <div class="subtitle">Kanzanji area · ¥600 adults, free elementary age & under · 10:00–17:00 · Closed Thursdays</div>
+        <img class="stop-img" src="https://media-cdn.tripadvisor.com/media/photo-s/0f/0a/c0/e2/photo1jpg.jpg" alt="Nukumori no Mori fairytale village">
+        <p>A tiny fairytale village in the forest, built over 30 years by architect Shigeyoshi Sasaki. Whimsical mushroom-shaped cottages, winding stone paths, a gelato shop, a cheesecake workshop, an owl café, and shops selling handmade pottery, leather goods, and jewellery. It feels like stepping into a Studio Ghibli film.</p>
+        <p>The whole village is about 2,400 square metres — small enough to see everything, but charming enough that you'll want to linger. Plan about 2 hours.</p>
+        <div class="kid-note">🧒 <strong>Kids love:</strong> The mushroom houses (some are small enough for only them to fit inside), the owl café, the gelato, and the general feeling of being in a real-life fairy tale. Every corner is photo-worthy.</div>
+        <p class="tip">Tip: Bring cash — some shops and the entrance are cash or PayPay only.</p>
+        <a href="https://maps.google.com/?q=Nukumori+no+Mori+Hamamatsu" target="_blank" class="map-link">Open in Maps</a>
+      </div>
+    </div>
+
+    <div class="transport">
+      <div class="transport-time"></div>
+      <div class="transport-body">🚕 Short taxi to the ryokan (~5–10 min). Everything in the Kanzanji area is close together.</div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="stop">
+      <div class="stop-time">13:00</div>
+      <div class="stop-body">
+        <h3>Check In — Sansuikan Kinryu</h3>
+        <div class="subtitle">Kanzanji Onsen · 2 rooms · Kaiseki dinner included</div>
+        <p>Your ryokan for the night — a traditional Japanese hot spring inn on Lake Hamana. Check in, change into the provided yukata robes, and settle in. The rest of the day is for relaxing.</p>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="stop">
+      <div class="stop-time">PM</div>
+      <div class="stop-body">
+        <h3>Hot Springs & Relaxation</h3>
+        <div class="subtitle">Kanzanji Onsen · In-house</div>
+        <p>Soak in the onsen (hot spring baths). Most ryokans have both indoor and outdoor baths, with views of the lake. The hot mineral water is incredibly relaxing after days of walking and train rides. Take your time — this is what Japan does better than anywhere in the world.</p>
+        <div class="kid-note">🧒 <strong>Kids love:</strong> Wearing yukata robes around the ryokan (they'll feel like little samurai), the novelty of communal baths, and the tatami mat rooms where everyone sleeps on futons on the floor.</div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="stop">
+      <div class="stop-time">18:00</div>
+      <div class="stop-body">
+        <h3>Kaiseki Dinner</h3>
+        <div class="subtitle">Included with your stay</div>
+        <p>A multi-course traditional Japanese dinner served in your room or in the ryokan's dining hall. Expect beautifully presented small dishes — seasonal sashimi, grilled fish, tempura, tofu, pickled vegetables, miso soup, and rice. Each course is a little work of art. This is one of the most memorable dining experiences in Japan.</p>
+        <div class="kid-note">🧒 <strong>Kids love:</strong> The sheer number of little dishes (it feels like a feast), the novelty of eating in a tatami room, and there's usually rice and simple items even picky eaters will enjoy.</div>
+        <p class="tip">Tip: Let the ryokan know in advance if you have any dietary needs or allergies — they're usually very accommodating.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="section" style="padding-top:0">
+    <div class="onsen-note">
+      <h3>🧖 Onsen Etiquette — Quick Guide</h3>
+      <p><strong>Before the bath:</strong> Rinse thoroughly at the washing stations before entering the water. This is non-negotiable — it's the #1 rule.</p>
+      <p><strong>Towels:</strong> Small towels can come with you (keep it on your head, not in the water). Large towels stay in the changing room.</p>
+      <p><strong>Tattoos:</strong> Some onsen don't allow tattoos. Sansuikan Kinryu should be family-friendly, but if concerned, ask at check-in about private bath options.</p>
+      <p><strong>With kids:</strong> Young children are welcome in onsen. Same-gender parent accompanies. Keep them calm and remind them not to splash or swim.</p>
+    </div>
+  </div>
+
+  <div class="section" style="padding-top:0">
+    <div class="intro-note">
+      <strong>Tomorrow:</strong> Morning mandarin orange picking in the fields near Kanzanji, then shinkansen home to Osaka. <a href="crawl-day4.html" style="color:var(--warm)">See Day 4 →</a>
+    </div>
+  </div>
+
+  <div class="footer">
+    Japan 2026 — Shinkansen Crawl Day 3 · <a href="crawl-day2.html" style="color:var(--warm)">← Day 2</a> · <a href="dan-and-connie.html" style="color:var(--warm)">Tour</a> · <a href="crawl-day4.html" style="color:var(--warm)">Day 4 →</a>
+  </div>
+
+</div>
+<script>function checkGate(){var p=document.getElementById('gate-pw').value.toLowerCase().trim();if(p==='sanche'){document.getElementById('gate-overlay').style.display='none';document.getElementById('content').style.display='block';sessionStorage.setItem('jp26','1')}else{document.getElementById('gate-err').textContent='Try again'}}if(sessionStorage.getItem('jp26')==='1'){document.getElementById('gate-overlay').style.display='none';document.getElementById('content').style.display='block'}</script>
+</body>
+</html>

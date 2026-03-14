@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Day 2: Tamiya, Air Park & Costco — Japan 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#1a1a1a;--cream:#faf8f4;--warm:#d4a574;--sage:#8b9e7e;--slate:#4a5568;--red:#c0392b;--gold:#b8860b}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Outfit',sans-serif;color:var(--ink);background:var(--cream);line-height:1.6}
+#gate-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:#1a1a1a;z-index:9999;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:16px;font-family:'Outfit',sans-serif}
+#gate-overlay h2{font-family:'Cormorant Garamond',serif;font-size:36px;color:white}
+#gate-overlay p{color:rgba(255,255,255,.5);font-size:14px;font-weight:300}
+#gate-overlay input{background:transparent;border:1px solid rgba(255,255,255,.3);color:white;padding:14px 24px;font-size:15px;text-align:center;font-family:'Outfit',sans-serif;outline:none;width:260px;letter-spacing:1px}
+#gate-overlay input::placeholder{color:rgba(255,255,255,.3)}
+#gate-overlay input:focus{border-color:rgba(255,255,255,.6)}
+#gate-overlay button{padding:12px 32px;background:transparent;border:1px solid rgba(255,255,255,.25);color:white;font-size:13px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;font-family:'Outfit',sans-serif;transition:all .3s}
+#gate-overlay button:hover{background:rgba(255,255,255,.1)}
+.gate-error{color:#c0392b;font-size:13px;font-weight:300;min-height:20px}
+.hero{position:relative;height:60vh;min-height:400px;background:linear-gradient(135deg,rgba(0,0,0,.4)0%,rgba(0,0,0,.15)50%,rgba(0,0,0,.5)100%),url('https://images.pexels.com/photos/3225528/pexels-photo-3225528.jpeg?auto=compress&cs=tinysrgb&w=1600') center/cover;display:flex;align-items:flex-end;padding:60px}
+.hero-content{max-width:700px}
+.hero-tag{font-family:'Outfit';font-weight:300;font-size:13px;letter-spacing:4px;text-transform:uppercase;color:var(--warm);margin-bottom:12px}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:56px;font-weight:700;color:white;line-height:1.05;margin-bottom:12px}
+.hero p{font-family:'Outfit';font-weight:300;font-size:16px;color:rgba(255,255,255,.85);max-width:500px}
+.hero-date{display:inline-block;margin-top:20px;padding:8px 20px;border:1px solid rgba(255,255,255,.4);font-size:12px;letter-spacing:2px;text-transform:uppercase;color:white}
+.section{max-width:900px;margin:0 auto;padding:60px 40px}
+.section-label{font-weight:300;font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--warm);margin-bottom:10px}
+.section h2{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:600;margin-bottom:20px;line-height:1.15}
+.section p{font-size:15px;color:var(--slate);max-width:700px;margin-bottom:14px;font-weight:300}
+.intro-note{background:white;border-left:3px solid var(--warm);padding:20px 24px;border-radius:0 6px 6px 0;margin:24px 0;font-size:14px;color:var(--slate);font-weight:300;line-height:1.6}
+.intro-note strong{font-weight:500;color:var(--ink)}
+.split-box{background:white;border-radius:8px;padding:24px;margin:20px 0;box-shadow:0 2px 12px rgba(0,0,0,.06)}
+.split-box h4{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:600;margin-bottom:8px}
+.split-box p{font-size:14px;color:var(--slate);font-weight:300;line-height:1.6;margin-bottom:6px}
+.split-box .tag{display:inline-block;padding:3px 10px;border-radius:3px;font-size:11px;letter-spacing:.5px;text-transform:uppercase;font-weight:500;margin-bottom:10px}
+.tag-dc{background:#e8d5c4;color:#8b6b4a}
+.tag-family{background:#d5e0e8;color:#4a6b7e}
+.tag-all{background:#d5e8d8;color:#4a7e52}
+.stop{display:grid;grid-template-columns:80px 1fr;gap:0}
+.stop-time{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:600;color:var(--warm);padding:32px 0;text-align:right;padding-right:24px;border-right:2px solid #e0d8ce}
+.stop-body{padding:24px 0 24px 24px}
+.stop-body h3{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;margin-bottom:6px}
+.stop-body .subtitle{font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--sage);font-weight:500;margin-bottom:10px}
+.stop-body p{font-size:14px;color:var(--slate);font-weight:300;line-height:1.6;margin-bottom:8px}
+.stop-body .tip{font-size:13px;color:var(--gold);font-style:italic;margin-top:6px}
+.stop-body .kid-note{font-size:13px;color:var(--sage);margin-top:6px;padding:8px 12px;background:rgba(139,158,126,.08);border-radius:4px}
+.stop-img{width:100%;height:220px;object-fit:cover;border-radius:6px;margin-bottom:14px}
+.divider{height:1px;background:#e0d8ce;margin:0 0 0 104px}
+.transport{display:grid;grid-template-columns:80px 1fr;gap:0}
+.transport-time{padding:12px 0;text-align:right;padding-right:24px;border-right:2px dashed #e0d8ce}
+.transport-body{padding:12px 0 12px 24px;font-size:13px;color:var(--sage);font-weight:300;font-style:italic}
+.map-link{display:inline-block;margin-top:8px;padding:6px 14px;border:1px solid var(--warm);border-radius:4px;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--warm);text-decoration:none;font-weight:500;transition:all .3s}
+.map-link:hover{background:var(--warm);color:white}
+.nav-links{display:flex;gap:16px;margin-bottom:20px;flex-wrap:wrap}
+.nav-links a{font-size:13px;color:var(--warm);text-decoration:none;letter-spacing:1px;text-transform:uppercase;font-weight:400}
+.nav-links a:hover{text-decoration:underline}
+.nav-links .current{color:var(--ink);font-weight:500}
+.footer{text-align:center;padding:40px;font-size:12px;color:var(--slate);font-weight:300;letter-spacing:1px}
+@media(max-width:768px){.hero h1{font-size:36px}.hero{padding:30px;height:50vh}.section{padding:40px 20px}.stop{grid-template-columns:60px 1fr}.divider{margin-left:84px}.transport{grid-template-columns:60px 1fr}}
+</style>
+</head>
+<body>
+<div id="gate-overlay"><h2>Japan 2026</h2><p>Enter password to continue</p><input type="password" id="gate-pw" placeholder="Password" onkeydown="if(event.key==='Enter')checkGate()"><button onclick="checkGate()">Enter</button><div class="gate-error" id="gate-err"></div></div>
+<div id="content" style="display:none">
+
+  <div class="hero">
+    <div class="hero-content">
+      <div class="hero-tag">Shinkansen Crawl · Day 2 of 4</div>
+      <h1>Tamiya, Fighter Jets & Costco</h1>
+      <p>The group splits for the morning — model kits for Dan & Connie, real fighter jets for the family — then everyone reunites for gyoza and a Costco run.</p>
+      <div class="hero-date">Friday, November 13</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="nav-links">
+      <a href="dan-and-connie.html">← Tour Overview</a>
+      <a href="crawl-day1.html">← Day 1</a>
+      <span class="current">Day 2</span>
+      <a href="crawl-day3.html">Day 3 →</a>
+    </div>
+    <div class="section-label">Day 2 — Split Morning</div>
+    <h2>Two Adventures, One City</h2>
+    <p>Today the group splits up for the morning. Dan & Connie stay in Shizuoka for a visit to Tamiya Headquarters. The family shinkansens ahead to Hamamatsu for fighter jets and gyoza. Everyone meets back up at Hamamatsu Station in the afternoon for a Costco run and hotel check-in.</p>
+  </div>
+
+  <!-- SPLIT MORNING -->
+  <div class="section" style="padding-top:0">
+    <div class="section-label">The Morning Split</div>
+
+    <div class="split-box">
+      <span class="tag tag-dc">Dan & Connie</span>
+      <h4>Tamiya Headquarters — Shizuoka</h4>
+      <p>A short taxi from the hotel (~10 min). The archive room takes you through Tamiya's history from wooden models to modern RC cars. The showroom lobby has full-size race cars, the Monster Beetle, and F1 cars. The Tamiya shop has discounted kits and exclusive merch. Free admission, reservation required (submitted in advance).</p>
+      <p><strong>Hours:</strong> Mon–Fri, 9:00–16:30. <strong>Max group:</strong> 5 people.</p>
+      <p>After the visit, shinkansen from Shizuoka to Hamamatsu (~25 min) to meet the family.</p>
+      <a href="https://maps.google.com/?q=Tamiya+Inc+Shizuoka" target="_blank" class="map-link">Open in Maps</a>
+    </div>
+
+    <div class="split-box">
+      <span class="tag tag-family">Family</span>
+      <h4>JASDF Air Park — Hamamatsu</h4>
+      <p>Shinkansen from Shizuoka to Hamamatsu (~25 min), then taxi to the Air Park (~15 min). This is the Japan Air Self-Defense Force museum — real fighter jets you can get up close to, cockpit simulators, flight suits, and aviation history. Free admission.</p>
+      <p>After the museum, Hamamatsu gyoza for lunch — the city's signature dish. Head back to Hamamatsu Station to meet D&C.</p>
+      <div class="kid-note">🧒 <strong>Kids love:</strong> Climbing near real fighter jets, the cockpit simulators, and pretending to be pilots. Free admission makes it even better.</div>
+      <a href="https://maps.google.com/?q=Air+Park+Hamamatsu" target="_blank" class="map-link">Open in Maps</a>
+    </div>
+  </div>
+
+  <!-- AFTERNOON TOGETHER -->
+  <div class="section" style="padding-top:0">
+    <div class="section-label">Afternoon — Everyone Together</div>
+
+    <div class="stop">
+      <div class="stop-time">14:00</div>
+      <div class="stop-body">
+        <h3>Meet Up — Hamamatsu Station</h3>
+        <div class="subtitle">Everyone regroups</div>
+        <p>D&C arrive from Shizuoka, family returns from Air Park and gyoza. Everyone meets at the station.</p>
+      </div>
+    </div>
+
+    <div class="transport">
+      <div class="transport-time"></div>
+      <div class="transport-body">🚕 Taxi to Costco Hamamatsu (~15 min from station)</div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="stop">
+      <div class="stop-time">14:30</div>
+      <div class="stop-body">
+        <h3>Costco Hamamatsu</h3>
+        <div class="subtitle">Hamakita Ward · Costco hours</div>
+        <p>Stock up on snacks, supplies, and anything you've been missing from home. Costco Japan has all the familiar stuff plus Japanese exclusives — matcha Kit Kats in bulk, Japanese whisky at good prices, and excellent fresh sushi platters.</p>
+        <div class="kid-note">🧒 <strong>Kids love:</strong> The food court. Same hot dogs, same pizza, same soft serve. A taste of home in the middle of Japan.</div>
+        <p class="tip">Tip: Bring your Costco membership card from home — it works worldwide.</p>
+        <a href="https://maps.google.com/?q=Costco+Hamamatsu" target="_blank" class="map-link">Open in Maps</a>
+      </div>
+    </div>
+
+    <div class="transport">
+      <div class="transport-time"></div>
+      <div class="transport-body">🚕 Taxi to hotel (~15 min back to station area)</div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="stop">
+      <div class="stop-time">17:00</div>
+      <div class="stop-body">
+        <h3>Check In — Richmond Hotel Hamamatsu</h3>
+        <div class="subtitle">3 rooms · Near Hamamatsu Station</div>
+        <p>Drop the bags, settle in. If you're not Costco'd out for dinner, Hamamatsu gyoza is the move — the city is famous for it. Look for a gyoza shop near the station (they serve them in a distinctive circular pattern). Or just enjoy whatever you picked up at Costco.</p>
+        <p class="tip">Tip: If D&C missed gyoza at lunch, tonight's the night. Hamamatsu-style gyoza is pan-fried in a circle and served with bean sprouts. It's different from Tokyo or Osaka gyoza.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="section" style="padding-top:0">
+    <div class="intro-note">
+      <strong>Tomorrow:</strong> Head west to the Kanzanji area for a fairytale forest village and a hot spring ryokan on the shores of Lake Hamana. <a href="crawl-day3.html" style="color:var(--warm)">See Day 3 →</a>
+    </div>
+  </div>
+
+  <div class="footer">
+    Japan 2026 — Shinkansen Crawl Day 2 · <a href="crawl-day1.html" style="color:var(--warm)">← Day 1</a> · <a href="dan-and-connie.html" style="color:var(--warm)">Tour</a> · <a href="crawl-day3.html" style="color:var(--warm)">Day 3 →</a>
+  </div>
+
+</div>
+<script>function checkGate(){var p=document.getElementById('gate-pw').value.toLowerCase().trim();if(p==='sanche'){document.getElementById('gate-overlay').style.display='none';document.getElementById('content').style.display='block';sessionStorage.setItem('jp26','1')}else{document.getElementById('gate-err').textContent='Try again'}}if(sessionStorage.getItem('jp26')==='1'){document.getElementById('gate-overlay').style.display='none';document.getElementById('content').style.display='block'}</script>
+</body>
+</html>
