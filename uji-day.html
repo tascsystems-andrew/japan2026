@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Uji Day Trip — Japan 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#1a1a1a;--cream:#faf8f4;--warm:#d4a574;--sage:#8b9e7e;--slate:#4a5568;--red:#c0392b;--gold:#b8860b;--matcha:#5a7247}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Outfit',sans-serif;color:var(--ink);background:var(--cream);line-height:1.6}
+#gate-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:#1a1a1a;z-index:9999;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:16px;font-family:'Outfit',sans-serif}
+#gate-overlay h2{font-family:'Cormorant Garamond',serif;font-size:36px;color:white}
+#gate-overlay p{color:rgba(255,255,255,.5);font-size:14px;font-weight:300}
+#gate-overlay input{background:transparent;border:1px solid rgba(255,255,255,.3);color:white;padding:14px 24px;font-size:15px;text-align:center;font-family:'Outfit',sans-serif;outline:none;width:260px;letter-spacing:1px}
+#gate-overlay input::placeholder{color:rgba(255,255,255,.3)}
+#gate-overlay input:focus{border-color:rgba(255,255,255,.6)}
+#gate-overlay button{padding:12px 32px;background:transparent;border:1px solid rgba(255,255,255,.25);color:white;font-size:13px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;font-family:'Outfit',sans-serif;transition:all .3s}
+#gate-overlay button:hover{background:rgba(255,255,255,.1)}
+.gate-error{color:#c0392b;font-size:13px;font-weight:300;min-height:20px}
+.hero{position:relative;height:60vh;min-height:400px;background:linear-gradient(135deg,rgba(0,0,0,.3)0%,rgba(0,0,0,.08)50%,rgba(0,0,0,.4)100%),url('https://res-3.cloudinary.com/jnto/image/upload/w_2064,h_1300,c_fill,f_auto,fl_lossy,q_auto/v1515405052/kyoto/Kyoto2117_13') center/cover;display:flex;align-items:flex-end;padding:60px}
+.hero-content{max-width:700px}
+.hero-tag{font-family:'Outfit';font-weight:300;font-size:13px;letter-spacing:4px;text-transform:uppercase;color:var(--warm);margin-bottom:12px}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:56px;font-weight:700;color:white;line-height:1.05;margin-bottom:12px}
+.hero p{font-family:'Outfit';font-weight:300;font-size:16px;color:rgba(255,255,255,.85);max-width:500px}
+.hero-date{display:inline-block;margin-top:20px;padding:8px 20px;border:1px solid rgba(255,255,255,.4);font-size:12px;letter-spacing:2px;text-transform:uppercase;color:white}
+.section{max-width:900px;margin:0 auto;padding:60px 40px}
+.section-label{font-weight:300;font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--warm);margin-bottom:10px}
+.section h2{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:600;margin-bottom:20px;line-height:1.15}
+.section p{font-size:15px;color:var(--slate);max-width:700px;margin-bottom:14px;font-weight:300}
+.intro-note{background:white;border-left:3px solid var(--warm);padding:20px 24px;border-radius:0 6px 6px 0;margin:24px 0;font-size:14px;color:var(--slate);font-weight:300;line-height:1.6}
+.intro-note strong{font-weight:500;color:var(--ink)}
+.stop{display:grid;grid-template-columns:80px 1fr;gap:0}
+.stop-time{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:600;color:var(--warm);padding:32px 0;text-align:right;padding-right:24px;border-right:2px solid #e0d8ce}
+.stop-body{padding:24px 0 24px 24px}
+.stop-body h3{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;margin-bottom:6px}
+.stop-body .subtitle{font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--sage);font-weight:500;margin-bottom:10px}
+.stop-body p{font-size:14px;color:var(--slate);font-weight:300;line-height:1.6;margin-bottom:8px}
+.stop-body .tip{font-size:13px;color:var(--gold);font-style:italic;margin-top:6px}
+.stop-body .kid-note{font-size:13px;color:var(--sage);margin-top:6px;padding:8px 12px;background:rgba(139,158,126,.08);border-radius:4px}
+.stop-img{width:100%;height:220px;object-fit:cover;border-radius:6px;margin-bottom:14px}
+.divider{height:1px;background:#e0d8ce;margin:0 0 0 104px}
+.transport{display:grid;grid-template-columns:80px 1fr;gap:0}
+.transport-time{padding:12px 0;text-align:right;padding-right:24px;border-right:2px dashed #e0d8ce}
+.transport-body{padding:12px 0 12px 24px;font-size:13px;color:var(--sage);font-weight:300;font-style:italic}
+.map-link{display:inline-block;margin-top:8px;padding:6px 14px;border:1px solid var(--warm);border-radius:4px;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--warm);text-decoration:none;font-weight:500;transition:all .3s}
+.map-link:hover{background:var(--warm);color:white}
+.nav-links{display:flex;gap:16px;margin-bottom:20px;flex-wrap:wrap}
+.nav-links a{font-size:13px;color:var(--warm);text-decoration:none;letter-spacing:1px;text-transform:uppercase;font-weight:400}
+.nav-links a:hover{text-decoration:underline}
+.nav-links .current{color:var(--ink);font-weight:500}
+.matcha-note{background:linear-gradient(135deg,#eef2e7,#e3ead5);border-radius:8px;padding:28px;margin:32px 0}
+.matcha-note h3{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;margin-bottom:12px;color:var(--matcha)}
+.matcha-note p{font-size:14px;color:var(--slate);font-weight:300;line-height:1.6;margin-bottom:8px}
+.coin-callout{display:flex;align-items:center;gap:16px;background:white;border-radius:8px;padding:20px;margin:20px 0;box-shadow:0 2px 12px rgba(0,0,0,.06)}
+.coin-callout .coin-text{font-size:14px;color:var(--slate);font-weight:300;line-height:1.5}
+.coin-callout .coin-text strong{font-weight:500;color:var(--ink)}
+.footer{text-align:center;padding:40px;font-size:12px;color:var(--slate);font-weight:300;letter-spacing:1px}
+@media(max-width:768px){.hero h1{font-size:36px}.hero{padding:30px;height:50vh}.section{padding:40px 20px}.stop{grid-template-columns:60px 1fr}.divider{margin-left:84px}.transport{grid-template-columns:60px 1fr}.coin-callout{flex-direction:column;text-align:center}}
+</style>
+</head>
+<body>
+<div id="gate-overlay"><h2>Japan 2026</h2><p>Enter password to continue</p><input type="password" id="gate-pw" placeholder="Password" onkeydown="if(event.key==='Enter')checkGate()"><button onclick="checkGate()">Enter</button><div class="gate-error" id="gate-err"></div></div>
+<div id="content" style="display:none">
+
+  <div class="hero">
+    <div class="hero-content">
+      <div class="hero-tag">Day Trip · Everyone Together</div>
+      <h1>Uji</h1>
+      <p>The birthplace of matcha, the temple on the ten-yen coin, and the most peaceful day of the whole trip.</p>
+      <div class="hero-date">Day Trip from Osaka</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="nav-links">
+      <a href="dan-and-connie.html">← Tour Overview</a>
+      <span class="current">Uji</span>
+    </div>
+    <div class="section-label">Day Trip</div>
+    <h2>Japan's Tea Town</h2>
+    <p>Uji is a small, quiet city between Osaka and Kyoto — and it's where Japanese tea culture was born almost a thousand years ago. The streets smell like roasted hojicha, every shop sells something matcha, and the main attraction is a wooden temple so beautiful they put it on the money. This is a slow day — no rushing, no crowds, just tea and temples and a river walk.</p>
+
+    <div class="intro-note">
+      <strong>Getting there:</strong> JR Nara Line from Osaka (change at Kyoto) — about 50 minutes total. Or JR Special Rapid to Kyoto, then transfer to JR Nara Line to Uji (~15 min). Covered by Suica/ICOCA. Uji itself is entirely walkable once you arrive.
+    </div>
+  </div>
+
+  <div class="section" style="padding-top:0">
+
+    <div class="stop">
+      <div class="stop-time">9:30</div>
+      <div class="stop-body">
+        <h3>Depart Osaka</h3>
+        <div class="subtitle">JR Osaka Station → JR Uji Station</div>
+        <p>Morning train east. The ride is about 50 minutes with one transfer at Kyoto Station. Uji Station is small and walkable — everything in town is within 15 minutes on foot.</p>
+      </div>
+    </div>
+
+    <div class="transport">
+      <div class="transport-time"></div>
+      <div class="transport-body">🚃 JR to Kyoto (~30 min), then JR Nara Line to Uji (~15 min). Walk from station toward the river (~5 min).</div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="stop">
+      <div class="stop-time">10:30</div>
+      <div class="stop-body">
+        <h3>Byodoin Omotesando — Matcha Street</h3>
+        <div class="subtitle">Uji · Free · Shops open ~9:00–17:00</div>
+        <img class="stop-img" src="https://res-4.cloudinary.com/jnto/image/upload/w_2064,h_1300,c_fill,f_auto,fl_lossy,q_auto/v1515405048/kyoto/Kyoto2116_13" alt="Uji tea street">
+        <p>The approach road to Byodoin Temple — a narrow, charming street lined with tea shops that have been here for centuries. Some of these tea houses date back to the Muromachi period (1300s). The air smells like roasted hojicha from the street-facing roasters, and every shop is offering tastings, matcha ice cream, matcha mochi, matcha soba — everything is green.</p>
+        <p>This is your morning graze. Walk slowly, try samples, get a matcha soft-serve, and soak in the atmosphere of wooden shop fronts and indigo noren curtains. Nakamura Tokichi (main store near the bridge, or the Byodoin branch further along) is one of the most famous tea houses in Japan.</p>
+        <div class="kid-note">🧒 <strong>Kids love:</strong> Matcha ice cream (sweet, not bitter), the little souvenir shops with rabbit-themed trinkets (Uji's mascot animal), and picking out colourful Japanese sweets from the displays.</div>
+        <p class="tip">Tip: Ito-Kyuemon has matcha KitKats and matcha-flavoured everything. Great for omiyage (souvenirs) to bring home.</p>
+        <a href="https://maps.google.com/?q=Byodoin+Omotesando+Uji" target="_blank" class="map-link">Open in Maps</a>
+      </div>
+    </div>
+
+    <div class="transport">
+      <div class="transport-time"></div>
+      <div class="transport-body">🚶 Walk to the end of the street (~5 min) — Byodoin Temple is right there.</div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="stop">
+      <div class="stop-time">11:30</div>
+      <div class="stop-body">
+        <h3>Byodoin Temple — The Phoenix Hall</h3>
+        <div class="subtitle">Uji · ¥700 adults, ¥300 elementary · Phoenix Hall interior +¥300 · 8:45–17:30</div>
+        <img class="stop-img" src="https://res-3.cloudinary.com/jnto/image/upload/w_2064,h_1300,c_fill,f_auto,fl_lossy,q_auto/v1515405052/kyoto/Kyoto2117_13" alt="Byodoin Phoenix Hall">
+        <p>A UNESCO World Heritage Site and one of the most beautiful buildings in Japan. The Phoenix Hall was built in 1053 — nearly a thousand years ago — and it's the only original wooden structure to survive. It sits on a small island in a pond, and when the water is still, the reflection makes it look like a palace floating between two worlds. It was designed to represent the Buddhist Pure Land — paradise on earth.</p>
+        <p>The hall is featured on the back of the Japanese 10-yen coin. Bring one and compare — the kids will love it. The grounds include a modern underground museum (Hoshokan) with national treasures, and a tea salon serving authentic Uji matcha.</p>
+
+        <div class="coin-callout">
+          <div class="coin-text"><strong>10-yen coin moment:</strong> Have the kids find a 10-yen coin in your change, then hold it up and match it to the real Phoenix Hall across the pond. It's been on the coin since 1951. The phoenixes on the roof also appear on the 10,000-yen note.</div>
+        </div>
+
+        <div class="kid-note">🧒 <strong>Kids love:</strong> The coin-matching moment (genuinely thrilling for kids), the koi in the pond, the golden phoenix statues on the roof, the wide gravel paths to walk on, and the underground museum which feels like a secret bunker.</div>
+        <p class="tip">Tip: The Phoenix Hall interior tours run every 20 minutes (Japanese only, but English pamphlet provided). Worth the extra ¥300 if the line isn't too long. Go early — the queue builds through the day.</p>
+        <a href="https://maps.google.com/?q=Byodoin+Temple+Uji" target="_blank" class="map-link">Open in Maps</a>
+      </div>
+    </div>
+
+    <div class="transport">
+      <div class="transport-time"></div>
+      <div class="transport-body">🚶 Walk along the riverside path toward Ujigami Shrine (~10 min, flat and scenic)</div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="stop">
+      <div class="stop-time">13:00</div>
+      <div class="stop-body">
+        <h3>Lunch — Uji River Area</h3>
+        <div class="subtitle">Along the river or back on Omotesando</div>
+        <p>Uji's lunch scene is tea-infused everything. Matcha soba (green tea noodles), cha-soba sets, udon, and tea-paired kaiseki-style sets. Nakamura Tokichi's Byodoin branch overlooks the river and serves matcha dessert sets that are worth a stop even if you're full. Or head back to Omotesando for a sit-down lunch at one of the traditional tea restaurants.</p>
+        <p class="tip">Tip: The restaurants along the Uji River path have lovely views. The Taihoan municipal tea house on the riverbank offers a formal matcha experience in a traditional tatami room for just ¥500.</p>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="stop">
+      <div class="stop-time">14:00</div>
+      <div class="stop-body">
+        <h3>Ujigami Shrine</h3>
+        <div class="subtitle">Uji · Free · Dawn to dusk</div>
+        <img class="stop-img" src="https://res-5.cloudinary.com/jnto/image/upload/w_2064,h_1300,c_fill,f_auto,fl_lossy,q_auto/v1515405047/kyoto/Kyoto2115_13" alt="Ujigami Shrine Uji">
+        <p>The oldest existing Shinto shrine in Japan — quietly nestled in the forested hills across the Uji River. It's small, modest, and profoundly old. The honden (main hall) dates to the late Heian period, making it the oldest shrine building still standing anywhere in the country. Also a UNESCO World Heritage Site.</p>
+        <p>The approach crosses a beautiful red bridge over the river, then follows a wooded path up the hillside. It's serene, shaded, and a world away from the bustle of even a small town like Uji.</p>
+        <div class="kid-note">🧒 <strong>Kids love:</strong> Crossing the red bridges over the river, the forest path approach, and the sense of being somewhere ancient. Rabbit motifs appear here too — Uji's sacred animal — so it's a continuation of the rabbit treasure hunt from the shops.</div>
+        <a href="https://maps.google.com/?q=Ujigami+Shrine+Uji" target="_blank" class="map-link">Open in Maps</a>
+      </div>
+    </div>
+
+    <div class="transport">
+      <div class="transport-time"></div>
+      <div class="transport-body">🚶 Walk back along the river toward Uji Bridge (~15 min). Flat, easy path with autumn views.</div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="stop">
+      <div class="stop-time">15:00</div>
+      <div class="stop-body">
+        <h3>Uji River Walk & Uji Bridge</h3>
+        <div class="subtitle">Free · Along the riverbank</div>
+        <img class="stop-img" src="https://res-2.cloudinary.com/jnto/image/upload/w_2064,h_1300,c_fill,f_auto,fl_lossy,q_auto/v1515405049/kyoto/Kyoto2114_13" alt="Uji River and bridge">
+        <p>The walk back along the Uji River is one of the most peaceful stretches of the whole trip. The Ajirogi-no-michi path follows the south bank, with views across the water to the forested hills. In November, the autumn colours will be turning — maples and camphor trees lining the banks in reds and golds.</p>
+        <p>Uji Bridge itself is one of the oldest bridges in Japan — first built in 646 AD, rebuilt many times since. The current bridge has traditional wooden-style railings with onion-shaped ornamental knobs (giboshi) designed to harmonise with the historic surroundings.</p>
+        <div class="kid-note">🧒 <strong>Kids love:</strong> Throwing leaves in the river and watching them float away, the flat easy path, and the sense of a calm ending to a calm day.</div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="stop">
+      <div class="stop-time">15:30</div>
+      <div class="stop-body">
+        <h3>Last Matcha Stop</h3>
+        <div class="subtitle">Near Uji Station</div>
+        <p>One last matcha soft-serve, one last browse through the tea shops, pick up any omiyage you missed on the way in. Matcha Republic near the station does Instagram-worthy perfume-bottle lattes if you're into that sort of thing. Or grab a bag of premium Uji sencha or hojicha to bring home — the tea here really is the best in Japan.</p>
+      </div>
+    </div>
+
+    <div class="transport">
+      <div class="transport-time"></div>
+      <div class="transport-body">🚃 JR Uji Station → Kyoto → Osaka (~50 min). Home by late afternoon.</div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="stop">
+      <div class="stop-time">17:00</div>
+      <div class="stop-body">
+        <h3>Home — Osaka Airbnb</h3>
+        <div class="subtitle">Nishikujo</div>
+        <p>Back to base by late afternoon with a bag of matcha souvenirs, tea-stained fingers, and the memory of a wooden temple reflected in still water. A gentle day after the intensity of Osaka.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="section" style="padding-top:0">
+    <div class="matcha-note">
+      <h3>🍵 Uji Tea — What to Know</h3>
+      <p><strong>Matcha</strong> — The bright green powdered tea whisked with hot water. Uji is where it was born. Anything matcha-flavoured here is the real deal.</p>
+      <p><strong>Sencha</strong> — The everyday green tea you steep in a teapot. Uji sencha is considered the best in Japan.</p>
+      <p><strong>Hojicha</strong> — Roasted green tea with a warm, toasty flavour. The scent of hojicha roasting on the street is one of the defining aromas of Uji. Kids often prefer this one — it's milder and less bitter than matcha.</p>
+      <p><strong>Gyokuro</strong> — The highest grade green tea, shade-grown for weeks before harvest to concentrate the flavour. Uji produces some of the world's finest gyokuro. If you see it on a menu, try it — it's sweet, rich, and nothing like regular green tea.</p>
+    </div>
+  </div>
+
+  <div class="section" style="padding-top:0">
+    <div class="intro-note">
+      <strong>Why Uji:</strong> It's the antidote to the sensory overload of Osaka. A 50-minute train ride takes you to a town that moves at a completely different pace — ancient shrines, tea fields, a quiet river, and some of the best matcha in the world. The kids will remember the 10-yen coin moment. The adults will remember the tea. Everyone will appreciate the calm.
+    </div>
+  </div>
+
+  <div class="footer">
+    Japan 2026 — Uji Day Trip · <a href="dan-and-connie.html" style="color:var(--warm)">Back to tour</a>
+  </div>
+
+</div>
+<script>function checkGate(){var p=document.getElementById('gate-pw').value.toLowerCase().trim();if(p==='sanche'){document.getElementById('gate-overlay').style.display='none';document.getElementById('content').style.display='block';sessionStorage.setItem('jp26','1')}else{document.getElementById('gate-err').textContent='Try again'}}if(sessionStorage.getItem('jp26')==='1'){document.getElementById('gate-overlay').style.display='none';document.getElementById('content').style.display='block'}</script>
+</body>
+</html>
