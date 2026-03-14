@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Family Kyoto Day — Japan 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#1a1a1a;--cream:#faf8f4;--warm:#d4a574;--sage:#8b9e7e;--slate:#4a5568;--red:#c0392b;--gold:#b8860b}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Outfit',sans-serif;color:var(--ink);background:var(--cream);line-height:1.6}
+#gate-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:#1a1a1a;z-index:9999;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:16px;font-family:'Outfit',sans-serif}
+#gate-overlay h2{font-family:'Cormorant Garamond',serif;font-size:36px;color:white}
+#gate-overlay p{color:rgba(255,255,255,.5);font-size:14px;font-weight:300}
+#gate-overlay input{background:transparent;border:1px solid rgba(255,255,255,.3);color:white;padding:14px 24px;font-size:15px;text-align:center;font-family:'Outfit',sans-serif;outline:none;width:260px;letter-spacing:1px}
+#gate-overlay input::placeholder{color:rgba(255,255,255,.3)}
+#gate-overlay input:focus{border-color:rgba(255,255,255,.6)}
+#gate-overlay button{padding:12px 32px;background:transparent;border:1px solid rgba(255,255,255,.25);color:white;font-size:13px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;font-family:'Outfit',sans-serif;transition:all .3s}
+#gate-overlay button:hover{background:rgba(255,255,255,.1)}
+.gate-error{color:#c0392b;font-size:13px;font-weight:300;min-height:20px}
+.hero{position:relative;height:60vh;min-height:400px;background:linear-gradient(135deg,rgba(0,0,0,.4)0%,rgba(0,0,0,.15)50%,rgba(0,0,0,.5)100%),url('https://images.pexels.com/photos/2091034/pexels-photo-2091034.jpeg?auto=compress&cs=tinysrgb&w=1600') center/cover;display:flex;align-items:flex-end;padding:60px}
+.hero-content{max-width:700px}
+.hero-tag{font-family:'Outfit';font-weight:300;font-size:13px;letter-spacing:4px;text-transform:uppercase;color:var(--warm);margin-bottom:12px}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:56px;font-weight:700;color:white;line-height:1.05;margin-bottom:12px}
+.hero p{font-family:'Outfit';font-weight:300;font-size:16px;color:rgba(255,255,255,.85);max-width:500px}
+.hero-date{display:inline-block;margin-top:20px;padding:8px 20px;border:1px solid rgba(255,255,255,.4);font-size:12px;letter-spacing:2px;text-transform:uppercase;color:white}
+.section{max-width:900px;margin:0 auto;padding:60px 40px}
+.section-label{font-weight:300;font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--warm);margin-bottom:10px}
+.section h2{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:600;margin-bottom:20px;line-height:1.15}
+.section p{font-size:15px;color:var(--slate);max-width:700px;margin-bottom:14px;font-weight:300}
+.intro-note{background:white;border-left:3px solid var(--warm);padding:20px 24px;border-radius:0 6px 6px 0;margin:24px 0;font-size:14px;color:var(--slate);font-weight:300;line-height:1.6}
+.intro-note strong{font-weight:500;color:var(--ink)}
+.stop{display:grid;grid-template-columns:80px 1fr;gap:0;margin-bottom:0;position:relative}
+.stop-time{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:600;color:var(--warm);padding:32px 0;text-align:right;padding-right:24px;border-right:2px solid #e0d8ce}
+.stop-body{padding:24px 0 24px 24px}
+.stop-body h3{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;margin-bottom:6px}
+.stop-body .subtitle{font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--sage);font-weight:500;margin-bottom:10px}
+.stop-body p{font-size:14px;color:var(--slate);font-weight:300;line-height:1.6;margin-bottom:8px}
+.stop-body .tip{font-size:13px;color:var(--gold);font-style:italic;margin-top:6px}
+.stop-body .kid-note{font-size:13px;color:var(--sage);margin-top:6px;padding:8px 12px;background:rgba(139,158,126,.08);border-radius:4px}
+.stop-img{width:100%;height:220px;object-fit:cover;border-radius:6px;margin-bottom:14px}
+.divider{height:1px;background:#e0d8ce;margin:0 0 0 104px}
+.transport{display:grid;grid-template-columns:80px 1fr;gap:0;margin:0}
+.transport-time{padding:12px 0;text-align:right;padding-right:24px;border-right:2px dashed #e0d8ce}
+.transport-body{padding:12px 0 12px 24px;font-size:13px;color:var(--sage);font-weight:300;font-style:italic}
+.map-link{display:inline-block;margin-top:8px;padding:6px 14px;border:1px solid var(--warm);border-radius:4px;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--warm);text-decoration:none;font-weight:500;transition:all .3s}
+.map-link:hover{background:var(--warm);color:white}
+.bonus{background:linear-gradient(135deg,#f5f0e8,#eee8dc);border-radius:8px;padding:28px;margin:32px 0}
+.bonus h3{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;margin-bottom:4px}
+.bonus .subtitle{font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--sage);font-weight:500;margin-bottom:10px}
+.bonus p{font-size:14px;color:var(--slate);font-weight:300;line-height:1.6;margin-bottom:8px}
+.bonus .kid-note{font-size:13px;color:var(--sage);margin-top:6px;padding:8px 12px;background:rgba(139,158,126,.08);border-radius:4px}
+.back-link{display:inline-block;margin-bottom:20px;font-size:13px;color:var(--warm);text-decoration:none;letter-spacing:1px;text-transform:uppercase;font-weight:400}
+.back-link:hover{text-decoration:underline}
+.footer{text-align:center;padding:40px;font-size:12px;color:var(--slate);font-weight:300;letter-spacing:1px}
+@media(max-width:768px){
+  .hero h1{font-size:36px}
+  .hero{padding:30px;height:50vh}
+  .section{padding:40px 20px}
+  .stop{grid-template-columns:60px 1fr}
+  .divider{margin-left:84px}
+  .transport{grid-template-columns:60px 1fr}
+}
+</style>
+</head>
+<body>
+
+<div id="gate-overlay"><h2>Japan 2026</h2><p>Enter password to continue</p><input type="password" id="gate-pw" placeholder="Password" onkeydown="if(event.key==='Enter')checkGate()"><button onclick="checkGate()">Enter</button><div class="gate-error" id="gate-err"></div></div>
+
+<div id="content" style="display:none">
+
+  <div class="hero">
+    <div class="hero-content">
+      <div class="hero-tag">Family Day · All Together</div>
+      <h1>Kyoto With the Kids</h1>
+      <p>A wooden terrace over the city, squeaky ninja floors, and maybe some trains — Kyoto's greatest hits, kid-tested.</p>
+      <div class="hero-date">Monday, November 9</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <a href="dan-and-connie.html" class="back-link">← Back to the tour</a>
+    <div class="section-label">The Plan</div>
+    <h2>Three Stops, One Incredible Day</h2>
+    <p>This is the whole crew's first taste of Kyoto — the ancient capital, 30 minutes from Osaka by train. We're hitting three of the city's most iconic spots, all chosen because they're genuinely amazing with young kids. Dan & Connie will stay overnight in Kyoto for their own self-guided day tomorrow.</p>
+
+    <div class="intro-note">
+      <strong>Getting there:</strong> JR Special Rapid from Osaka Station to Kyoto Station (~30 min, covered by IC card, no reservation needed). From Kyoto Station, we'll use buses and taxis to get around the city. With 4 kids + 4 adults, a taxi between stops is often the same price as 8 bus fares and way less stressful.
+    </div>
+  </div>
+
+  <!-- TIMELINE -->
+  <div class="section" style="padding-top:0">
+
+    <div class="stop">
+      <div class="stop-time">9:30</div>
+      <div class="stop-body">
+        <h3>Kiyomizu-dera</h3>
+        <div class="subtitle">Higashiyama · ¥400 adults, free under 6, ¥200 ages 6–15 · 6:00–18:00</div>
+        <img class="stop-img" src="https://images.pexels.com/photos/5169558/pexels-photo-5169558.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Kiyomizu-dera Temple Kyoto">
+        <p>One of Japan's most iconic temples — a massive wooden terrace that juts out 13 metres over the hillside, supported by 139 pillars and not a single nail. The view over Kyoto from the terrace is breathtaking, especially in early November when the maples are turning.</p>
+        <p>At the base of the main hall, the <strong>Otowa Waterfall</strong> splits into three streams. Visitors line up to drink from one — each stream grants a different wish: success, love, or longevity. The kids will love choosing.</p>
+        <div class="kid-note">🧒 <strong>Kids love:</strong> The waterfall wishing game, the massive wooden terrace (feels like a treehouse), and the walk down through Higashiyama lanes with mochi shops, pottery stalls, and soft serve.</div>
+        <p class="tip">Tip: Walk down via Sannen-zaka and Ninnen-zaka — the prettiest lanes in Kyoto. Stone-paved, lantern-lined, full of snack shops. Stroller-possible but a carrier is easier.</p>
+        <a href="https://maps.google.com/?q=Kiyomizu-dera+Kyoto" target="_blank" class="map-link">Open in Maps</a>
+      </div>
+    </div>
+
+    <div class="transport">
+      <div class="transport-time"></div>
+      <div class="transport-body">🚶 Walk down through Higashiyama lanes → through Gion (~25 min stroll with stops)</div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="stop">
+      <div class="stop-time">11:30</div>
+      <div class="stop-body">
+        <h3>Gion District + Lunch</h3>
+        <div class="subtitle">Higashiyama · Free to stroll</div>
+        <p>Kyoto's famous geisha district. Walk along Hanamikoji-dori — the main street lined with traditional wooden machiya houses, tea houses, and restaurants. If you're lucky you might spot a maiko (apprentice geisha) heading to an appointment in full kimono.</p>
+        <p>Grab lunch here — plenty of options from casual udon shops to sit-down spots. The kids will be ready to refuel after the Kiyomizu walk.</p>
+        <div class="kid-note">🧒 <strong>Kids love:</strong> Spotting people in rental kimonos (they're everywhere), the little bridges over the canal on Shirakawa-dori, and the vending machine drinks.</div>
+        <p class="tip">Tip: For a quick, kid-friendly lunch, look for a kaiten-zushi (conveyor belt sushi) spot — the moving plates keep everyone entertained.</p>
+        <a href="https://maps.google.com/?q=Gion+Kyoto" target="_blank" class="map-link">Open in Maps</a>
+      </div>
+    </div>
+
+    <div class="transport">
+      <div class="transport-time"></div>
+      <div class="transport-body">🚕 Taxi from Gion to Nijo Castle (~15 min, ~¥1,500)</div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="stop">
+      <div class="stop-time">13:30</div>
+      <div class="stop-body">
+        <h3>Nijo Castle</h3>
+        <div class="subtitle">Nakagyo · ¥800 adults, ¥400 ages 6–12, free under 6 · 8:45–17:00</div>
+        <img class="stop-img" src="https://images.pexels.com/photos/1440476/pexels-photo-1440476.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Japanese castle gardens autumn">
+        <p>Built in 1603 as the Kyoto residence of the Tokugawa shoguns. The main attraction: the <strong>nightingale floors</strong> (uguisubari). These wooden corridors were engineered to chirp and squeak with every footstep — a 400-year-old intruder alarm system. The kids will go absolutely wild tiptoeing, stomping, and testing every board.</p>
+        <p>Beyond the floors, the Ninomaru Palace has stunning painted screens — tigers, pine trees, cranes — in room after room. The surrounding gardens are beautiful for a wander, and in November, the autumn foliage around the moat is gorgeous.</p>
+        <div class="kid-note">🧒 <strong>Kids love:</strong> Making the floors sing. This is the single most kid-engaging thing in all of Kyoto. They'll beg to walk through twice. The moat and stone walls also give strong "castle adventure" vibes.</div>
+        <p class="tip">Tip: Shoes off inside the palace — bring socks! The floors are chilly in November.</p>
+        <a href="https://maps.google.com/?q=Nijo+Castle+Kyoto" target="_blank" class="map-link">Open in Maps</a>
+      </div>
+    </div>
+
+    <div class="transport">
+      <div class="transport-time"></div>
+      <div class="transport-body">🚕 Taxi to Kyoto Station (~10 min, ~¥1,000). Or subway from Nijojo-mae → Kyoto Station (2 stops).</div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="stop">
+      <div class="stop-time">15:30</div>
+      <div class="stop-body">
+        <h3>Decision Point</h3>
+        <div class="subtitle">Kyoto Station area</div>
+        <p>You're back at Kyoto Station. Check the energy levels. If the kids (and adults) are still going strong, the Kyoto Railway Museum is a 15-minute walk from the station. If everyone's cooked, grab a treat at the station and hop the train home to Osaka. Both are great options — no wrong call.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- BONUS -->
+  <div class="section" style="padding-top:0">
+    <div class="section-label">Bonus Round (If You've Got Gas Left)</div>
+
+    <div class="bonus">
+      <h3>🚂 Kyoto Railway Museum</h3>
+      <div class="subtitle">Shimogyo · ¥1,500 adults, ¥500 ages 3–12, free under 3 · 10:00–17:00 (last entry 16:30)</div>
+      <p>One of Japan's best train museums — and that's saying something in a country that takes trains very seriously. Highlights include a roundhouse full of real steam locomotives, a massive operating model railway diorama, a Shinkansen 500 series nose you can sit in, and hands-on driving simulators.</p>
+      <p>The outdoor area has a real steam locomotive that runs short rides (small extra fee). There's also a kids' play area and a café overlooking the tracks where you can watch real trains roll by.</p>
+      <div class="kid-note">🧒 <strong>Kids love:</strong> Everything. The driving simulators, climbing into real train cabs, the steam train ride, and the diorama show (runs every 15 min). This is a 2-hour stop minimum if the kids get into it.</div>
+      <p class="tip" style="color:var(--gold)">Tip: It's a 15-minute walk from Kyoto Station (well signposted) or take the JR San'in Line one stop to Umekoji-Kyotonishi Station. Last entry at 16:30 — don't cut it too close.</p>
+      <a href="https://maps.google.com/?q=Kyoto+Railway+Museum" target="_blank" class="map-link">Open in Maps</a>
+    </div>
+  </div>
+
+  <!-- END OF DAY -->
+  <div class="section" style="padding-top:0">
+    <div class="section-label">End of Day</div>
+    <div class="intro-note">
+      <strong>Family heads home:</strong> JR Special Rapid from Kyoto Station → Osaka Station (~30 min). The kids will probably be asleep before you hit Takatsuki.<br><br>
+      <strong>Dan & Connie stay:</strong> Head to the Oriental Hotel Kyoto Rokujo (near Kyoto Station) for the night. Tomorrow is your self-guided Kyoto day — <a href="dc-kyoto-day.html" style="color:var(--warm)">see your itinerary</a>.
+    </div>
+  </div>
+
+  <div class="footer">
+    Japan 2026 — Family Kyoto Day · <a href="dan-and-connie.html" style="color:var(--warm)">Back to tour</a> · <a href="schedule.html" style="color:var(--warm)">Full schedule</a>
+  </div>
+
+</div>
+
+<script>
+function checkGate(){var p=document.getElementById('gate-pw').value.toLowerCase().trim();if(p==='sanche'){document.getElementById('gate-overlay').style.display='none';document.getElementById('content').style.display='block';sessionStorage.setItem('jp26','1')}else{document.getElementById('gate-err').textContent='Try again'}}if(sessionStorage.getItem('jp26')==='1'){document.getElementById('gate-overlay').style.display='none';document.getElementById('content').style.display='block'}
+</script>
+</body>
+</html>
