@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Osaka Walking Tour — Japan 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#1a1a1a;--cream:#faf8f4;--warm:#d4a574;--sage:#8b9e7e;--slate:#4a5568;--red:#c0392b;--gold:#b8860b}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Outfit',sans-serif;color:var(--ink);background:var(--cream);line-height:1.6}
+#gate-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:#1a1a1a;z-index:9999;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:16px;font-family:'Outfit',sans-serif}
+#gate-overlay h2{font-family:'Cormorant Garamond',serif;font-size:36px;color:white}
+#gate-overlay p{color:rgba(255,255,255,.5);font-size:14px;font-weight:300}
+#gate-overlay input{background:transparent;border:1px solid rgba(255,255,255,.3);color:white;padding:14px 24px;font-size:15px;text-align:center;font-family:'Outfit',sans-serif;outline:none;width:260px;letter-spacing:1px}
+#gate-overlay input::placeholder{color:rgba(255,255,255,.3)}
+#gate-overlay input:focus{border-color:rgba(255,255,255,.6)}
+#gate-overlay button{padding:12px 32px;background:transparent;border:1px solid rgba(255,255,255,.25);color:white;font-size:13px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;font-family:'Outfit',sans-serif;transition:all .3s}
+#gate-overlay button:hover{background:rgba(255,255,255,.1)}
+.gate-error{color:#c0392b;font-size:13px;font-weight:300;min-height:20px}
+.hero{position:relative;height:60vh;min-height:400px;background:linear-gradient(135deg,rgba(0,0,0,.35)0%,rgba(0,0,0,.1)50%,rgba(0,0,0,.45)100%),url('https://images.pexels.com/photos/2506923/pexels-photo-2506923.jpeg?auto=compress&cs=tinysrgb&w=1600') center/cover;display:flex;align-items:flex-end;padding:60px}
+.hero-content{max-width:700px}
+.hero-tag{font-family:'Outfit';font-weight:300;font-size:13px;letter-spacing:4px;text-transform:uppercase;color:var(--warm);margin-bottom:12px}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:56px;font-weight:700;color:white;line-height:1.05;margin-bottom:12px}
+.hero p{font-family:'Outfit';font-weight:300;font-size:16px;color:rgba(255,255,255,.85);max-width:500px}
+.hero-date{display:inline-block;margin-top:20px;padding:8px 20px;border:1px solid rgba(255,255,255,.4);font-size:12px;letter-spacing:2px;text-transform:uppercase;color:white}
+.section{max-width:900px;margin:0 auto;padding:60px 40px}
+.section-label{font-weight:300;font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--warm);margin-bottom:10px}
+.section h2{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:600;margin-bottom:20px;line-height:1.15}
+.section p{font-size:15px;color:var(--slate);max-width:700px;margin-bottom:14px;font-weight:300}
+.intro-note{background:white;border-left:3px solid var(--warm);padding:20px 24px;border-radius:0 6px 6px 0;margin:24px 0;font-size:14px;color:var(--slate);font-weight:300;line-height:1.6}
+.intro-note strong{font-weight:500;color:var(--ink)}
+.stop{display:grid;grid-template-columns:80px 1fr;gap:0}
+.stop-time{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:600;color:var(--warm);padding:32px 0;text-align:right;padding-right:24px;border-right:2px solid #e0d8ce}
+.stop-body{padding:24px 0 24px 24px}
+.stop-body h3{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;margin-bottom:6px}
+.stop-body .subtitle{font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--sage);font-weight:500;margin-bottom:10px}
+.stop-body p{font-size:14px;color:var(--slate);font-weight:300;line-height:1.6;margin-bottom:8px}
+.stop-body .tip{font-size:13px;color:var(--gold);font-style:italic;margin-top:6px}
+.stop-body .kid-note{font-size:13px;color:var(--sage);margin-top:6px;padding:8px 12px;background:rgba(139,158,126,.08);border-radius:4px}
+.stop-img{width:100%;height:220px;object-fit:cover;border-radius:6px;margin-bottom:14px}
+.divider{height:1px;background:#e0d8ce;margin:0 0 0 104px}
+.transport{display:grid;grid-template-columns:80px 1fr;gap:0}
+.transport-time{padding:12px 0;text-align:right;padding-right:24px;border-right:2px dashed #e0d8ce}
+.transport-body{padding:12px 0 12px 24px;font-size:13px;color:var(--sage);font-weight:300;font-style:italic}
+.map-link{display:inline-block;margin-top:8px;padding:6px 14px;border:1px solid var(--warm);border-radius:4px;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--warm);text-decoration:none;font-weight:500;transition:all .3s}
+.map-link:hover{background:var(--warm);color:white}
+.nav-links{display:flex;gap:16px;margin-bottom:20px;flex-wrap:wrap}
+.nav-links a{font-size:13px;color:var(--warm);text-decoration:none;letter-spacing:1px;text-transform:uppercase;font-weight:400}
+.nav-links a:hover{text-decoration:underline}
+.nav-links .current{color:var(--ink);font-weight:500}
+.food-note{background:linear-gradient(135deg,#f5efe5,#eee5d5);border-radius:8px;padding:28px;margin:32px 0}
+.food-note h3{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;margin-bottom:12px}
+.food-note p{font-size:14px;color:var(--slate);font-weight:300;line-height:1.6;margin-bottom:8px}
+.footer{text-align:center;padding:40px;font-size:12px;color:var(--slate);font-weight:300;letter-spacing:1px}
+@media(max-width:768px){.hero h1{font-size:36px}.hero{padding:30px;height:50vh}.section{padding:40px 20px}.stop{grid-template-columns:60px 1fr}.divider{margin-left:84px}.transport{grid-template-columns:60px 1fr}}
+</style>
+</head>
+<body>
+<div id="gate-overlay"><h2>Japan 2026</h2><p>Enter password to continue</p><input type="password" id="gate-pw" placeholder="Password" onkeydown="if(event.key==='Enter')checkGate()"><button onclick="checkGate()">Enter</button><div class="gate-error" id="gate-err"></div></div>
+<div id="content" style="display:none">
+
+  <div class="hero">
+    <div class="hero-content">
+      <div class="hero-tag">Guided · Everyone Together</div>
+      <h1>Osaka Walking Tour</h1>
+      <p>Your first real day in Japan — castle walls, street food, neon canyons, and the city that never stops eating.</p>
+      <div class="hero-date">Saturday, November 7</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="nav-links">
+      <a href="dan-and-connie.html">← Tour Overview</a>
+      <span class="current">Nov 7</span>
+    </div>
+    <div class="section-label">Day 3</div>
+    <h2>The Wow Tour</h2>
+    <p>This is the day Osaka makes its first impression — and Osaka doesn't do subtle first impressions. We'll start with the city's most iconic landmark, eat our way through its most famous market, wander the retro streets of its most eccentric neighbourhood, and finish under the neon glow of Dotonbori. By tonight, you'll understand why they call Osaka "Japan's kitchen."</p>
+
+    <div class="intro-note">
+      <strong>Pace note:</strong> This is a full day, but it's built with kid energy in mind. Lots of outdoor walking, frequent snack stops, and nothing that requires silence or standing still for long. If energy drops, we can skip or shuffle — the evening in Dotonbori is the one non-negotiable.
+    </div>
+  </div>
+
+  <div class="section" style="padding-top:0">
+
+    <div class="stop">
+      <div class="stop-time">9:30</div>
+      <div class="stop-body">
+        <h3>Osaka Castle Park</h3>
+        <div class="subtitle">Chuo Ward · Castle grounds free, tower ¥600 adults · 9:00–17:00</div>
+        <img class="stop-img" src="https://images.pexels.com/photos/2506923/pexels-photo-2506923.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Osaka Castle">
+        <p>The morning starts big. Osaka Castle sits on a massive stone-walled plateau surrounded by moats and parkland — it's the most dramatic thing you'll see all trip. The grounds are free and enormous, with wide paths perfect for strollers and kids running ahead. The castle tower is a museum inside (elevator available), and the top floor has panoramic views of the entire city.</p>
+        <p>The stone walls alone are worth the visit — some of the individual stones are the size of a car, quarried and placed by hand 400 years ago.</p>
+        <div class="kid-note">🧒 <strong>Kids love:</strong> The enormous moat (look for turtles), the wide open lawns to run on, the elevator ride up the castle tower, and spotting the golden fish ornaments on the roof.</div>
+        <p class="tip">Tip: Enter from the south side (Tanimachi-yonchome Station) for the most dramatic approach — you cross the moat bridge with the castle framed ahead of you.</p>
+        <a href="https://maps.google.com/?q=Osaka+Castle" target="_blank" class="map-link">Open in Maps</a>
+      </div>
+    </div>
+
+    <div class="transport">
+      <div class="transport-time"></div>
+      <div class="transport-body">🚃 Osaka Metro Chuo Line → Tanimachi Line, or taxi (~15 min to Kuromon area)</div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="stop">
+      <div class="stop-time">11:30</div>
+      <div class="stop-body">
+        <h3>Kuromon Market</h3>
+        <div class="subtitle">Nippombashi · Free entry · Most stalls 9:00–17:00</div>
+        <img class="stop-img" src="https://images.pexels.com/photos/2531546/pexels-photo-2531546.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Japanese street market">
+        <p>Known as "Osaka's Kitchen" — a 600-metre covered market that's been running since the 1800s. This is where Osaka's chefs buy their ingredients, and where you should eat lunch. Stall by stall, bite by bite. Grilled scallops on a stick, fresh sashimi, tamagoyaki (sweet rolled omelette), mochi, fruit on sticks, and whatever else looks good.</p>
+        <p>The market is covered and sheltered, so weather doesn't matter. It's narrow in spots but manageable with a stroller.</p>
+        <div class="kid-note">🧒 <strong>Kids love:</strong> Eating with their hands, choosing what looks interesting, the tamagoyaki stalls (sweet and familiar), fruit skewers, and the sheer volume of things to point at and try.</div>
+        <p class="tip">Tip: Come hungry. Don't eat a big breakfast before this — the whole point is to graze your way through.</p>
+        <a href="https://maps.google.com/?q=Kuromon+Market+Osaka" target="_blank" class="map-link">Open in Maps</a>
+      </div>
+    </div>
+
+    <div class="transport">
+      <div class="transport-time"></div>
+      <div class="transport-body">🚶 Walk south (~15 min) or one metro stop to Shinsekai</div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="stop">
+      <div class="stop-time">13:30</div>
+      <div class="stop-body">
+        <h3>Shinsekai</h3>
+        <div class="subtitle">Naniwa Ward · Free · All day neighbourhood</div>
+        <img class="stop-img" src="https://images.pexels.com/photos/5765913/pexels-photo-5765913.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Shinsekai Osaka retro street">
+        <p>Osaka's most eccentric neighbourhood — built in 1912 as a "new world" entertainment district, modelled half on New York and half on Paris. Today it's a wonderfully retro, slightly chaotic tangle of neon signs, puffer fish lanterns, arcades, and kushikatsu restaurants.</p>
+        <p>Tsutenkaku Tower sits in the middle of it all — a 1950s observation tower with views of the neighbourhood and a lucky Billiken statue at the top. It's kitschy, old-school, and very Osaka.</p>
+        <div class="kid-note">🧒 <strong>Kids love:</strong> The crazy signage (giant puffer fish, crabs, sumo wrestlers), popping into an arcade for a few rounds, and rubbing the Billiken statue's feet for good luck at the top of the tower.</div>
+        <p class="tip">Tip: Kushikatsu rule — never double dip in the communal sauce. Dip once, eat, done. They take this very seriously.</p>
+        <a href="https://maps.google.com/?q=Shinsekai+Osaka" target="_blank" class="map-link">Open in Maps</a>
+      </div>
+    </div>
+
+    <div class="transport">
+      <div class="transport-time"></div>
+      <div class="transport-body">🚃 Head back to the Airbnb for a break (~15 min from Shinsekai)</div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="stop">
+      <div class="stop-time">15:30</div>
+      <div class="stop-body">
+        <h3>Afternoon Break</h3>
+        <div class="subtitle">Airbnb · Nishikujo</div>
+        <p>Built into the schedule on purpose. The kids (and everyone else) will need a recharge before the evening. Head back for naps, snacks, and downtime. The evening session is the main event and you want everyone awake for it.</p>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="stop">
+      <div class="stop-time">17:30</div>
+      <div class="stop-body">
+        <h3>Dotonbori</h3>
+        <div class="subtitle">Chuo Ward · Free · Best after dark</div>
+        <img class="stop-img" src="https://images.pexels.com/photos/2353793/pexels-photo-2353793.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Dotonbori Osaka neon at night">
+        <p>The beating heart of Osaka — and the image you've seen on every Japan travel poster. A canal lined with massive neon signs (the running Glico Man, the mechanical crab, the gyoza-eating dragon), packed with people, noise, and the best street food in the country. This is Osaka at full volume.</p>
+        <p>Walk the main strip along the canal, cross the bridges, and eat everything. Takoyaki from a street stall, okonomiyaki from a hole-in-the-wall, gyoza, yakitori — it's an all-you-can-eat buffet disguised as a neighbourhood.</p>
+        <div class="kid-note">🧒 <strong>Kids love:</strong> The sheer sensory overload — neon everywhere, the running Glico Man, the mechanical crab, choosing takoyaki toppings, and just the energy of a place that feels like a carnival every single night.</div>
+        <p class="tip">Tip: Walk to Ebisubashi Bridge for the classic Glico Man photo. Then duck one block south into Hozenji Yokocho — a tiny lantern-lit alley with a moss-covered shrine. A beautiful contrast to the neon chaos.</p>
+        <a href="https://maps.google.com/?q=Dotonbori+Osaka" target="_blank" class="map-link">Open in Maps</a>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="stop">
+      <div class="stop-time">20:00</div>
+      <div class="stop-body">
+        <h3>Home</h3>
+        <div class="subtitle">Nishikujo Airbnb</div>
+        <p>Walk or metro back to Nishikujo — about 20 minutes by train from Dotonbori. The kids will be full, buzzing, and hopefully ready to crash. Day one in the books.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="section" style="padding-top:0">
+    <div class="food-note">
+      <h3>🍢 Osaka Street Food — The Essentials</h3>
+      <p><strong>Takoyaki</strong> — Crispy-outside, molten-inside octopus balls. Topped with sauce, mayo, bonito flakes, and green onion. Osaka's #1 street food.</p>
+      <p><strong>Okonomiyaki</strong> — A thick savoury pancake made with batter, cabbage, and your choice of filling. Cooked on a griddle, slathered in sauce. "Okonomi" means "as you like it."</p>
+      <p><strong>Kushikatsu</strong> — Deep-fried skewers of everything — meat, shrimp, vegetables, cheese, even mochi. Dipped once in communal sauce. No double dipping.</p>
+      <p><strong>Gyoza</strong> — Pan-fried dumplings. Osaka-style are thin-skinned and crispy on the bottom.</p>
+      <p><strong>Tamagoyaki</strong> — Sweet rolled omelette, often on a stick at markets. Kids love this one.</p>
+    </div>
+  </div>
+
+  <div class="section" style="padding-top:0">
+    <div class="intro-note">
+      <strong>Tomorrow:</strong> Rest day — take it easy, explore the neighbourhood at your own pace, get your bearings. Kyoto is the day after.
+    </div>
+  </div>
+
+  <div class="footer">
+    Japan 2026 — Osaka Walking Tour · <a href="dan-and-connie.html" style="color:var(--warm)">Back to tour</a>
+  </div>
+
+</div>
+<script>function checkGate(){var p=document.getElementById('gate-pw').value.toLowerCase().trim();if(p==='sanche'){document.getElementById('gate-overlay').style.display='none';document.getElementById('content').style.display='block';sessionStorage.setItem('jp26','1')}else{document.getElementById('gate-err').textContent='Try again'}}if(sessionStorage.getItem('jp26')==='1'){document.getElementById('gate-overlay').style.display='none';document.getElementById('content').style.display='block'}</script>
+</body>
+</html>

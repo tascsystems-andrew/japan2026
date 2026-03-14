@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Osaka Deep Dive — Japan 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#1a1a1a;--cream:#faf8f4;--warm:#d4a574;--sage:#8b9e7e;--slate:#4a5568;--red:#c0392b;--gold:#b8860b}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Outfit',sans-serif;color:var(--ink);background:var(--cream);line-height:1.6}
+#gate-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:#1a1a1a;z-index:9999;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:16px;font-family:'Outfit',sans-serif}
+#gate-overlay h2{font-family:'Cormorant Garamond',serif;font-size:36px;color:white}
+#gate-overlay p{color:rgba(255,255,255,.5);font-size:14px;font-weight:300}
+#gate-overlay input{background:transparent;border:1px solid rgba(255,255,255,.3);color:white;padding:14px 24px;font-size:15px;text-align:center;font-family:'Outfit',sans-serif;outline:none;width:260px;letter-spacing:1px}
+#gate-overlay input::placeholder{color:rgba(255,255,255,.3)}
+#gate-overlay input:focus{border-color:rgba(255,255,255,.6)}
+#gate-overlay button{padding:12px 32px;background:transparent;border:1px solid rgba(255,255,255,.25);color:white;font-size:13px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;font-family:'Outfit',sans-serif;transition:all .3s}
+#gate-overlay button:hover{background:rgba(255,255,255,.1)}
+.gate-error{color:#c0392b;font-size:13px;font-weight:300;min-height:20px}
+.hero{position:relative;height:60vh;min-height:400px;background:linear-gradient(135deg,rgba(0,0,0,.35)0%,rgba(0,0,0,.15)50%,rgba(0,0,0,.45)100%),url('https://images.pexels.com/photos/5169056/pexels-photo-5169056.jpeg?auto=compress&cs=tinysrgb&w=1600') center/cover;display:flex;align-items:flex-end;padding:60px}
+.hero-content{max-width:700px}
+.hero-tag{font-family:'Outfit';font-weight:300;font-size:13px;letter-spacing:4px;text-transform:uppercase;color:var(--warm);margin-bottom:12px}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:56px;font-weight:700;color:white;line-height:1.05;margin-bottom:12px}
+.hero p{font-family:'Outfit';font-weight:300;font-size:16px;color:rgba(255,255,255,.85);max-width:500px}
+.hero-date{display:inline-block;margin-top:20px;padding:8px 20px;border:1px solid rgba(255,255,255,.4);font-size:12px;letter-spacing:2px;text-transform:uppercase;color:white}
+.section{max-width:900px;margin:0 auto;padding:60px 40px}
+.section-label{font-weight:300;font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--warm);margin-bottom:10px}
+.section h2{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:600;margin-bottom:20px;line-height:1.15}
+.section p{font-size:15px;color:var(--slate);max-width:700px;margin-bottom:14px;font-weight:300}
+.intro-note{background:white;border-left:3px solid var(--warm);padding:20px 24px;border-radius:0 6px 6px 0;margin:24px 0;font-size:14px;color:var(--slate);font-weight:300;line-height:1.6}
+.intro-note strong{font-weight:500;color:var(--ink)}
+.stop{display:grid;grid-template-columns:80px 1fr;gap:0}
+.stop-time{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:600;color:var(--warm);padding:32px 0;text-align:right;padding-right:24px;border-right:2px solid #e0d8ce}
+.stop-body{padding:24px 0 24px 24px}
+.stop-body h3{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;margin-bottom:6px}
+.stop-body .subtitle{font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--sage);font-weight:500;margin-bottom:10px}
+.stop-body p{font-size:14px;color:var(--slate);font-weight:300;line-height:1.6;margin-bottom:8px}
+.stop-body .tip{font-size:13px;color:var(--gold);font-style:italic;margin-top:6px}
+.stop-body .kid-note{font-size:13px;color:var(--sage);margin-top:6px;padding:8px 12px;background:rgba(139,158,126,.08);border-radius:4px}
+.stop-img{width:100%;height:220px;object-fit:cover;border-radius:6px;margin-bottom:14px}
+.divider{height:1px;background:#e0d8ce;margin:0 0 0 104px}
+.transport{display:grid;grid-template-columns:80px 1fr;gap:0}
+.transport-time{padding:12px 0;text-align:right;padding-right:24px;border-right:2px dashed #e0d8ce}
+.transport-body{padding:12px 0 12px 24px;font-size:13px;color:var(--sage);font-weight:300;font-style:italic}
+.map-link{display:inline-block;margin-top:8px;padding:6px 14px;border:1px solid var(--warm);border-radius:4px;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--warm);text-decoration:none;font-weight:500;transition:all .3s}
+.map-link:hover{background:var(--warm);color:white}
+.nav-links{display:flex;gap:16px;margin-bottom:20px;flex-wrap:wrap}
+.nav-links a{font-size:13px;color:var(--warm);text-decoration:none;letter-spacing:1px;text-transform:uppercase;font-weight:400}
+.nav-links a:hover{text-decoration:underline}
+.nav-links .current{color:var(--ink);font-weight:500}
+.footer{text-align:center;padding:40px;font-size:12px;color:var(--slate);font-weight:300;letter-spacing:1px}
+@media(max-width:768px){.hero h1{font-size:36px}.hero{padding:30px;height:50vh}.section{padding:40px 20px}.stop{grid-template-columns:60px 1fr}.divider{margin-left:84px}.transport{grid-template-columns:60px 1fr}}
+</style>
+</head>
+<body>
+<div id="gate-overlay"><h2>Japan 2026</h2><p>Enter password to continue</p><input type="password" id="gate-pw" placeholder="Password" onkeydown="if(event.key==='Enter')checkGate()"><button onclick="checkGate()">Enter</button><div class="gate-error" id="gate-err"></div></div>
+<div id="content" style="display:none">
+
+  <div class="hero">
+    <div class="hero-content">
+      <div class="hero-tag">Guided · Everyone Together</div>
+      <h1>Osaka Deep Dive</h1>
+      <p>The sacred, the sky-high, and the streets you haven't walked yet — a different side of the city.</p>
+      <div class="hero-date">Wednesday, November 11</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="nav-links">
+      <a href="dan-and-connie.html">← Tour Overview</a>
+      <span class="current">Nov 11</span>
+    </div>
+    <div class="section-label">Day 7</div>
+    <h2>The Other Osaka</h2>
+    <p>You've done the neon and the street food. Today goes deeper — Osaka's most ancient shrine, the tallest building in Japan, and a neighbourhood that trades carnival energy for garden calm. Tomorrow the shinkansen crawl begins, so today is the last unhurried day before we head east.</p>
+
+    <div class="intro-note">
+      <strong>Pace note:</strong> This is a gentler day than Nov 7. More walking, more looking, fewer crowds. The afternoon is intentionally flexible — you can go hard at the shops or take it easy in the park depending on how the group is feeling.
+    </div>
+  </div>
+
+  <div class="section" style="padding-top:0">
+
+    <div class="stop">
+      <div class="stop-time">9:30</div>
+      <div class="stop-body">
+        <h3>Sumiyoshi Taisha</h3>
+        <div class="subtitle">Sumiyoshi Ward · Free · 6:00–17:00</div>
+        <img class="stop-img" src="https://images.pexels.com/photos/5169056/pexels-photo-5169056.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Japanese shrine arched bridge">
+        <p>One of Japan's oldest and most important shrines — founded in the 3rd century, before Buddhism even arrived. The architecture is pure Shinto, predating the Chinese-influenced styles you see at most shrines and temples. The buildings are simple, white, and striking.</p>
+        <p>The most famous feature is the Sorihashi Bridge — a steep, dramatically arched vermilion bridge over the shrine's pond. It's beautiful and slightly terrifying to walk over (the incline is steeper than it looks). The grounds are peaceful, shaded by ancient trees, and a complete contrast to anything else you've seen in Osaka.</p>
+        <div class="kid-note">🧒 <strong>Kids love:</strong> The steep arched bridge (it's an adventure to climb up and over), the koi in the pond, the rabbit statues hidden around the grounds (Sumiyoshi's sacred animal), and the open gravel paths to run on.</div>
+        <p class="tip">Tip: Look for the rabbit stone statues — Sumiyoshi Taisha's "power animal" is the rabbit. Finding them all is a mini treasure hunt.</p>
+        <a href="https://maps.google.com/?q=Sumiyoshi+Taisha+Osaka" target="_blank" class="map-link">Open in Maps</a>
+      </div>
+    </div>
+
+    <div class="transport">
+      <div class="transport-time"></div>
+      <div class="transport-body">🚃 Nankai Main Line or Hankai Tramway to Tennoji area (~15 min). The Hankai Tram is a lovely old streetcar if you want the scenic route.</div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="stop">
+      <div class="stop-time">11:00</div>
+      <div class="stop-body">
+        <h3>Abeno Harukas</h3>
+        <div class="subtitle">Tennoji · Observation deck ¥1,500 adults, ¥700 ages 6–11, free under 6 · 9:00–22:00</div>
+        <img class="stop-img" src="https://images.pexels.com/photos/2187456/pexels-photo-2187456.jpeg?auto=compress&cs=tinysrgb&w=800" alt="City skyline observation deck view">
+        <p>The tallest building in Japan — 300 metres, 60 floors, and a glass-floored observation deck at the top called "Harukas 300." On a clear day you can see all the way to Kobe, Kyoto, and even the mountains of Nara. The elevator ride alone is an event.</p>
+        <p>The observation deck has floor-to-ceiling windows on all four sides, plus a section with glass floors if anyone's feeling brave. There's also a café at the top if you want to sit with a coffee and take in the view.</p>
+        <div class="kid-note">🧒 <strong>Kids love:</strong> The rocket-speed elevator (59 floors in about 40 seconds), the glass floor panels, spotting landmarks from above, and the simple thrill of being at the top of the tallest building in Japan.</div>
+        <p class="tip">Tip: Go before noon for the best visibility. Haze builds through the afternoon, especially in autumn.</p>
+        <a href="https://maps.google.com/?q=Abeno+Harukas+Osaka" target="_blank" class="map-link">Open in Maps</a>
+      </div>
+    </div>
+
+    <div class="transport">
+      <div class="transport-time"></div>
+      <div class="transport-body">🚶 Walk across to Tennoji Park (~5 min from the base of Harukas)</div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="stop">
+      <div class="stop-time">12:30</div>
+      <div class="stop-body">
+        <h3>Tennoji Park & Lunch</h3>
+        <div class="subtitle">Tennoji · Park free, Keitakuen Garden ¥150 · 9:30–17:00</div>
+        <p>A green break right next to Harukas. Tennoji Park has wide paths, open lawns, and the lovely Keitakuen Garden — a small traditional Japanese garden originally built as a private estate in 1926. It's quiet, well-maintained, and a nice change of pace from city sidewalks.</p>
+        <p>For lunch, the streets around Tennoji Station have everything — ramen, udon, curry, tonkatsu. Or grab something from the food hall in Abeno Harukas itself (the basement floors are a massive depachika food hall with bento boxes, pastries, and prepared food).</p>
+        <div class="kid-note">🧒 <strong>Kids love:</strong> Running on the open lawns, the stepping stones in the garden, and the sheer relief of green space after a morning of buildings and trains.</div>
+        <p class="tip">Tip: The Harukas depachika (basement food hall) is excellent for grab-and-go lunch. Department store food halls in Japan are a whole experience — beautifully packaged everything.</p>
+        <a href="https://maps.google.com/?q=Tennoji+Park+Osaka" target="_blank" class="map-link">Open in Maps</a>
+      </div>
+    </div>
+
+    <div class="transport">
+      <div class="transport-time"></div>
+      <div class="transport-body">🚃 Osaka Metro Midosuji Line from Tennoji → Namba (~5 min)</div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="stop">
+      <div class="stop-time">14:30</div>
+      <div class="stop-body">
+        <h3>Namba & Shinsaibashi</h3>
+        <div class="subtitle">Chuo Ward · Free · Shopping + exploring</div>
+        <p>The afternoon is for wandering Osaka's main shopping and entertainment district. Shinsaibashi-suji is a long covered arcade — 600 metres of shops, from global brands to tiny Japanese boutiques, 100-yen shops, and everything in between. It connects Shinsaibashi at the north end to Namba at the south.</p>
+        <p>Nearby, Amerikamura ("American Village") is Osaka's youth culture hub — vintage clothing, independent shops, street art, and a triangle park where people hang out. It's the Harajuku of Osaka but grittier and more fun.</p>
+        <p>If shopping's not your thing, this is also great territory for just walking and watching — Osaka's street energy is unmatched.</p>
+        <div class="kid-note">🧒 <strong>Kids love:</strong> The covered arcades (dry, bright, endless things to look at), the 100-yen shops (everything is about $1 CAD — let them pick a souvenir), and the capsule toy machines (gachapon) that seem to line every block.</div>
+        <p class="tip">Tip: The Don Quijote ("Donki") store in Namba is a multi-storey labyrinth of Japanese snacks, gadgets, toys, beauty products, and pure chaos. It's an experience. You'll either love it or need to leave within five minutes.</p>
+        <a href="https://maps.google.com/?q=Shinsaibashi+Osaka" target="_blank" class="map-link">Open in Maps</a>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="stop">
+      <div class="stop-time">16:30</div>
+      <div class="stop-body">
+        <h3>Afternoon Break / Early Evening</h3>
+        <div class="subtitle">Flexible</div>
+        <p>Head back to the Airbnb for a break, or keep exploring if energy is good. If you're near Dotonbori (it's a 2-minute walk from Namba), it's always worth another pass — it looks different at every hour. Alternatively, the Namba Parks building has a rooftop garden that's a nice quiet spot to sit while the kids wind down.</p>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="stop">
+      <div class="stop-time">18:00</div>
+      <div class="stop-body">
+        <h3>Dinner</h3>
+        <div class="subtitle">Your pick</div>
+        <p>Tonight is dinner somewhere good before the crawl starts tomorrow. A few ideas: a proper sit-down okonomiyaki restaurant where they cook it on a teppan in front of you, a local ramen shop, or — if you're up for it — a yakiniku (Japanese BBQ) place where you grill your own meat at the table. The Tennoji and Namba areas are full of options.</p>
+        <p class="tip">Tip: Yakiniku is great with kids — they love grilling their own food, and the portions are small so picky eaters can try a little of everything.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="section" style="padding-top:0">
+    <div class="intro-note">
+      <strong>Tomorrow:</strong> The Tokaido Shinkansen Crawl begins! Green Car bullet train east to Shin-Fuji, Mt. Fuji at your feet, ekiben lunch on the train. Pack tonight — you won't be back for four days. <a href="crawl-day1.html" style="color:var(--warm)">See Crawl Day 1 →</a>
+    </div>
+  </div>
+
+  <div class="footer">
+    Japan 2026 — Osaka Deep Dive · <a href="dan-and-connie.html" style="color:var(--warm)">Back to tour</a>
+  </div>
+
+</div>
+<script>function checkGate(){var p=document.getElementById('gate-pw').value.toLowerCase().trim();if(p==='sanche'){document.getElementById('gate-overlay').style.display='none';document.getElementById('content').style.display='block';sessionStorage.setItem('jp26','1')}else{document.getElementById('gate-err').textContent='Try again'}}if(sessionStorage.getItem('jp26')==='1'){document.getElementById('gate-overlay').style.display='none';document.getElementById('content').style.display='block'}</script>
+</body>
+</html>
