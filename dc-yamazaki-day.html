@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yamazaki Day — Dan & Connie</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#1a1a1a;--cream:#faf8f4;--warm:#d4a574;--sage:#8b9e7e;--slate:#4a5568;--red:#c0392b;--gold:#b8860b;--amber:#92400e}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Outfit',sans-serif;color:var(--ink);background:var(--cream);line-height:1.6}
+#gate-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:#1a1a1a;z-index:9999;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:16px;font-family:'Outfit',sans-serif}
+#gate-overlay h2{font-family:'Cormorant Garamond',serif;font-size:36px;color:white}
+#gate-overlay p{color:rgba(255,255,255,.5);font-size:14px;font-weight:300}
+#gate-overlay input{background:transparent;border:1px solid rgba(255,255,255,.3);color:white;padding:14px 24px;font-size:15px;text-align:center;font-family:'Outfit',sans-serif;outline:none;width:260px;letter-spacing:1px}
+#gate-overlay input::placeholder{color:rgba(255,255,255,.3)}
+#gate-overlay input:focus{border-color:rgba(255,255,255,.6)}
+#gate-overlay button{padding:12px 32px;background:transparent;border:1px solid rgba(255,255,255,.25);color:white;font-size:13px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;font-family:'Outfit',sans-serif;transition:all .3s}
+#gate-overlay button:hover{background:rgba(255,255,255,.1)}
+.gate-error{color:#c0392b;font-size:13px;font-weight:300;min-height:20px}
+.hero{position:relative;height:60vh;min-height:400px;background:linear-gradient(135deg,rgba(30,20,10,.6)0%,rgba(30,20,10,.2)50%,rgba(30,20,10,.65)100%),url('https://images.pexels.com/photos/1283219/pexels-photo-1283219.jpeg?auto=compress&cs=tinysrgb&w=1600') center/cover;display:flex;align-items:flex-end;padding:60px}
+.hero-content{max-width:700px}
+.hero-tag{font-family:'Outfit';font-weight:300;font-size:13px;letter-spacing:4px;text-transform:uppercase;color:var(--warm);margin-bottom:12px}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:56px;font-weight:700;color:white;line-height:1.05;margin-bottom:12px}
+.hero p{font-family:'Outfit';font-weight:300;font-size:16px;color:rgba(255,255,255,.85);max-width:500px}
+.hero-date{display:inline-block;margin-top:20px;padding:8px 20px;border:1px solid rgba(255,255,255,.4);font-size:12px;letter-spacing:2px;text-transform:uppercase;color:white}
+.section{max-width:900px;margin:0 auto;padding:60px 40px}
+.section-label{font-weight:300;font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--warm);margin-bottom:10px}
+.section h2{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:600;margin-bottom:20px;line-height:1.15}
+.section p{font-size:15px;color:var(--slate);max-width:700px;margin-bottom:14px;font-weight:300}
+.intro-note{background:white;border-left:3px solid var(--warm);padding:20px 24px;border-radius:0 6px 6px 0;margin:24px 0;font-size:14px;color:var(--slate);font-weight:300;line-height:1.6}
+.intro-note strong{font-weight:500;color:var(--ink)}
+.lottery-note{background:linear-gradient(135deg,#f5efe5,#eee5d5);border-left:3px solid var(--amber);padding:20px 24px;border-radius:0 6px 6px 0;margin:24px 0;font-size:14px;color:var(--slate);font-weight:300;line-height:1.6}
+.lottery-note strong{font-weight:500;color:var(--amber)}
+.stop{display:grid;grid-template-columns:80px 1fr;gap:0;margin-bottom:0;position:relative}
+.stop-time{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:600;color:var(--warm);padding:32px 0;text-align:right;padding-right:24px;border-right:2px solid #e0d8ce}
+.stop-body{padding:24px 0 24px 24px}
+.stop-body h3{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;margin-bottom:6px}
+.stop-body .subtitle{font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--sage);font-weight:500;margin-bottom:10px}
+.stop-body p{font-size:14px;color:var(--slate);font-weight:300;line-height:1.6;margin-bottom:8px}
+.stop-body .tip{font-size:13px;color:var(--gold);font-style:italic;margin-top:6px}
+.stop-img{width:100%;height:220px;object-fit:cover;border-radius:6px;margin-bottom:14px}
+.divider{height:1px;background:#e0d8ce;margin:0 0 0 104px}
+.transport{display:grid;grid-template-columns:80px 1fr;gap:0;margin:0}
+.transport-time{padding:12px 0;text-align:right;padding-right:24px;border-right:2px dashed #e0d8ce}
+.transport-body{padding:12px 0 12px 24px;font-size:13px;color:var(--sage);font-weight:300;font-style:italic}
+.map-link{display:inline-block;margin-top:8px;padding:6px 14px;border:1px solid var(--warm);border-radius:4px;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--warm);text-decoration:none;font-weight:500;transition:all .3s}
+.map-link:hover{background:var(--warm);color:white}
+.scenario{background:white;border-radius:8px;padding:24px;margin:20px 0;box-shadow:0 2px 12px rgba(0,0,0,.06)}
+.scenario h4{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:600;margin-bottom:8px;color:var(--ink)}
+.scenario p{font-size:14px;color:var(--slate);font-weight:300;line-height:1.6;margin-bottom:6px}
+.scenario .tag{display:inline-block;padding:3px 10px;border-radius:3px;font-size:11px;letter-spacing:.5px;text-transform:uppercase;font-weight:500;margin-bottom:10px}
+.tag-a{background:#d5e8d8;color:#4a7e52}
+.tag-b{background:#e8d5c4;color:#8b6b4a}
+.back-link{display:inline-block;margin-bottom:20px;font-size:13px;color:var(--warm);text-decoration:none;letter-spacing:1px;text-transform:uppercase;font-weight:400}
+.back-link:hover{text-decoration:underline}
+.footer{text-align:center;padding:40px;font-size:12px;color:var(--slate);font-weight:300;letter-spacing:1px}
+@media(max-width:768px){
+  .hero h1{font-size:36px}
+  .hero{padding:30px;height:50vh}
+  .section{padding:40px 20px}
+  .stop{grid-template-columns:60px 1fr}
+  .divider{margin-left:84px}
+  .transport{grid-template-columns:60px 1fr}
+}
+</style>
+</head>
+<body>
+
+<div id="gate-overlay"><h2>Japan 2026</h2><p>Enter password to continue</p><input type="password" id="gate-pw" placeholder="Password" onkeydown="if(event.key==='Enter')checkGate()"><button onclick="checkGate()">Enter</button><div class="gate-error" id="gate-err"></div></div>
+
+<div id="content" style="display:none">
+
+  <div class="hero">
+    <div class="hero-content">
+      <div class="hero-tag">Dan & Connie · Self-Guided</div>
+      <h1>The Yamazaki Distillery</h1>
+      <p>The birthplace of Japanese whisky — nestled between Kyoto and Osaka, where three rivers meet.</p>
+      <div class="hero-date">Tuesday, November 17</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <a href="dan-and-connie.html" class="back-link">← Back to your tour</a>
+    <div class="section-label">The Plan</div>
+    <h2>Whisky While They Do Noodles</h2>
+    <p>While the family heads to the CUPNOODLES Museum in Ikeda, you two get a morning at Suntory's Yamazaki Distillery — where Japanese whisky was born in 1923. It's a short train ride from Osaka, sitting right on the Kyoto-Osaka border in a misty valley where three rivers converge.</p>
+
+    <div class="lottery-note">
+      <strong>🎰 The Lottery:</strong> The full MONOZUKURI distillery tour (the one with the fermentation rooms, cask warehouse, and tasting session) is allocated by lottery only. Entries for November open around <strong>early September 2026</strong> on <a href="https://www.suntory.com/factory/yamazaki/" target="_blank" style="color:var(--amber)">suntory.com</a>. We'll enter as soon as it opens. If we don't win, the Whisky Museum is free and excellent on its own — see Scenario B below.
+    </div>
+  </div>
+
+  <!-- SCENARIOS -->
+  <div class="section" style="padding-top:0">
+    <div class="section-label">Two Ways This Day Goes</div>
+
+    <div class="scenario">
+      <span class="tag tag-a">Scenario A — We win the lottery</span>
+      <h4>Full MONOZUKURI Distillery Tour + Tasting</h4>
+      <p>~80 minutes guided through the mashing room, fermentation washbacks, copper pot stills, and cask warehouse. The air changes from sake-like to whisky as you go. Ends with a curated tasting of exclusive Yamazaki expressions and a lesson in highball-making. Audio guide in English available.</p>
+      <p>Afterwards, you'll have free time in the Whisky Museum + shop.</p>
+    </div>
+
+    <div class="scenario">
+      <span class="tag tag-b">Scenario B — We don't win (still great)</span>
+      <h4>Yamazaki Whisky Museum (Free, Walk-In)</h4>
+      <p>The museum is free and open to walk-in visitors — just register at the entrance on arrival. Two floors covering the history of Japanese whisky, Suntory's story, and the distillation process with miniature models and English descriptions.</p>
+      <p>The ground floor has the <strong>Whisky Library</strong> — a stunning wall of hundreds of bottles in every shade of amber — and a <strong>pay-per-dram tasting counter</strong> (¥300–800 per pour). You can try distillery-only expressions you won't find anywhere else. The gift shop has exclusive small-batch bottles and Yamazaki merch.</p>
+    </div>
+  </div>
+
+  <!-- TIMELINE -->
+  <div class="section" style="padding-top:0">
+    <div class="section-label">Suggested Timeline</div>
+
+    <div class="stop">
+      <div class="stop-time">9:00</div>
+      <div class="stop-body">
+        <h3>Depart Osaka</h3>
+        <div class="subtitle">JR Osaka Station → JR Yamazaki Station</div>
+        <p>Take the JR Kyoto Line (regular train, not shinkansen) from Osaka Station. It's about 25 minutes to Yamazaki Station. The distillery is a 10-minute walk from the station through a quiet residential neighbourhood.</p>
+        <p class="tip">Tip: Yamazaki Station is tiny — one platform, one exit. You can't miss it.</p>
+      </div>
+    </div>
+
+    <div class="transport">
+      <div class="transport-time"></div>
+      <div class="transport-body">🚃 JR Kyoto Line → Yamazaki Station (~25 min). Then 10-min walk to distillery.</div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="stop">
+      <div class="stop-time">10:00</div>
+      <div class="stop-body">
+        <h3>Suntory Yamazaki Distillery</h3>
+        <div class="subtitle">Shimamoto · Tour: lottery / Museum: free · 9:30–17:00</div>
+        <img class="stop-img" src="https://images.pexels.com/photos/1283219/pexels-photo-1283219.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Whisky distillery barrels">
+        <p><strong>If Scenario A:</strong> Your tour will be at a reserved time (likely 10:00 or 10:30). ~80 min guided tour through the full production line, ending with tasting. Then free time in museum + shop.</p>
+        <p><strong>If Scenario B:</strong> Head straight to the Whisky Museum. Take your time through the exhibits, then settle in at the tasting counter. Three pours each from the distillery-exclusive menu is a good pace. The whisky library photo wall alone is worth the visit.</p>
+        <p class="tip">Tip: The gift shop has distillery-only bottles and small tasting sets that make incredible souvenirs. Go to the shop first — popular items sell out by afternoon.</p>
+        <a href="https://maps.google.com/?q=Suntory+Yamazaki+Distillery" target="_blank" class="map-link">Open in Maps</a>
+      </div>
+    </div>
+
+    <div class="transport">
+      <div class="transport-time"></div>
+      <div class="transport-body">🚃 JR Yamazaki Station → JR Osaka Station (~25 min)</div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="stop">
+      <div class="stop-time">13:00</div>
+      <div class="stop-body">
+        <h3>Lunch in Osaka</h3>
+        <div class="subtitle">Your choice · Back in the city</div>
+        <p>Head back to Osaka and grab lunch. The family will be returning from the CUPNOODLES Museum around the same time. You could meet up, or take the afternoon to explore on your own — Shinsaibashi shopping arcade, Namba area, or just wander Dotonbori in daylight for a change.</p>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="stop">
+      <div class="stop-time">PM</div>
+      <div class="stop-body">
+        <h3>Free Afternoon</h3>
+        <div class="subtitle">Explore at your own pace</div>
+        <p>A few ideas if you want to keep going: Osaka Castle Park is a beautiful walk (especially in November foliage), the Umeda Sky Building has a rooftop observatory, or you could check out the Shinsekai neighbourhood for retro vibes and kushikatsu (deep-fried skewers). Tomorrow is USJ day — early start!</p>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="section" style="padding-top:0">
+    <div class="intro-note">
+      <strong>Key details:</strong> No parking at the distillery — train only. No one under 20 permitted for tours or tastings (no kids, even in carriers). Bring your passport or photo ID for the gift shop. No outside food or drinks allowed on the premises.
+    </div>
+  </div>
+
+  <div class="footer">
+    Japan 2026 — Dan & Connie's Yamazaki Day · <a href="dan-and-connie.html" style="color:var(--warm)">Back to tour</a>
+  </div>
+
+</div>
+
+<script>
+function checkGate(){var p=document.getElementById('gate-pw').value.toLowerCase().trim();if(p==='sanche'){document.getElementById('gate-overlay').style.display='none';document.getElementById('content').style.display='block';sessionStorage.setItem('jp26','1')}else{document.getElementById('gate-err').textContent='Try again'}}if(sessionStorage.getItem('jp26')==='1'){document.getElementById('gate-overlay').style.display='none';document.getElementById('content').style.display='block'}
+</script>
+</body>
+</html>
