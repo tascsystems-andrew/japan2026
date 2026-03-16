@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Girls' Kyoto Trip — Japan 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#1a1a1a;--cream:#faf8f4;--warm:#d4a574;--sage:#8b9e7e;--slate:#4a5568;--red:#c0392b;--gold:#b8860b}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Outfit',sans-serif;color:var(--ink);background:var(--cream);line-height:1.6}
+#gate-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:#1a1a1a;z-index:9999;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:16px;font-family:'Outfit',sans-serif}
+#gate-overlay h2{font-family:'Cormorant Garamond',serif;font-size:36px;color:white}
+#gate-overlay p{color:rgba(255,255,255,.5);font-size:14px;font-weight:300}
+#gate-overlay input{background:transparent;border:1px solid rgba(255,255,255,.3);color:white;padding:14px 24px;font-size:15px;text-align:center;font-family:'Outfit',sans-serif;outline:none;width:260px;letter-spacing:1px}
+#gate-overlay input::placeholder{color:rgba(255,255,255,.3)}
+#gate-overlay input:focus{border-color:rgba(255,255,255,.6)}
+#gate-overlay button{padding:12px 32px;background:transparent;border:1px solid rgba(255,255,255,.25);color:white;font-size:13px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;font-family:'Outfit',sans-serif;transition:all .3s}
+#gate-overlay button:hover{background:rgba(255,255,255,.1)}
+.gate-error{color:#c0392b;font-size:13px;font-weight:300;min-height:20px}
+.hero{position:relative;height:60vh;min-height:400px;background:linear-gradient(135deg,rgba(0,0,0,.35)0%,rgba(0,0,0,.1)50%,rgba(0,0,0,.45)100%),url('https://images.pexels.com/photos/2091034/pexels-photo-2091034.jpeg?auto=compress&cs=tinysrgb&w=1600') center/cover;display:flex;align-items:flex-end;padding:60px}
+.hero-content{max-width:700px}
+.hero-tag{font-family:'Outfit';font-weight:300;font-size:13px;letter-spacing:4px;text-transform:uppercase;color:var(--warm);margin-bottom:12px}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:56px;font-weight:700;color:white;line-height:1.05;margin-bottom:12px}
+.hero p{font-family:'Outfit';font-weight:300;font-size:16px;color:rgba(255,255,255,.85);max-width:500px}
+.hero-date{display:inline-block;margin-top:20px;padding:8px 20px;border:1px solid rgba(255,255,255,.4);font-size:12px;letter-spacing:2px;text-transform:uppercase;color:white}
+.section{max-width:900px;margin:0 auto;padding:60px 40px}
+.section-label{font-weight:300;font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--warm);margin-bottom:10px}
+.section h2{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:600;margin-bottom:20px;line-height:1.15}
+.section p{font-size:15px;color:var(--slate);max-width:700px;margin-bottom:14px;font-weight:300}
+.intro-note{background:white;border-left:3px solid var(--warm);padding:20px 24px;border-radius:0 6px 6px 0;margin:24px 0;font-size:14px;color:var(--slate);font-weight:300;line-height:1.6}
+.intro-note strong{font-weight:500;color:var(--ink)}
+.day-header{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:600;margin:40px 0 8px;padding-top:20px;border-top:2px solid #e0d8ce}
+.day-sub{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--warm);font-weight:500;margin-bottom:20px}
+.stop{display:grid;grid-template-columns:80px 1fr;gap:0}
+.stop-time{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:600;color:var(--warm);padding:32px 0;text-align:right;padding-right:24px;border-right:2px solid #e0d8ce}
+.stop-body{padding:24px 0 24px 24px}
+.stop-body h3{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;margin-bottom:6px}
+.stop-body .subtitle{font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--sage);font-weight:500;margin-bottom:10px}
+.stop-body p{font-size:14px;color:var(--slate);font-weight:300;line-height:1.6;margin-bottom:8px}
+.stop-body .tip{font-size:13px;color:var(--gold);font-style:italic;margin-top:6px}
+.stop-body .kid-note{font-size:13px;color:var(--sage);margin-top:6px;padding:8px 12px;background:rgba(139,158,126,.08);border-radius:4px}
+.stop-img{width:100%;height:220px;object-fit:cover;border-radius:6px;margin-bottom:14px}
+.divider{height:1px;background:#e0d8ce;margin:0 0 0 104px}
+.transport{display:grid;grid-template-columns:80px 1fr;gap:0}
+.transport-time{padding:12px 0;text-align:right;padding-right:24px;border-right:2px dashed #e0d8ce}
+.transport-body{padding:12px 0 12px 24px;font-size:13px;color:var(--sage);font-weight:300;font-style:italic}
+.map-link{display:inline-block;margin-top:8px;padding:6px 14px;border:1px solid var(--warm);border-radius:4px;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--warm);text-decoration:none;font-weight:500;transition:all .3s}
+.map-link:hover{background:var(--warm);color:white}
+.nav-links{display:flex;gap:16px;margin-bottom:20px;flex-wrap:wrap}
+.nav-links a{font-size:13px;color:var(--warm);text-decoration:none;letter-spacing:1px;text-transform:uppercase;font-weight:400}
+.nav-links a:hover{text-decoration:underline}
+.nav-links .current{color:var(--ink);font-weight:500}
+.hotel-note{background:linear-gradient(135deg,#f5efe5,#eee5d5);border-radius:8px;padding:28px;margin:32px 0}
+.hotel-note h3{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;margin-bottom:12px}
+.hotel-note p{font-size:14px;color:var(--slate);font-weight:300;line-height:1.6;margin-bottom:8px}
+.footer{text-align:center;padding:40px;font-size:12px;color:var(--slate);font-weight:300;letter-spacing:1px}
+@media(max-width:768px){.hero h1{font-size:36px}.hero{padding:30px;height:50vh}.section{padding:40px 20px}.stop{grid-template-columns:60px 1fr}.divider{margin-left:84px}.transport{grid-template-columns:60px 1fr}}
+</style>
+</head>
+<body>
+<div id="gate-overlay"><h2>Japan 2026</h2><p>Enter password to continue</p><input type="password" id="gate-pw" placeholder="Password" onkeydown="if(event.key==='Enter')checkGate()"><button onclick="checkGate()">Enter</button><div class="gate-error" id="gate-err"></div></div>
+<div id="content" style="display:none">
+
+  <div class="hero">
+    <div class="hero-content">
+      <div class="hero-tag">Girls' Trip · Sam + Adrienne + Kids</div>
+      <h1>Girls' Kyoto Trip</h1>
+      <p>Two nights in Kyoto — Nishiki Market, Fushimi Inari, Arashiyama, and the ancient capital at your own pace.</p>
+      <div class="hero-date">November 24 – 26, 2026</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="nav-links">
+      <a href="adrienne.html">← Adrienne's Page</a>
+      <span class="current">Girls' Kyoto</span>
+    </div>
+    <div class="section-label">3 Days · 2 Nights</div>
+    <h2>Kyoto Without the Boys</h2>
+    <p>Andy's back in Vancouver for the week. This is Sam and Adrienne's chance to take the kids to Kyoto — two nights at a great hotel, the iconic sights, and the kind of trip that proves you can navigate a foreign city with four kids under 7 and come out the other side proud of yourself.</p>
+
+    <div class="intro-note">
+      <strong>The hotel:</strong> Richmond Hotel Premier Kyoto Shijo — right on Shijo-dori with a LIFE supermarket in the basement, free lounge with drinks and snacks all afternoon, and breakfast included. You already know the drill: it's the same hotel Sandy & Dave will stay at a few weeks later.
+    </div>
+  </div>
+
+  <!-- DAY 1 -->
+  <div class="section" style="padding-top:0">
+    <div class="day-header">Day 1 — Tuesday, November 24</div>
+    <div class="day-sub">Osaka → Kyoto · Nishiki Market · Gion</div>
+
+    <div class="stop">
+      <div class="stop-time">AM</div>
+      <div class="stop-body">
+        <h3>Morning — Homeschool</h3>
+        <div class="subtitle">Osaka Airbnb</div>
+        <p>Get the morning lessons done at the Airbnb, pack overnight bags for 2 nights, and head out after lunch. You don't need much — the hotel has laundry and the supermarket downstairs has everything else.</p>
+      </div>
+    </div>
+
+    <div class="transport">
+      <div class="transport-time"></div>
+      <div class="transport-body">🚃 JR Special Rapid from Osaka → Kyoto (~30 min). Then subway or walk to the hotel to drop bags.</div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="stop">
+      <div class="stop-time">13:30</div>
+      <div class="stop-body">
+        <h3>Check In + Drop Bags</h3>
+        <div class="subtitle">Richmond Hotel Premier Kyoto Shijo</div>
+        <p>Check-in is 2 PM but the hotel will hold luggage. Drop the bags and head straight out — you've got an afternoon to fill.</p>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="stop">
+      <div class="stop-time">14:00</div>
+      <div class="stop-body">
+        <h3>Nishiki Market</h3>
+        <div class="subtitle">Nakagyo · Free entry · ~10 min walk from hotel</div>
+        <p>Kyoto's famous food market — a narrow covered arcade packed with vendors selling pickles, mochi, grilled seafood on sticks, matcha sweets, and everything else Kyoto is known for. This is lunch, snack time, and entertainment all in one. The market is a 10-minute walk from the hotel, making it the perfect first stop.</p>
+        <div class="kid-note">🧒 <strong>Kids love:</strong> Choosing snacks from the stalls, the octopus-on-a-stick, the colourful mochi displays, and the general excitement of a market full of food at eye level.</div>
+        <a href="https://maps.google.com/?q=Nishiki+Market+Kyoto" target="_blank" class="map-link">Open in Maps</a>
+      </div>
+    </div>
+
+    <div class="transport">
+      <div class="transport-time"></div>
+      <div class="transport-body">🚶 Walk east through the shopping arcades toward Gion (~15 min)</div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="stop">
+      <div class="stop-time">15:30</div>
+      <div class="stop-body">
+        <h3>Gion</h3>
+        <div class="subtitle">Higashiyama · Free to stroll</div>
+        <p>Kyoto's famous geisha district. Walk along Hanamikoji-dori — traditional wooden machiya houses, tea houses, and lantern-lit side streets. In the late afternoon you might spot a maiko heading to an evening appointment. The Shirakawa canal area is beautiful with its willow trees and stone bridges.</p>
+        <div class="kid-note">🧒 <strong>Kids love:</strong> Spotting people in rental kimonos, the little bridges over the canal, and the vending machine drinks after a lot of walking.</div>
+        <a href="https://maps.google.com/?q=Gion+Kyoto" target="_blank" class="map-link">Open in Maps</a>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="stop">
+      <div class="stop-time">17:30</div>
+      <div class="stop-body">
+        <h3>Hotel Lounge + Dinner</h3>
+        <div class="subtitle">Richmond Hotel Premier Kyoto Shijo</div>
+        <p>Head back to the hotel for the free lounge — drinks and snacks until 9 PM. The kids can decompress while you and Adrienne enjoy a glass of wine. For dinner, the Shijo area around the hotel has endless options, or grab something from the LIFE supermarket downstairs and eat in the room. First day done.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 2 -->
+  <div class="section" style="padding-top:0">
+    <div class="day-header">Day 2 — Wednesday, November 25</div>
+    <div class="day-sub">Full Day Kyoto · Fushimi Inari · Arashiyama</div>
+
+    <div class="stop">
+      <div class="stop-time">8:00</div>
+      <div class="stop-body">
+        <h3>Breakfast at the Hotel</h3>
+        <div class="subtitle">Included · Japanese & Western buffet</div>
+        <p>The Richmond's breakfast is excellent — Japanese and Western options, good coffee, and enough variety that even picky kids will find something. Fuel up properly, today is a big day.</p>
+      </div>
+    </div>
+
+    <div class="transport">
+      <div class="transport-time"></div>
+      <div class="transport-body">🚃 Keihan Line from Gion-Shijo → Fushimi Inari (~10 min)</div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="stop">
+      <div class="stop-time">9:00</div>
+      <div class="stop-body">
+        <h3>Fushimi Inari Taisha</h3>
+        <div class="subtitle">Fushimi · Free · Open 24 hours</div>
+        <img class="stop-img" src="https://images.pexels.com/photos/2091034/pexels-photo-2091034.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Fushimi Inari torii gates">
+        <p>The one everyone knows — thousands of vermilion torii gates winding up a mountain through the forest. Arrive early to beat the crowds. You don't need to go all the way to the summit (2+ hours) — the first section up to the Yotsutsuji intersection (~30–45 min) has the best gate tunnels and a lookout point over Kyoto. That's the sweet spot with kids.</p>
+        <div class="kid-note">🧒 <strong>Kids love:</strong> Running through the endless tunnel of orange gates (it feels like a portal to another world), the fox statues everywhere, and the sense of adventure climbing up through the forest. The mini shrines along the path are fun to discover.</div>
+        <p class="tip">Tip: Go early morning — by 10 AM the lower gates are packed with tourists and it's hard to get a clean photo. At 9 AM you'll have stretches to yourself.</p>
+        <a href="https://maps.google.com/?q=Fushimi+Inari+Taisha+Kyoto" target="_blank" class="map-link">Open in Maps</a>
+      </div>
+    </div>
+
+    <div class="transport">
+      <div class="transport-time"></div>
+      <div class="transport-body">🚃 JR Inari → Kyoto Station → JR Sagano Line → Saga-Arashiyama (~40 min with transfer). Or taxi (~30 min, ~¥3,000).</div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="stop">
+      <div class="stop-time">11:30</div>
+      <div class="stop-body">
+        <h3>Arashiyama</h3>
+        <div class="subtitle">Ukyo · Bamboo grove free · All day area</div>
+        <img class="stop-img" src="https://images.pexels.com/photos/19693266/pexels-photo-19693266.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Arashiyama Bamboo Grove">
+        <p>The towering bamboo forest, the Togetsukyo Bridge, and the monkey park — Arashiyama is a full afternoon in one area. Walk through the bamboo grove (free, stunning even in late November), cross the bridge, and explore the main street lined with shops and food stalls.</p>
+        <p>Grab lunch on the main street — plenty of noodle shops, cafés, and grab-and-go options. The whole area is flat and stroller-friendly along the main paths.</p>
+        <div class="kid-note">🧒 <strong>Kids love:</strong> The bamboo grove (it's magical — the light filters through and the bamboo creaks in the wind), the Togetsukyo Bridge (wide and dramatic), and the Arashiyama Monkey Park if you're up for a 20-min hike to see wild monkeys at the top.</div>
+        <p class="tip">Tip: The Monkey Park (Iwatayama) is a 20-minute uphill climb — doable with the 6 and 7 year old, tough with the younger two in a carrier. The monkeys at the top are free-roaming and incredible. Your call based on energy levels.</p>
+        <a href="https://maps.google.com/?q=Arashiyama+Bamboo+Grove+Kyoto" target="_blank" class="map-link">Open in Maps</a>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="stop">
+      <div class="stop-time">15:00</div>
+      <div class="stop-body">
+        <h3>Kamo River Walk</h3>
+        <div class="subtitle">Free · On the way back</div>
+        <p>If there's energy left on the way back toward the hotel, the Kamo River is a beautiful spot to let the kids run. Wide gravel banks, shallow water (in places), and stepping stones to hop across. Locals jog, picnic, and hang out here — it's the city's outdoor living room. In late November the trees along the river may still have autumn colour.</p>
+        <div class="kid-note">🧒 <strong>Kids love:</strong> The stepping stones across the river (turtle and bird shapes!), throwing leaves in the water, and the wide open space to run after a day of temples and trains.</div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="stop">
+      <div class="stop-time">17:00</div>
+      <div class="stop-body">
+        <h3>Evening — Hotel + Dinner</h3>
+        <div class="subtitle">Richmond Hotel Premier Kyoto Shijo</div>
+        <p>Back to the lounge for round two. For dinner, Pontocho alley (a narrow pedestrian lantern-lit street along the river) is a short walk from the hotel and has restaurants ranging from casual to fancy. Or stay simple — the LIFE supermarket and the hotel room are right there.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 3 -->
+  <div class="section" style="padding-top:0">
+    <div class="day-header">Day 3 — Thursday, November 26</div>
+    <div class="day-sub">Morning Kyoto · Train Home</div>
+
+    <div class="stop">
+      <div class="stop-time">8:00</div>
+      <div class="stop-body">
+        <h3>Breakfast + Check Out</h3>
+        <div class="subtitle">Richmond Hotel Premier Kyoto Shijo</div>
+        <p>Last breakfast at the hotel. Check out is 11 AM — pack up, leave luggage at reception if you want a morning stroll, or head straight out.</p>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="stop">
+      <div class="stop-time">9:30</div>
+      <div class="stop-body">
+        <h3>Morning Option — Kiyomizu-dera or Nishiki Revisit</h3>
+        <div class="subtitle">Your choice</div>
+        <p>If the group has energy for one more temple, <strong>Kiyomizu-dera</strong> is the one — the famous wooden terrace jutting out over the hillside with views across all of Kyoto. It's about 20 minutes by bus or taxi from the hotel. The approach street (Matsubara-dori) is lined with souvenir shops and snack stalls.</p>
+        <p>If a temple feels like too much, a second pass through <strong>Nishiki Market</strong> is always worth it — pick up omiyage (souvenirs), grab last snacks, and keep it relaxed.</p>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="stop">
+      <div class="stop-time">12:00</div>
+      <div class="stop-body">
+        <h3>Train Home</h3>
+        <div class="subtitle">JR Kyoto → Osaka (~30 min)</div>
+        <p>Collect luggage from the hotel, head to Kyoto Station, and catch the train back to Osaka. You'll be home by early afternoon with time for afternoon homeschool and a well-earned rest.</p>
+        <p>You just did Kyoto with four kids under 7 and no dad. That's not a trip — that's an achievement.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" style="padding-top:0">
+    <div class="hotel-note">
+      <h3>🏨 Your Hotel — Richmond Hotel Premier Kyoto Shijo</h3>
+      <p><strong>Location:</strong> Shijo-dori, central Kyoto. ~15 min walk to Nishiki Market and Gion. Near Shijo subway station and Karasuma/Omiya Hankyu stations.</p>
+      <p><strong>Supermarket:</strong> LIFE in the basement of the building. Breakfast supplies, snacks, drinks — you never need to leave the building for essentials.</p>
+      <p><strong>Lounge:</strong> Free drinks and snacks 1–9 PM, including happy hour with wine, beer, whisky, and sake from 5–9 PM. This is your secret weapon after a day with four kids.</p>
+      <p><strong>Breakfast:</strong> Included. Japanese and Western buffet.</p>
+      <p><strong>Laundry:</strong> Coin laundry in the hotel.</p>
+    </div>
+  </div>
+
+  <div class="footer">
+    Japan 2026 — Girls' Kyoto Trip · <a href="adrienne.html" style="color:var(--warm)">Adrienne's Page</a> · <a href="schedule.html" style="color:var(--warm)">Full Schedule</a>
+  </div>
+
+</div>
+<script>function checkGate(){var p=document.getElementById('gate-pw').value.toLowerCase().trim();if(p==='sanche'){document.getElementById('gate-overlay').style.display='none';document.getElementById('content').style.display='block';sessionStorage.setItem('jp26','1')}else{document.getElementById('gate-err').textContent='Try again'}}if(sessionStorage.getItem('jp26')==='1'){document.getElementById('gate-overlay').style.display='none';document.getElementById('content').style.display='block'}</script>
+</body>
+</html>
