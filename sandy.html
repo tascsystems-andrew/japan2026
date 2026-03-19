@@ -223,16 +223,6 @@ body{font-family:'Outfit',sans-serif;color:var(--ink);background:var(--cream);li
 
 </div>
 
-<script>
-function checkGate(){
-  var pw=document.getElementById('gate-pw').value.toLowerCase().trim();
-  if(pw==='sanche'){
-    document.getElementById('gate-overlay').style.display='none';
-    document.getElementById('content').style.display='block';
-  } else {
-    document.getElementById('gate-err').textContent='Incorrect password';
-  }
-}
-</script>
+<script>function checkGate(){var p=document.getElementById('gate-pw').value.toLowerCase().trim();if(p==='sanche'){document.getElementById('gate-overlay').style.display='none';document.getElementById('content').style.display='block';sessionStorage.setItem('jp26','1')}else{document.getElementById('gate-err').textContent='Incorrect password'}}if(sessionStorage.getItem('jp26')==='1'){document.getElementById('gate-overlay').style.display='none';document.getElementById('content').style.display='block'}</script>
 </body>
 </html>
