@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sandy & Dave Arrival — Japan 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#1a1a1a;--cream:#faf8f4;--warm:#d4a574;--sage:#8b9e7e;--slate:#4a5568;--red:#c0392b;--gold:#b8860b}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Outfit',sans-serif;color:var(--ink);background:var(--cream);line-height:1.6}
+#gate-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:#1a1a1a;z-index:9999;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:16px;font-family:'Outfit',sans-serif}
+#gate-overlay h2{font-family:'Cormorant Garamond',serif;font-size:36px;color:white}
+#gate-overlay p{color:rgba(255,255,255,.5);font-size:14px;font-weight:300}
+#gate-overlay input{background:transparent;border:1px solid rgba(255,255,255,.3);color:white;padding:14px 24px;font-size:15px;text-align:center;font-family:'Outfit',sans-serif;outline:none;width:260px;letter-spacing:1px}
+#gate-overlay input::placeholder{color:rgba(255,255,255,.3)}
+#gate-overlay input:focus{border-color:rgba(255,255,255,.6)}
+#gate-overlay button{padding:12px 32px;background:transparent;border:1px solid rgba(255,255,255,.25);color:white;font-size:13px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;font-family:'Outfit',sans-serif;transition:all .3s}
+#gate-overlay button:hover{background:rgba(255,255,255,.1)}
+.gate-error{color:#c0392b;font-size:13px;font-weight:300;min-height:20px}
+.hero{position:relative;height:60vh;min-height:400px;background:linear-gradient(135deg,rgba(0,0,0,.35)0%,rgba(0,0,0,.1)50%,rgba(0,0,0,.45)100%),url('https://images.pexels.com/photos/208701/pexels-photo-208701.jpeg?auto=compress&cs=tinysrgb&w=1600') center/cover;display:flex;align-items:flex-end;padding:60px}
+.hero-content{max-width:700px}
+.hero-tag{font-family:'Outfit';font-weight:300;font-size:13px;letter-spacing:4px;text-transform:uppercase;color:var(--warm);margin-bottom:12px}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:56px;font-weight:700;color:white;line-height:1.05;margin-bottom:12px}
+.hero p{font-family:'Outfit';font-weight:300;font-size:16px;color:rgba(255,255,255,.85);max-width:500px}
+.hero-date{display:inline-block;margin-top:20px;padding:8px 20px;border:1px solid rgba(255,255,255,.4);font-size:12px;letter-spacing:2px;text-transform:uppercase;color:white}
+.section{max-width:900px;margin:0 auto;padding:60px 40px}
+.section-label{font-weight:300;font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--warm);margin-bottom:10px}
+.section h2{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:600;margin-bottom:20px;line-height:1.15}
+.section p{font-size:15px;color:var(--slate);max-width:700px;margin-bottom:14px;font-weight:300}
+.intro-note{background:white;border-left:3px solid var(--warm);padding:20px 24px;border-radius:0 6px 6px 0;margin:24px 0;font-size:14px;color:var(--slate);font-weight:300;line-height:1.6}
+.intro-note strong{font-weight:500;color:var(--ink)}
+.day-header{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:600;margin:40px 0 8px;padding-top:20px;border-top:2px solid #e0d8ce}
+.day-sub{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--warm);font-weight:500;margin-bottom:20px}
+.stop{display:grid;grid-template-columns:80px 1fr;gap:0}
+.stop-time{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:600;color:var(--warm);padding:32px 0;text-align:right;padding-right:24px;border-right:2px solid #e0d8ce}
+.stop-body{padding:24px 0 24px 24px}
+.stop-body h3{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;margin-bottom:6px}
+.stop-body .subtitle{font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--sage);font-weight:500;margin-bottom:10px}
+.stop-body p{font-size:14px;color:var(--slate);font-weight:300;line-height:1.6;margin-bottom:8px}
+.stop-body .tip{font-size:13px;color:var(--gold);font-style:italic;margin-top:6px}
+.stop-body .kid-note{font-size:13px;color:var(--sage);margin-top:6px;padding:8px 12px;background:rgba(139,158,126,.08);border-radius:4px}
+.stop-img{width:100%;height:220px;object-fit:cover;border-radius:6px;margin-bottom:14px}
+.divider{height:1px;background:#e0d8ce;margin:0 0 0 104px}
+.transport{display:grid;grid-template-columns:80px 1fr;gap:0}
+.transport-time{padding:12px 0;text-align:right;padding-right:24px;border-right:2px dashed #e0d8ce}
+.transport-body{padding:12px 0 12px 24px;font-size:13px;color:var(--sage);font-weight:300;font-style:italic}
+.map-link{display:inline-block;margin-top:8px;padding:6px 14px;border:1px solid var(--warm);border-radius:4px;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--warm);text-decoration:none;font-weight:500;transition:all .3s}
+.map-link:hover{background:var(--warm);color:white}
+.nav-links{display:flex;gap:16px;margin-bottom:20px;flex-wrap:wrap}
+.nav-links a{font-size:13px;color:var(--warm);text-decoration:none;letter-spacing:1px;text-transform:uppercase;font-weight:400}
+.nav-links a:hover{text-decoration:underline}
+.nav-links .current{color:var(--ink);font-weight:500}
+.airbnb-note{background:linear-gradient(135deg,#f5efe5,#eee5d5);border-radius:8px;padding:28px;margin:32px 0}
+.airbnb-note h3{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;margin-bottom:12px}
+.airbnb-note p{font-size:14px;color:var(--slate);font-weight:300;line-height:1.6;margin-bottom:8px}
+.footer{text-align:center;padding:40px;font-size:12px;color:var(--slate);font-weight:300;letter-spacing:1px}
+@media(max-width:768px){.hero h1{font-size:36px}.hero{padding:30px;height:50vh}.section{padding:40px 20px}.stop{grid-template-columns:60px 1fr}.divider{margin-left:84px}.transport{grid-template-columns:60px 1fr}}
+</style>
+</head>
+<body>
+<div id="gate-overlay"><h2>Japan 2026</h2><p>Enter password to continue</p><input type="password" id="gate-pw" placeholder="Password" onkeydown="if(event.key==='Enter')checkGate()"><button onclick="checkGate()">Enter</button><div class="gate-error" id="gate-err"></div></div>
+<div id="content" style="display:none">
+
+  <div class="hero">
+    <div class="hero-content">
+      <div class="hero-tag">Sandy & Dave · Grandparents' Trip</div>
+      <h1>Welcome to Osaka</h1>
+      <p>You've made it. After nearly 10,000 kilometers, you're finally here with your grandkids. Today is about arrival, settling in, and the kind of hugs that make the whole journey worth it.</p>
+      <div class="hero-date">Friday, December 11, 2026</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="nav-links">
+      <a href="sandy.html">← Sandy's Page</a>
+      <span class="current">Arrival Day</span>
+    </div>
+    <div class="section-label">1 Day · Welcome to Japan</div>
+    <h2>Touching Down</h2>
+    <p>You're landing at Kansai International Airport (KIX) around midday or early afternoon. The timing is perfect — not too early to be exhausted, not too late to settle in. This is a travel day, so keep expectations low and energy focused on getting to the Airbnb, seeing the grandkids, and resting well.</p>
+
+    <div class="intro-note">
+      <strong>The home:</strong> Your Airbnb is in Kasugadekita, Konohana Ward, Osaka — one JR stop from Universal Studios Japan, very close to Nishikujo station. It's quiet, residential, and walking distance from local shops and restaurants.
+    </div>
+  </div>
+
+  <!-- DAY 1 -->
+  <div class="section" style="padding-top:0">
+    <div class="day-header">Friday, December 11</div>
+    <div class="day-sub">Arrival · Settle In · First Hugs</div>
+
+    <div class="stop">
+      <div class="stop-time">Midday</div>
+      <div class="stop-body">
+        <h3>Land at Kansai International Airport (KIX)</h3>
+        <div class="subtitle">Southern Osaka · Welcome to Japan</div>
+        <p>You've made it. Collect your luggage, clear immigration and customs (be prepared for a small form), and head out to ground transportation. The airport is modern, clean, and relatively easy to navigate. Follow signs for "Trains" or "Rental Cars."</p>
+        <p class="tip">Tip: Your phone likely won't have service yet. Grab a SIM card or pocket WiFi from the airport shops before you leave if you haven't arranged one already.</p>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="stop">
+      <div class="stop-time">PM</div>
+      <div class="stop-body">
+        <h3>KIX → Airbnb (Choose Your Route)</h3>
+        <div class="subtitle">~70 minutes</div>
+        <p><strong>Option 1 — Haruka Express:</strong> The Haruka Limited Express train is fast and straightforward. It leaves from KIX directly to Kyoto Station and other points — ask at the station if it goes toward Osaka/Nishikujo. Cost is around ¥3,000–4,000. Takes luggage easily and feels smooth after a long flight.</p>
+        <p><strong>Option 2 — Rental Car:</strong> If your son is picking you up or if you've arranged a car, this is the easiest option for luggage and settling in at your own pace. The drive from KIX to the Kasugadekita address is about 60–70 minutes depending on traffic.</p>
+        <p><strong>Option 3 — Taxi:</strong> Comfortable but pricey (around ¥10,000–12,000).</p>
+        <p class="tip">Tip: The Haruka is convenient, but if you're tired and have a lot of luggage, the rental car or being picked up is worth it. This is not the day to figure out train schedules.</p>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="stop">
+      <div class="stop-time">16:00</div>
+      <div class="stop-body">
+        <h3>Arrive at the Airbnb · Settle In</h3>
+        <div class="subtitle">Kasugadekita, Konohana Ward</div>
+        <p>You're here. Get your luggage in the door, do a quick orientation with your son, and let the grandkids show you around. They've been waiting for this. There's no agenda — let this time happen naturally. Help them show you their favourite things in the house, let them sit with you, settle your nerves from the flight.</p>
+        <div class="kid-note">🧒 <strong>Grandkid energy:</strong> The 7-year-old and 6-year-old will want to show you everything. The younger two (4 and 3) might be shy at first but will warm up quickly once they see you're here to stay for five days. Give them a little space but let them lead.</div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="stop">
+      <div class="stop-time">17:00</div>
+      <div class="stop-body">
+        <h3>Neighbourhood Walk · Keep It Low Key</h3>
+        <div class="subtitle">Kasugadekita & Nishikujo · Walking distance</div>
+        <p>Once everyone's had a moment, take a gentle walk around the neighbourhood with whoever wants to go (maybe your son and one or two of the kids). The Konohana area has a charming local shotengai (shopping street) with small shops, fruit stands, and the energy of everyday Japan. Peek into a konbini (convenience store) — these are an experience in themselves.</p>
+        <p>You might also walk along the small canal near the Airbnb. Nothing formal, just a slow stroll to get your legs moving, see where things are, and help the kids burn a little energy before dinner.</p>
+        <div class="kid-note">🧒 <strong>Kids love:</strong> Konbinis. They're fascinating to children — all the snacks, the drinks, the novelty toys. Let them each pick a small snack or drink. It becomes their "welcome home" memory.</div>
+        <p class="tip">Tip: You're jet-lagged. Don't push it. A 20–30 minute walk is plenty. You've just flown across the world.</p>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="stop">
+      <div class="stop-time">18:00</div>
+      <div class="stop-body">
+        <h3>Optional — Osaka Castle Park at Dusk</h3>
+        <div class="subtitle">If energy permits · JR from Nishikujo to Osakajo-Koen (~15 min)</div>
+        <p>If the group is still awake and interested, a quick evening visit to Osaka Castle Park is magical. In December, you'll catch the castle lit up beautifully at dusk — golden lights against the dark sky. The park itself is beautiful and peaceful in the evening, and it's a nice introduction to Osaka's landmarks without being overwhelming.</p>
+        <p>This is optional. If everyone is ready to head home and rest, skip it. There's no shame in a travel day that ends early.</p>
+        <a href="https://maps.google.com/?q=Osaka+Castle+Park+Osakajo-Koen" target="_blank" class="map-link">Open in Maps</a>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="stop">
+      <div class="stop-time">19:00</div>
+      <div class="stop-body">
+        <h3>Welcome Dinner at the Airbnb</h3>
+        <div class="subtitle">Home-cooked meal with the family</div>
+        <p>Your son will likely have arranged a homecooked meal — his way of saying welcome home without making you leave the house. Eat together, let the kids see you're staying, enjoy being around everyone. This is the whole reason you came.</p>
+        <p>Bedtime will come early for everyone, and that's fine. You've all earned rest.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" style="padding-top:0">
+    <div class="airbnb-note">
+      <h3>🏠 Your Home — Kasugadekita Airbnb</h3>
+      <p><strong>Location:</strong> Kasugadekita 2-chōme-9-24, Konohana Ward, Osaka 554-0021. Nearest station: Nishikujo (one JR stop from Universal Studios Japan).</p>
+      <p><strong>Neighbourhood:</strong> Quiet residential area with local shops, restaurants, and the charm of everyday Osaka. Nothing touristy — just normal life.</p>
+      <p><strong>Getting around:</strong> Nishikujo is one stop away on the JR Yume-Yuuki Line. From there, you can reach central Osaka, Kyoto, and other areas easily.</p>
+      <p><strong>Shopping:</strong> Shotengai (shopping street) and konbinis nearby. The neighbourhood has everything you need for a comfortable stay.</p>
+    </div>
+  </div>
+
+  <div class="footer">
+    Japan 2026 — Sandy & Dave's Trip · <a href="sandy.html" style="color:var(--warm)">Sandy's Page</a> · <a href="schedule.html" style="color:var(--warm)">Full Schedule</a>
+  </div>
+
+</div>
+<script>function checkGate(){var p=document.getElementById('gate-pw').value.toLowerCase().trim();if(p==='sanche'){document.getElementById('gate-overlay').style.display='none';document.getElementById('content').style.display='block';sessionStorage.setItem('jp26','1')}else{document.getElementById('gate-err').textContent='Try again'}}if(sessionStorage.getItem('jp26')==='1'){document.getElementById('gate-overlay').style.display='none';document.getElementById('content').style.display='block'}</script>
+</body>
+</html>

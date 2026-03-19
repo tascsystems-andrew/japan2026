@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sandy & Dave Kyoto Day 1 — Japan 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#1a1a1a;--cream:#faf8f4;--warm:#d4a574;--sage:#8b9e7e;--slate:#4a5568;--red:#c0392b;--gold:#b8860b}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Outfit',sans-serif;color:var(--ink);background:var(--cream);line-height:1.6}
+#gate-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:#1a1a1a;z-index:9999;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:16px;font-family:'Outfit',sans-serif}
+#gate-overlay h2{font-family:'Cormorant Garamond',serif;font-size:36px;color:white}
+#gate-overlay p{color:rgba(255,255,255,.5);font-size:14px;font-weight:300}
+#gate-overlay input{background:transparent;border:1px solid rgba(255,255,255,.3);color:white;padding:14px 24px;font-size:15px;text-align:center;font-family:'Outfit',sans-serif;outline:none;width:260px;letter-spacing:1px}
+#gate-overlay input::placeholder{color:rgba(255,255,255,.3)}
+#gate-overlay input:focus{border-color:rgba(255,255,255,.6)}
+#gate-overlay button{padding:12px 32px;background:transparent;border:1px solid rgba(255,255,255,.25);color:white;font-size:13px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;font-family:'Outfit',sans-serif;transition:all .3s}
+#gate-overlay button:hover{background:rgba(255,255,255,.1)}
+.gate-error{color:#c0392b;font-size:13px;font-weight:300;min-height:20px}
+.hero{position:relative;height:60vh;min-height:400px;background:linear-gradient(135deg,rgba(0,0,0,.35)0%,rgba(0,0,0,.1)50%,rgba(0,0,0,.45)100%),url('https://images.pexels.com/photos/1320998/pexels-photo-1320998.jpeg?auto=compress&cs=tinysrgb&w=1600') center/cover;display:flex;align-items:flex-end;padding:60px}
+.hero-content{max-width:700px}
+.hero-tag{font-family:'Outfit';font-weight:300;font-size:13px;letter-spacing:4px;text-transform:uppercase;color:var(--warm);margin-bottom:12px}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:56px;font-weight:700;color:white;line-height:1.05;margin-bottom:12px}
+.hero p{font-family:'Outfit';font-weight:300;font-size:16px;color:rgba(255,255,255,.85);max-width:500px}
+.hero-date{display:inline-block;margin-top:20px;padding:8px 20px;border:1px solid rgba(255,255,255,.4);font-size:12px;letter-spacing:2px;text-transform:uppercase;color:white}
+.section{max-width:900px;margin:0 auto;padding:60px 40px}
+.section-label{font-weight:300;font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--warm);margin-bottom:10px}
+.section h2{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:600;margin-bottom:20px;line-height:1.15}
+.section p{font-size:15px;color:var(--slate);max-width:700px;margin-bottom:14px;font-weight:300}
+.intro-note{background:white;border-left:3px solid var(--warm);padding:20px 24px;border-radius:0 6px 6px 0;margin:24px 0;font-size:14px;color:var(--slate);font-weight:300;line-height:1.6}
+.intro-note strong{font-weight:500;color:var(--ink)}
+.day-header{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:600;margin:40px 0 8px;padding-top:20px;border-top:2px solid #e0d8ce}
+.day-sub{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--warm);font-weight:500;margin-bottom:20px}
+.stop{display:grid;grid-template-columns:80px 1fr;gap:0}
+.stop-time{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:600;color:var(--warm);padding:32px 0;text-align:right;padding-right:24px;border-right:2px solid #e0d8ce}
+.stop-body{padding:24px 0 24px 24px}
+.stop-body h3{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;margin-bottom:6px}
+.stop-body .subtitle{font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--sage);font-weight:500;margin-bottom:10px}
+.stop-body p{font-size:14px;color:var(--slate);font-weight:300;line-height:1.6;margin-bottom:8px}
+.stop-body .tip{font-size:13px;color:var(--gold);font-style:italic;margin-top:6px}
+.stop-body .kid-note{font-size:13px;color:var(--sage);margin-top:6px;padding:8px 12px;background:rgba(139,158,126,.08);border-radius:4px}
+.stop-img{width:100%;height:220px;object-fit:cover;border-radius:6px;margin-bottom:14px}
+.divider{height:1px;background:#e0d8ce;margin:0 0 0 104px}
+.transport{display:grid;grid-template-columns:80px 1fr;gap:0}
+.transport-time{padding:12px 0;text-align:right;padding-right:24px;border-right:2px dashed #e0d8ce}
+.transport-body{padding:12px 0 12px 24px;font-size:13px;color:var(--sage);font-weight:300;font-style:italic}
+.map-link{display:inline-block;margin-top:8px;padding:6px 14px;border:1px solid var(--warm);border-radius:4px;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--warm);text-decoration:none;font-weight:500;transition:all .3s}
+.map-link:hover{background:var(--warm);color:white}
+.nav-links{display:flex;gap:16px;margin-bottom:20px;flex-wrap:wrap}
+.nav-links a{font-size:13px;color:var(--warm);text-decoration:none;letter-spacing:1px;text-transform:uppercase;font-weight:400}
+.nav-links a:hover{text-decoration:underline}
+.nav-links .current{color:var(--ink);font-weight:500}
+.hotel-note{background:linear-gradient(135deg,#f5efe5,#eee5d5);border-radius:8px;padding:28px;margin:32px 0}
+.hotel-note h3{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;margin-bottom:12px}
+.hotel-note p{font-size:14px;color:var(--slate);font-weight:300;line-height:1.6;margin-bottom:8px}
+.footer{text-align:center;padding:40px;font-size:12px;color:var(--slate);font-weight:300;letter-spacing:1px}
+@media(max-width:768px){.hero h1{font-size:36px}.hero{padding:30px;height:50vh}.section{padding:40px 20px}.stop{grid-template-columns:60px 1fr}.divider{margin-left:84px}.transport{grid-template-columns:60px 1fr}}
+</style>
+</head>
+<body>
+<div id="gate-overlay"><h2>Japan 2026</h2><p>Enter password to continue</p><input type="password" id="gate-pw" placeholder="Password" onkeydown="if(event.key==='Enter')checkGate()"><button onclick="checkGate()">Enter</button><div class="gate-error" id="gate-err"></div></div>
+<div id="content" style="display:none">
+
+  <div class="hero">
+    <div class="hero-content">
+      <div class="hero-tag">Sandy & Dave · Big Bird in Japan</div>
+      <h1>The Big Bird Kyoto Tour</h1>
+      <p>This is the day you've been planning for. Follow Big Bird and Barkley through ancient temples, bamboo forests, and the heart of Kyoto — with your grandkids in tow.</p>
+      <div class="hero-date">Saturday, December 12, 2026</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="nav-links">
+      <a href="sandy.html">← Sandy's Page</a>
+      <span class="current">Kyoto Day 1</span>
+    </div>
+    <div class="section-label">1 Day · The Main Event</div>
+    <h2>A Day Inspired by Big Bird in Japan</h2>
+    <p>This is it — the tour that inspired the whole brochure. You're walking where Big Bird walked, visiting Sanjusangendo Temple (where Barkley got spooked in the movie) and the Arashiyama Bamboo Grove (the magical forest from the Tale of the Bamboo Cutter). You're making memories with your grandkids in one of Japan's most beautiful cities.</p>
+
+    <div class="intro-note">
+      <strong>The hotel:</strong> Richmond Hotel Premier Kyoto Shijo — a great location right on Shijo-dori with breakfast included and excellent service. You'll spend tonight here and check out tomorrow morning.
+    </div>
+  </div>
+
+  <!-- DAY -->
+  <div class="section" style="padding-top:0">
+    <div class="day-header">Saturday, December 12</div>
+    <div class="day-sub">Osaka → Kyoto · Temples · Bamboo Grove</div>
+
+    <div class="stop">
+      <div class="stop-time">8:00</div>
+      <div class="stop-body">
+        <h3>Early Breakfast at the Airbnb</h3>
+        <div class="subtitle">Before heading out</div>
+        <p>Eat well before you go. You've got a full day ahead and the grandkids will do better with food in them. Pack snacks (fruit, crackers, juice boxes) for between stops — Kyoto temples and trains can work up an appetite, and little legs tire faster than you'd think.</p>
+      </div>
+    </div>
+
+    <div class="transport">
+      <div class="transport-time"></div>
+      <div class="transport-body">🚃 JR Special Rapid from Osaka → Kyoto (~30 min). Get seats together if possible, especially since you have the little ones.</div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="stop">
+      <div class="stop-time">9:30</div>
+      <div class="stop-body">
+        <h3>Sanjusangendo Temple — The Big Bird Stop</h3>
+        <div class="subtitle">Higashiyama · ¥600 adults, ¥300 children · ~45 min visit</div>
+        <img class="stop-img" src="https://images.pexels.com/photos/1320998/pexels-photo-1320998.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Sanjusangendo Temple">
+        <p>This is where Barkley got spooked in the movie. Sanjusangendo is a long wooden hall housing 1,001 golden Kannon statues — the atmosphere is hushed, golden, and genuinely awe-inspiring. The kids will feel it. Photography is not allowed inside, so you're all going to experience it together, not through a phone screen.</p>
+        <p>The approach to the temple is beautiful, and the neighbourhood is quiet and traditional. Plan about 45 minutes for the temple visit itself.</p>
+        <div class="kid-note">🧒 <strong>Kids experience:</strong> The sight of 1,001 golden statues is stunning at any age. The little ones might be a bit overwhelmed by the quiet reverence, but the older kids (6 and 7) will understand they're seeing something special. It's a moment.</div>
+        <p class="tip">Tip: No photos inside means everyone is present. That's actually a gift.</p>
+        <a href="https://maps.google.com/?q=Sanjusangendo+Temple+Kyoto" target="_blank" class="map-link">Open in Maps</a>
+      </div>
+    </div>
+
+    <div class="transport">
+      <div class="transport-time"></div>
+      <div class="transport-body">🚶 Walk or short bus to the Kiyomizu-dera area (~15 min walk through the Higashiyama neighbourhood)</div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="stop">
+      <div class="stop-time">11:00</div>
+      <div class="stop-body">
+        <h3>Kiyomizu-dera Temple</h3>
+        <div class="subtitle">Higashiyama · ¥400 · Famous wooden terrace</div>
+        <img class="stop-img" src="https://images.pexels.com/photos/2803117/pexels-photo-2803117.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Kiyomizu-dera Temple">
+        <p>The famous wooden terrace juts out over the hillside, giving you views across all of Kyoto. The approach streets (Ninenzaka and Sannenzaka) are lined with traditional shops and snack vendors — souvenir shops, matcha ice cream stands, little restaurants. December may still have some late autumn colours, and the whole area is beautiful for wandering.</p>
+        <p>Let the kids lead you through the approach streets. They'll find the snacks, the shops, the small discoveries that make Japan magical for children.</p>
+        <div class="kid-note">🧒 <strong>Kids love:</strong> The approach streets are basically a treasure hunt — matcha ice cream, little toys in shop windows, the general energy of a famous spot. The terrace itself is a thrill (they're up high!), and the view is impressive to even the youngest kid.</div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="stop">
+      <div class="stop-time">12:30</div>
+      <div class="stop-body">
+        <h3>Lunch in Higashiyama</h3>
+        <div class="subtitle">Plenty of options nearby</div>
+        <p>You're in the heart of Higashiyama, surrounded by restaurants and food stalls. Grab udon, soba, tempura, or whatever looks good. The streets around Kiyomizu are designed for wandering and eating. Plenty of places are kid-friendly, and the whole vibe is casual.</p>
+        <p class="tip">Tip: Early lunch (before 1 PM) means shorter waits and happier kids. Pick something that looks good to you — you can't go wrong.</p>
+      </div>
+    </div>
+
+    <div class="transport">
+      <div class="transport-time"></div>
+      <div class="transport-body">🚃 Train/bus to Arashiyama (west Kyoto, ~30 min from Higashiyama). Bus is more scenic, train is faster.</div>
+    </transport>
+
+    <div class="divider"></div>
+
+    <div class="stop">
+      <div class="stop-time">14:30</div>
+      <div class="stop-body">
+        <h3>Arashiyama Bamboo Grove — The Fairy Tale Forest</h3>
+        <div class="subtitle">Ukyo · Free · Open all day</div>
+        <img class="stop-img" src="https://images.pexels.com/photos/19693266/pexels-photo-19693266.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Arashiyama Bamboo Grove">
+        <p>This is the forest from the Big Bird movie — the magical bamboo grove from the Tale of the Bamboo Cutter / Kaguya-hime (the Japanese Princess story). The bamboo towers above you, the light filters through in shafts, and the air feels different. It's genuinely enchanting.</p>
+        <p>The path through is easy and flat — perfect for all ages. Walk slowly, let the kids lead you, sit on a bench if the moment feels right. This is the heart of your trip.</p>
+        <div class="kid-note">🧒 <strong>Kids experience:</strong> Even the youngest will understand they're in something magical. The bamboo is alive and creaking, the light is beautiful, and it feels like stepping into a story. The older kids (6 and 7) will be absolutely enchanted.</div>
+        <a href="https://maps.google.com/?q=Arashiyama+Bamboo+Grove+Kyoto" target="_blank" class="map-link">Open in Maps</a>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="stop">
+      <div class="stop-time">15:30</div>
+      <div class="stop-body">
+        <h3>Togetsukyo Bridge & Arashiyama Main Street</h3>
+        <div class="subtitle">Free · Walking area</div>
+        <img class="stop-img" src="https://images.pexels.com/photos/3560044/pexels-photo-3560044.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Togetsukyo Bridge">
+        <p>Leave the bamboo grove and walk to the iconic Togetsukyo Bridge — wide, dramatic, and instantly recognizable. The main street around the bridge is lined with souvenir shops, restaurants, and food stalls. Grab a snack, let the kids browse the shop windows, enjoy the energy of a famous spot without any rushing.</p>
+        <p>If energy permits, Tenryu-ji Temple is nearby (¥500 admission) with a beautiful garden — but it's optional. The bridge and the street alone are plenty for one afternoon.</p>
+      </div>
+    </div>
+
+    <div class="transport">
+      <div class="transport-time"></div>
+      <div class="transport-body">🚃 Train/walk to hotel area (Shijo). ~30 min depending on your route. Take it easy — everyone's had a full day.</div>
+    </transport>
+
+    <div class="divider"></div>
+
+    <div class="stop">
+      <div class="stop-time">17:00</div>
+      <div class="stop-body">
+        <h3>Check In to Richmond Hotel Premier Kyoto Shijo</h3>
+        <div class="subtitle">Shijo-dori · Central Kyoto</div>
+        <p>Drop your bags, get settled, and take a breath. You made it through the full Big Bird tour. The kids are tired, you're probably tired too, and a good rest is coming. The hotel lounge (free drinks and snacks until 9 PM) is perfect if anyone needs a quiet decompression moment.</p>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="stop">
+      <div class="stop-time">18:30</div>
+      <div class="stop-body">
+        <h3>Dinner Walk — Pontocho or Gion</h3>
+        <div class="subtitle">Shijo area · Walking distance from hotel</div>
+        <p>You're right in the centre of Kyoto's best neighbourhoods. Pontocho is a narrow pedestrian alley along the river, lantern-lit and atmospheric — restaurants ranging from casual to fancy, all with views of the water. Gion (the geisha district) is nearby and beautiful at night. Choose whatever feels right for your group's energy level.</p>
+        <p>December illuminations may still be happening at some temples if you want to extend the evening, but a good dinner and an early night is also perfectly wise.</p>
+        <p class="tip">Tip: The kids have had an extraordinary day. A nice dinner and bed is the right call. You've already given them the memory of a lifetime.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" style="padding-top:0">
+    <div class="hotel-note">
+      <h3>🏨 Your Hotel — Richmond Hotel Premier Kyoto Shijo</h3>
+      <p><strong>Location:</strong> Shijo-dori, central Kyoto. Walking distance to Nishiki Market and Gion. Near Shijo subway station.</p>
+      <p><strong>Breakfast:</strong> Included. Japanese and Western buffet — fuel up in the morning before heading out.</p>
+      <p><strong>Lounge:</strong> Free drinks and snacks 1–9 PM. A perfect way to decompress after a day of exploring.</p>
+      <p><strong>Supermarket:</strong> LIFE supermarket in the basement for any snacks or essentials you need.</p>
+      <p><strong>Laundry:</strong> Coin laundry available if needed.</p>
+    </div>
+  </div>
+
+  <div class="footer">
+    Japan 2026 — Sandy & Dave's Trip · <a href="sandy.html" style="color:var(--warm)">Sandy's Page</a> · <a href="schedule.html" style="color:var(--warm)">Full Schedule</a>
+  </div>
+
+</div>
+<script>function checkGate(){var p=document.getElementById('gate-pw').value.toLowerCase().trim();if(p==='sanche'){document.getElementById('gate-overlay').style.display='none';document.getElementById('content').style.display='block';sessionStorage.setItem('jp26','1')}else{document.getElementById('gate-err').textContent='Try again'}}if(sessionStorage.getItem('jp26')==='1'){document.getElementById('gate-overlay').style.display='none';document.getElementById('content').style.display='block'}</script>
+</body>
+</html>

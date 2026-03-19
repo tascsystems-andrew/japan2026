@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sandy & Dave Farewell Day — Japan 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#1a1a1a;--cream:#faf8f4;--warm:#d4a574;--sage:#8b9e7e;--slate:#4a5568;--red:#c0392b;--gold:#b8860b}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Outfit',sans-serif;color:var(--ink);background:var(--cream);line-height:1.6}
+#gate-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:#1a1a1a;z-index:9999;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:16px;font-family:'Outfit',sans-serif}
+#gate-overlay h2{font-family:'Cormorant Garamond',serif;font-size:36px;color:white}
+#gate-overlay p{color:rgba(255,255,255,.5);font-size:14px;font-weight:300}
+#gate-overlay input{background:transparent;border:1px solid rgba(255,255,255,.3);color:white;padding:14px 24px;font-size:15px;text-align:center;font-family:'Outfit',sans-serif;outline:none;width:260px;letter-spacing:1px}
+#gate-overlay input::placeholder{color:rgba(255,255,255,.3)}
+#gate-overlay input:focus{border-color:rgba(255,255,255,.6)}
+#gate-overlay button{padding:12px 32px;background:transparent;border:1px solid rgba(255,255,255,.25);color:white;font-size:13px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;font-family:'Outfit',sans-serif;transition:all .3s}
+#gate-overlay button:hover{background:rgba(255,255,255,.1)}
+.gate-error{color:#c0392b;font-size:13px;font-weight:300;min-height:20px}
+.hero{position:relative;height:60vh;min-height:400px;background:linear-gradient(135deg,rgba(0,0,0,.35)0%,rgba(0,0,0,.1)50%,rgba(0,0,0,.45)100%),url('https://images.pexels.com/photos/208730/pexels-photo-208730.jpeg?auto=compress&cs=tinysrgb&w=1600') center/cover;display:flex;align-items:flex-end;padding:60px}
+.hero-content{max-width:700px}
+.hero-tag{font-family:'Outfit';font-weight:300;font-size:13px;letter-spacing:4px;text-transform:uppercase;color:var(--warm);margin-bottom:12px}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:56px;font-weight:700;color:white;line-height:1.05;margin-bottom:12px}
+.hero p{font-family:'Outfit';font-weight:300;font-size:16px;color:rgba(255,255,255,.85);max-width:500px}
+.hero-date{display:inline-block;margin-top:20px;padding:8px 20px;border:1px solid rgba(255,255,255,.4);font-size:12px;letter-spacing:2px;text-transform:uppercase;color:white}
+.section{max-width:900px;margin:0 auto;padding:60px 40px}
+.section-label{font-weight:300;font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--warm);margin-bottom:10px}
+.section h2{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:600;margin-bottom:20px;line-height:1.15}
+.section p{font-size:15px;color:var(--slate);max-width:700px;margin-bottom:14px;font-weight:300}
+.intro-note{background:white;border-left:3px solid var(--warm);padding:20px 24px;border-radius:0 6px 6px 0;margin:24px 0;font-size:14px;color:var(--slate);font-weight:300;line-height:1.6}
+.intro-note strong{font-weight:500;color:var(--ink)}
+.day-header{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:600;margin:40px 0 8px;padding-top:20px;border-top:2px solid #e0d8ce}
+.day-sub{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--warm);font-weight:500;margin-bottom:20px}
+.stop{display:grid;grid-template-columns:80px 1fr;gap:0}
+.stop-time{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:600;color:var(--warm);padding:32px 0;text-align:right;padding-right:24px;border-right:2px solid #e0d8ce}
+.stop-body{padding:24px 0 24px 24px}
+.stop-body h3{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;margin-bottom:6px}
+.stop-body .subtitle{font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--sage);font-weight:500;margin-bottom:10px}
+.stop-body p{font-size:14px;color:var(--slate);font-weight:300;line-height:1.6;margin-bottom:8px}
+.stop-body .tip{font-size:13px;color:var(--gold);font-style:italic;margin-top:6px}
+.stop-body .kid-note{font-size:13px;color:var(--sage);margin-top:6px;padding:8px 12px;background:rgba(139,158,126,.08);border-radius:4px}
+.stop-img{width:100%;height:220px;object-fit:cover;border-radius:6px;margin-bottom:14px}
+.divider{height:1px;background:#e0d8ce;margin:0 0 0 104px}
+.transport{display:grid;grid-template-columns:80px 1fr;gap:0}
+.transport-time{padding:12px 0;text-align:right;padding-right:24px;border-right:2px dashed #e0d8ce}
+.transport-body{padding:12px 0 12px 24px;font-size:13px;color:var(--sage);font-weight:300;font-style:italic}
+.map-link{display:inline-block;margin-top:8px;padding:6px 14px;border:1px solid var(--warm);border-radius:4px;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--warm);text-decoration:none;font-weight:500;transition:all .3s}
+.map-link:hover{background:var(--warm);color:white}
+.nav-links{display:flex;gap:16px;margin-bottom:20px;flex-wrap:wrap}
+.nav-links a{font-size:13px;color:var(--warm);text-decoration:none;letter-spacing:1px;text-transform:uppercase;font-weight:400}
+.nav-links a:hover{text-decoration:underline}
+.nav-links .current{color:var(--ink);font-weight:500}
+.options-box{background:white;border-left:3px solid var(--sage);padding:20px 24px;border-radius:0 6px 6px 0;margin:24px 0;font-size:14px;color:var(--slate);font-weight:300;line-height:1.6}
+.options-box h4{font-family:'Cormorant Garamond',serif;font-weight:600;color:var(--ink);margin-bottom:12px;font-size:16px}
+.options-box ul{margin-left:20px;margin-bottom:8px}
+.options-box li{margin-bottom:8px}
+.footer{text-align:center;padding:40px;font-size:12px;color:var(--slate);font-weight:300;letter-spacing:1px}
+@media(max-width:768px){.hero h1{font-size:36px}.hero{padding:30px;height:50vh}.section{padding:40px 20px}.stop{grid-template-columns:60px 1fr}.divider{margin-left:84px}.transport{grid-template-columns:60px 1fr}}
+</style>
+</head>
+<body>
+<div id="gate-overlay"><h2>Japan 2026</h2><p>Enter password to continue</p><input type="password" id="gate-pw" placeholder="Password" onkeydown="if(event.key==='Enter')checkGate()"><button onclick="checkGate()">Enter</button><div class="gate-error" id="gate-err"></div></div>
+<div id="content" style="display:none">
+
+  <div class="hero">
+    <div class="hero-content">
+      <div class="hero-tag">Sandy & Dave · Final Day</div>
+      <h1>Last Day in Osaka</h1>
+      <p>One final day with the grandkids before you head home. Keep it loose, keep it joyful, and make it memorable. These are the moments you came for.</p>
+      <div class="hero-date">Monday, December 14, 2026</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="nav-links">
+      <a href="sandy.html">← Sandy's Page</a>
+      <span class="current">Farewell Day</span>
+    </div>
+    <div class="section-label">1 Day · Flex Day</div>
+    <h2>Your Last Morning</h2>
+    <p>You've done Kyoto. You've hiked through bamboo forests and seen 1,001 golden statues. Today is about whatever feels right. Maybe you explore another side of Osaka. Maybe you stay close to home with the grandkids. The day is yours to shape based on energy levels, interest, and what feels most important to you right now — being together.</p>
+
+    <div class="intro-note">
+      <strong>The mindset:</strong> This isn't about checking off the last major sight. It's about being present. Your grandkids are here. You're here. That's the whole trip, right there.
+    </div>
+  </div>
+
+  <!-- DAY -->
+  <div class="section" style="padding-top:0">
+    <div class="day-header">Monday, December 14</div>
+    <div class="day-sub">Choose Your Own Adventure</div>
+
+    <div class="stop">
+      <div class="stop-time">Morning</div>
+      <div class="stop-body">
+        <h3>Slow Start — Breakfast with the Family</h3>
+        <div class="subtitle">At the Airbnb or nearby</div>
+        <p>No rush. Eat together, let the kids stay in pajamas a little longer, enjoy coffee without an agenda. If the older kids have school or activities, support that. If it's a relaxed morning, let it be relaxed. You don't need to be anywhere yet.</p>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="stop">
+      <div class="stop-time">Morning/Afternoon</div>
+      <div class="stop-body">
+        <h3>Choose Your Adventure</h3>
+        <div class="subtitle">Pick one or mix and match</div>
+
+        <div class="options-box">
+          <h4>Option 1 — Osaka Castle</h4>
+          <p>If you missed it on arrival day or want to go inside the castle museum (¥600), today's your chance. The castle is beautiful in December, the park is peaceful, and the views are excellent. It's accessible from Nishikujo and worth the trip if you're interested in Osaka history.</p>
+          <a href="https://maps.google.com/?q=Osaka+Castle+Osakajo-Koen" target="_blank" class="map-link">Open in Maps</a>
+        </div>
+
+        <div class="options-box">
+          <h4>Option 2 — Kuromon Market</h4>
+          <p>Osaka's answer to Nishiki Market — fresh seafood, street food, produce stalls, and the energy of a working market. The tuna is famous here. It's a different vibe than Kyoto (busier, more local, less tourist-focused), and the food is excellent. Great for grabbing lunch and snacks.</p>
+          <a href="https://maps.google.com/?q=Kuromon+Market+Osaka" target="_blank" class="map-link">Open in Maps</a>
+        </div>
+
+        <div class="options-box">
+          <h4>Option 3 — Sumiyoshi Taisha</h4>
+          <p>One of Japan's oldest and most beautiful shrines, with a distinctive arched bridge and peaceful gardens. It's quiet, atmospheric, and genuinely beautiful. Free entry. It feels like stepping out of modern Osaka and into something timeless.</p>
+          <a href="https://maps.google.com/?q=Sumiyoshi+Taisha+Osaka" target="_blank" class="map-link">Open in Maps</a>
+        </div>
+
+        <div class="options-box">
+          <h4>Option 4 — Umeda Area</h4>
+          <p>The modern heart of Osaka. Grand Front Osaka (shopping, restaurants, a view from the top), HEP FIVE (a shopping centre with a Ferris wheel on the roof — tiny but fun), and underground food streets with every kind of cuisine. Great for last-minute shopping and getting a taste of contemporary Osaka energy.</p>
+          <a href="https://maps.google.com/?q=Umeda+Osaka" target="_blank" class="map-link">Open in Maps</a>
+        </div>
+
+        <div class="options-box">
+          <h4>Option 5 — Stay Local</h4>
+          <p>Skip the tourist sites. Spend the afternoon at the Airbnb with the grandkids — games, colouring, making memories in the quiet moments. Walk around Nishikujo, find a local café, just be present. These moments matter as much as temples and markets.</p>
+        </div>
+
+        <p class="tip">Tip: Pick one thing, or do a couple of small things. Don't try to do everything. You want to finish the day relaxed, not exhausted.</p>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="stop">
+      <div class="stop-time">Evening</div>
+      <div class="stop-body">
+        <h3>Farewell Dinner</h3>
+        <div class="subtitle">Make it special</div>
+        <p>This is your last meal together. Think about what feels right — a nice izakaya with a private room, yakiniku (Japanese BBQ where everyone cooks together), your son's choice of somewhere meaningful, or something casual and fun. The meal is secondary to the company.</p>
+        <p>Make a toast if it feels right. Tell the grandkids you love them. Let them know you'll be back. Let them tell you what was their favourite part of the trip. Eat slowly. Enjoy it.</p>
+        <div class="kid-note">🧒 <strong>Make it memorable:</strong> The kids will remember this meal. Not necessarily the food, but the feeling of being celebrated and loved. That's what they'll carry with them.</div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="stop">
+      <div class="stop-time">Late Evening</div>
+      <div class="stop-body">
+        <h3>Pack Up, Early Night</h3>
+        <div class="subtitle">Tomorrow comes early</div>
+        <p>You leave tomorrow. Get your bags organized tonight so morning isn't chaotic. Bedtime will come early, and that's fine. You've had an extraordinary week. Rest well.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" style="padding-top:0">
+    <div class="options-box">
+      <h4>A Thought Before You Go</h4>
+      <p>You came 10,000 kilometers to spend five days with your grandkids. You watched them discover bamboo forests and golden temples. You walked with them through markets and neighbourhoods. You slowed down and were present. That's not a trip — that's love made visible.</p>
+      <p>The photos and the souvenirs are nice, but the real gift is the time. The grandkids will remember that their grandma and grandpa showed up. That matters more than any sight or any accomplishment.</p>
+      <p>Safe travels home. Come back soon.</p>
+    </div>
+  </div>
+
+  <div class="footer">
+    Japan 2026 — Sandy & Dave's Trip · <a href="sandy.html" style="color:var(--warm)">Sandy's Page</a> · <a href="schedule.html" style="color:var(--warm)">Full Schedule</a>
+  </div>
+
+</div>
+<script>function checkGate(){var p=document.getElementById('gate-pw').value.toLowerCase().trim();if(p==='sanche'){document.getElementById('gate-overlay').style.display='none';document.getElementById('content').style.display='block';sessionStorage.setItem('jp26','1')}else{document.getElementById('gate-err').textContent='Try again'}}if(sessionStorage.getItem('jp26')==='1'){document.getElementById('gate-overlay').style.display='none';document.getElementById('content').style.display='block'}</script>
+</body>
+</html>

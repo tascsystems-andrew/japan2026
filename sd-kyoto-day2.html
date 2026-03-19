@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sandy & Dave Kyoto Day 2 — Japan 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#1a1a1a;--cream:#faf8f4;--warm:#d4a574;--sage:#8b9e7e;--slate:#4a5568;--red:#c0392b;--gold:#b8860b}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Outfit',sans-serif;color:var(--ink);background:var(--cream);line-height:1.6}
+#gate-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:#1a1a1a;z-index:9999;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:16px;font-family:'Outfit',sans-serif}
+#gate-overlay h2{font-family:'Cormorant Garamond',serif;font-size:36px;color:white}
+#gate-overlay p{color:rgba(255,255,255,.5);font-size:14px;font-weight:300}
+#gate-overlay input{background:transparent;border:1px solid rgba(255,255,255,.3);color:white;padding:14px 24px;font-size:15px;text-align:center;font-family:'Outfit',sans-serif;outline:none;width:260px;letter-spacing:1px}
+#gate-overlay input::placeholder{color:rgba(255,255,255,.3)}
+#gate-overlay input:focus{border-color:rgba(255,255,255,.6)}
+#gate-overlay button{padding:12px 32px;background:transparent;border:1px solid rgba(255,255,255,.25);color:white;font-size:13px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;font-family:'Outfit',sans-serif;transition:all .3s}
+#gate-overlay button:hover{background:rgba(255,255,255,.1)}
+.gate-error{color:#c0392b;font-size:13px;font-weight:300;min-height:20px}
+.hero{position:relative;height:60vh;min-height:400px;background:linear-gradient(135deg,rgba(0,0,0,.35)0%,rgba(0,0,0,.1)50%,rgba(0,0,0,.45)100%),url('https://images.pexels.com/photos/2913275/pexels-photo-2913275.jpeg?auto=compress&cs=tinysrgb&w=1600') center/cover;display:flex;align-items:flex-end;padding:60px}
+.hero-content{max-width:700px}
+.hero-tag{font-family:'Outfit';font-weight:300;font-size:13px;letter-spacing:4px;text-transform:uppercase;color:var(--warm);margin-bottom:12px}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:56px;font-weight:700;color:white;line-height:1.05;margin-bottom:12px}
+.hero p{font-family:'Outfit';font-weight:300;font-size:16px;color:rgba(255,255,255,.85);max-width:500px}
+.hero-date{display:inline-block;margin-top:20px;padding:8px 20px;border:1px solid rgba(255,255,255,.4);font-size:12px;letter-spacing:2px;text-transform:uppercase;color:white}
+.section{max-width:900px;margin:0 auto;padding:60px 40px}
+.section-label{font-weight:300;font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--warm);margin-bottom:10px}
+.section h2{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:600;margin-bottom:20px;line-height:1.15}
+.section p{font-size:15px;color:var(--slate);max-width:700px;margin-bottom:14px;font-weight:300}
+.intro-note{background:white;border-left:3px solid var(--warm);padding:20px 24px;border-radius:0 6px 6px 0;margin:24px 0;font-size:14px;color:var(--slate);font-weight:300;line-height:1.6}
+.intro-note strong{font-weight:500;color:var(--ink)}
+.day-header{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:600;margin:40px 0 8px;padding-top:20px;border-top:2px solid #e0d8ce}
+.day-sub{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--warm);font-weight:500;margin-bottom:20px}
+.stop{display:grid;grid-template-columns:80px 1fr;gap:0}
+.stop-time{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:600;color:var(--warm);padding:32px 0;text-align:right;padding-right:24px;border-right:2px solid #e0d8ce}
+.stop-body{padding:24px 0 24px 24px}
+.stop-body h3{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;margin-bottom:6px}
+.stop-body .subtitle{font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--sage);font-weight:500;margin-bottom:10px}
+.stop-body p{font-size:14px;color:var(--slate);font-weight:300;line-height:1.6;margin-bottom:8px}
+.stop-body .tip{font-size:13px;color:var(--gold);font-style:italic;margin-top:6px}
+.stop-body .kid-note{font-size:13px;color:var(--sage);margin-top:6px;padding:8px 12px;background:rgba(139,158,126,.08);border-radius:4px}
+.stop-img{width:100%;height:220px;object-fit:cover;border-radius:6px;margin-bottom:14px}
+.divider{height:1px;background:#e0d8ce;margin:0 0 0 104px}
+.transport{display:grid;grid-template-columns:80px 1fr;gap:0}
+.transport-time{padding:12px 0;text-align:right;padding-right:24px;border-right:2px dashed #e0d8ce}
+.transport-body{padding:12px 0 12px 24px;font-size:13px;color:var(--sage);font-weight:300;font-style:italic}
+.map-link{display:inline-block;margin-top:8px;padding:6px 14px;border:1px solid var(--warm);border-radius:4px;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--warm);text-decoration:none;font-weight:500;transition:all .3s}
+.map-link:hover{background:var(--warm);color:white}
+.nav-links{display:flex;gap:16px;margin-bottom:20px;flex-wrap:wrap}
+.nav-links a{font-size:13px;color:var(--warm);text-decoration:none;letter-spacing:1px;text-transform:uppercase;font-weight:400}
+.nav-links a:hover{text-decoration:underline}
+.nav-links .current{color:var(--ink);font-weight:500}
+.hotel-note{background:linear-gradient(135deg,#f5efe5,#eee5d5);border-radius:8px;padding:28px;margin:32px 0}
+.hotel-note h3{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;margin-bottom:12px}
+.hotel-note p{font-size:14px;color:var(--slate);font-weight:300;line-height:1.6;margin-bottom:8px}
+.footer{text-align:center;padding:40px;font-size:12px;color:var(--slate);font-weight:300;letter-spacing:1px}
+@media(max-width:768px){.hero h1{font-size:36px}.hero{padding:30px;height:50vh}.section{padding:40px 20px}.stop{grid-template-columns:60px 1fr}.divider{margin-left:84px}.transport{grid-template-columns:60px 1fr}}
+</style>
+</head>
+<body>
+<div id="gate-overlay"><h2>Japan 2026</h2><p>Enter password to continue</p><input type="password" id="gate-pw" placeholder="Password" onkeydown="if(event.key==='Enter')checkGate()"><button onclick="checkGate()">Enter</button><div class="gate-error" id="gate-err"></div></div>
+<div id="content" style="display:none">
+
+  <div class="hero">
+    <div class="hero-content">
+      <div class="hero-tag">Sandy & Dave · Kyoto to Osaka</div>
+      <h1>Morning in Kyoto, Home by Evening</h1>
+      <p>One last taste of Kyoto before heading home. Nishiki Market, a possible side trip to Fushimi Inari's famous gates, and the train ride back to reality — and your grandkids waiting in Osaka.</p>
+      <div class="hero-date">Sunday, December 13, 2026</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="nav-links">
+      <a href="sandy.html">← Sandy's Page</a>
+      <span class="current">Kyoto Day 2</span>
+    </div>
+    <div class="section-label">1 Day · Morning & Afternoon</div>
+    <h2>Last Morning in Kyoto</h2>
+    <p>You've had your Big Bird moment. Today is about soaking in one more piece of Kyoto before heading back to Osaka and your family. Nishiki Market is sensory magic for kids — pickles, mochi, grilled seafood, and matcha everything. If everyone has energy, Fushimi Inari's thousands of vermillion torii gates are worth a quick visit. Then it's back to Osaka for a relaxed evening.</p>
+
+    <div class="intro-note">
+      <strong>The day:</strong> Check out of your hotel this morning, do Nishiki Market, grab lunch near Kyoto Station, and head home on the train. The afternoon is yours to unwind with the grandkids.
+    </div>
+  </div>
+
+  <!-- DAY -->
+  <div class="section" style="padding-top:0">
+    <div class="day-header">Sunday, December 13</div>
+    <div class="day-sub">Morning Kyoto · Nishiki Market · Fushimi Inari Option · Train Home</div>
+
+    <div class="stop">
+      <div class="stop-time">8:00</div>
+      <div class="stop-body">
+        <h3>Breakfast at Richmond Hotel + Check Out</h3>
+        <div class="subtitle">Final morning at the hotel</div>
+        <p>One last excellent hotel breakfast. Fuel up well — you've got exploring to do and a train ride ahead. Check out is 11 AM. Pack your bags, leave them with the hotel if you want a few hours of wandering before heading to the station.</p>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="stop">
+      <div class="stop-time">9:00</div>
+      <div class="stop-body">
+        <h3>Nishiki Market — "Kyoto's Kitchen"</h3>
+        <div class="subtitle">Nakagyo · Free entry · ~10 min walk from hotel</div>
+        <img class="stop-img" src="https://images.pexels.com/photos/2913275/pexels-photo-2913275.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Nishiki Market">
+        <p>A five-block covered market packed with hundreds of stalls selling pickles, mochi, fresh seafood, grilled food on sticks, matcha sweets, and every kind of Japanese delicacy you can imagine. This is lunch, snack time, and pure sensory entertainment all in one. Walk slowly, let the kids taste things, grab omiyage (souvenirs) for people back home.</p>
+        <p>The market is relatively quiet on Sunday mornings before the tourist crush, so you'll get a genuine glimpse of how locals shop and eat.</p>
+        <div class="kid-note">🧒 <strong>Kids experience:</strong> The market is a treasure hunt. Each stall is a new discovery — colours, smells, little food samples. The octopus-on-a-stick, the colourful mochi, the mound of pickles. Even the youngest kids will be amazed.</div>
+        <p class="tip">Tip: Give each kid a small budget (¥500–1000) to pick their own snack. They'll feel like grown-up explorers, and you'll get photos of their genuine delight.</p>
+        <a href="https://maps.google.com/?q=Nishiki+Market+Kyoto" target="_blank" class="map-link">Open in Maps</a>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="stop">
+      <div class="stop-time">10:30</div>
+      <div class="stop-body">
+        <h3>Optional — Fushimi Inari Taisha (Quick Visit)</h3>
+        <div class="subtitle">Fushimi · Free · ~10 min train from Kyoto Station</div>
+        <img class="stop-img" src="https://images.pexels.com/photos/2091034/pexels-photo-2091034.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Fushimi Inari">
+        <p>If you didn't get here yesterday and the group still has energy, Fushimi Inari is worth a side trip. The thousands of vermillion torii gates winding up the mountainside are iconic and magical. You don't need to go to the top (2+ hours) — even 15–20 minutes walking up through the gate tunnels will give you the iconic photos and the sense of the place.</p>
+        <p>Train from Kyoto Station to Fushimi Inari is quick and easy. Come back to Kyoto Station after for lunch and the ride home.</p>
+        <div class="kid-note">🧒 <strong>Kids love:</strong> Running through the endless tunnel of orange gates feels like stepping into another world. It's magical and immediately impressive, even to little kids.</div>
+        <p class="tip">Tip: This is optional. If you're content with Nishiki Market and want to just grab lunch and head home, that's perfectly fine. You've already had an extraordinary trip.</p>
+        <a href="https://maps.google.com/?q=Fushimi+Inari+Taisha+Kyoto" target="_blank" class="map-link">Open in Maps</a>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="stop">
+      <div class="stop-time">11:30</div>
+      <div class="stop-body">
+        <h3>Lunch Near Kyoto Station</h3>
+        <div class="subtitle">Grab something good</div>
+        <p>You're near Kyoto Station anyway, heading for the train. There are hundreds of food options here — the massive underground food hall, ramen shops, bento restaurants, conveyor belt sushi, anything you want. Find a spot, sit down, eat well, and enjoy a moment of rest before the train ride home.</p>
+      </div>
+    </div>
+
+    <div class="transport">
+      <div class="transport-time"></div>
+      <div class="transport-body">🚃 JR Special Rapid from Kyoto → Osaka (~30 min). Settle in, maybe let the kids rest or play a quiet game. You're heading home.</div>
+    </transport>
+
+    <div class="divider"></div>
+
+    <div class="stop">
+      <div class="stop-time">14:00</div>
+      <div class="stop-body">
+        <h3>Arrive Back in Osaka</h3>
+        <div class="subtitle">Return to the Airbnb</div>
+        <p>You're back. The Kyoto chapter is closed. Get to the Airbnb, drop your bags, and settle back into family time. The grandkids have been waiting — dinner together, stories about Kyoto, showing them what you brought back from Nishiki Market. This is home base.</p>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="stop">
+      <div class="stop-time">Evening</div>
+      <div class="stop-body">
+        <h3>Relaxed Evening at the Airbnb</h3>
+        <div class="subtitle">Family time</div>
+        <p>You've earned a quiet night. Maybe a walk around the neighbourhood if everyone has energy. Maybe dinner at home or a local restaurant. Mostly, just be present with your family. The big adventure is done. Now it's about being together.</p>
+        <div class="kid-note">🧒 <strong>Grandkid perspective:</strong> They've had you to themselves for a day — tell them about the bamboo forest, the golden statues, the market. They want to know what you saw and felt. Share the stories.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" style="padding-top:0">
+    <div class="hotel-note">
+      <h3>🏨 Check Out — Richmond Hotel Premier Kyoto Shijo</h3>
+      <p><strong>Check-out time:</strong> 11 AM. If you want to explore a bit longer, you can usually leave luggage with the hotel and pick it up before heading to the station.</p>
+      <p><strong>On your way home:</strong> Collect any luggage you've left behind, grab any last snacks or supplies from the LIFE supermarket downstairs, and head to Kyoto Station for your train home.</p>
+    </div>
+  </div>
+
+  <div class="footer">
+    Japan 2026 — Sandy & Dave's Trip · <a href="sandy.html" style="color:var(--warm)">Sandy's Page</a> · <a href="schedule.html" style="color:var(--warm)">Full Schedule</a>
+  </div>
+
+</div>
+<script>function checkGate(){var p=document.getElementById('gate-pw').value.toLowerCase().trim();if(p==='sanche'){document.getElementById('gate-overlay').style.display='none';document.getElementById('content').style.display='block';sessionStorage.setItem('jp26','1')}else{document.getElementById('gate-err').textContent='Try again'}}if(sessionStorage.getItem('jp26')==='1'){document.getElementById('gate-overlay').style.display='none';document.getElementById('content').style.display='block'}</script>
+</body>
+</html>
