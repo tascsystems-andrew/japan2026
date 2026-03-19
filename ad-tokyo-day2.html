@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temples, Art & East Tokyo | Adrienne's Tokyo Trip</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ink: #1a1a1a;
+            --cream: #faf8f4;
+            --warm: #d4a574;
+            --sage: #8b9e7e;
+            --slate: #4a5568;
+            --red: #c0392b;
+            --gold: #b8860b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            color: var(--ink);
+            background-color: var(--cream);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        a {
+            color: var(--warm);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Password Gate */
+        #gate-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--cream);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+
+        #gate-overlay.hidden {
+            display: none;
+        }
+
+        .gate-container {
+            text-align: center;
+            padding: 2rem;
+            max-width: 400px;
+        }
+
+        .gate-container h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--ink);
+        }
+
+        .gate-container p {
+            margin-bottom: 1.5rem;
+            color: var(--slate);
+        }
+
+        #gate-pw {
+            width: 100%;
+            padding: 0.75rem;
+            font-family: 'Outfit', sans-serif;
+            border: 2px solid var(--warm);
+            border-radius: 4px;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .gate-btn {
+            background-color: var(--warm);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .gate-btn:hover {
+            opacity: 0.9;
+        }
+
+        /* Navigation */
+        nav {
+            background-color: var(--ink);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav a {
+            color: var(--cream);
+        }
+
+        nav a:hover {
+            color: var(--warm);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 60vh;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('https://live.staticflickr.com/65535/49181839993_779e678d80_b.jpg');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 3rem 2rem;
+            color: white;
+        }
+
+        .hero-tag {
+            font-size: 0.9rem;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            opacity: 0.9;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            line-height: 1.1;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            font-weight: 300;
+            max-width: 600px;
+        }
+
+        .hero-date {
+            font-size: 1rem;
+            margin-top: 1rem;
+            opacity: 0.95;
+        }
+
+        /* Content Wrapper */
+        .content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Timeline */
+        .timeline {
+            margin: 2rem 0;
+        }
+
+        .stop {
+            display: grid;
+            grid-template-columns: 80px 1fr;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .stop-time {
+            font-weight: 600;
+            color: var(--warm);
+            font-size: 0.95rem;
+            padding-top: 0.25rem;
+        }
+
+        .stop-body {
+            border-right: 2px solid #e0d8ce;
+            padding-right: 1.5rem;
+            padding-bottom: 2rem;
+        }
+
+        .stop-body h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.3rem;
+            color: var(--ink);
+        }
+
+        .stop-body .subtitle {
+            font-size: 0.95rem;
+            color: var(--slate);
+            font-style: italic;
+            margin-bottom: 1rem;
+        }
+
+        .stop-body p {
+            margin-bottom: 1rem;
+            color: var(--ink);
+        }
+
+        .stop-image {
+            width: 100%;
+            max-width: 600px;
+            height: auto;
+            border-radius: 4px;
+            margin: 1rem 0;
+        }
+
+        .tip {
+            font-size: 13px;
+            color: var(--gold);
+            font-style: italic;
+            margin-top: 6px;
+        }
+
+        .solo-tip {
+            font-size: 13px;
+            color: var(--gold);
+            font-style: italic;
+            margin-top: 6px;
+        }
+
+        .map-link {
+            display: inline-block;
+            margin-top: 0.5rem;
+            padding: 0.5rem 1rem;
+            background-color: #f5ede3;
+            border-radius: 3px;
+            font-size: 0.9rem;
+        }
+
+        /* Transport Section */
+        .transport {
+            display: grid;
+            grid-template-columns: 80px 1fr;
+            gap: 1.5rem;
+            margin: 0;
+            position: relative;
+        }
+
+        .transport-time {
+            font-size: 0.85rem;
+            color: var(--slate);
+            padding-top: 0.25rem;
+        }
+
+        .transport-body {
+            border-right: 2px dashed #e0d8ce;
+            padding-right: 1.5rem;
+            padding-bottom: 2rem;
+            font-size: 0.95rem;
+            color: var(--slate);
+        }
+
+        /* Divider */
+        .divider {
+            height: 1px;
+            background: #e0d8ce;
+            margin: 0 0 0 104px;
+            margin-bottom: 2rem;
+        }
+
+        /* Options */
+        .options {
+            background-color: #faf8f4;
+            padding: 1.5rem;
+            border-radius: 4px;
+            margin: 1.5rem 0;
+            border-left: 4px solid var(--sage);
+        }
+
+        .options h4 {
+            color: var(--sage);
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+
+        .option {
+            margin-bottom: 1.5rem;
+        }
+
+        .option:last-child {
+            margin-bottom: 0;
+        }
+
+        .option h5 {
+            font-size: 1rem;
+            color: var(--ink);
+            margin-bottom: 0.5rem;
+        }
+
+        .option p {
+            font-size: 0.95rem;
+            color: var(--slate);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--ink);
+            color: var(--cream);
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        footer a {
+            color: var(--warm);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+
+            .stop {
+                grid-template-columns: 60px 1fr;
+                gap: 1rem;
+            }
+
+            .stop-body {
+                padding-right: 1rem;
+            }
+
+            .transport {
+                grid-template-columns: 60px 1fr;
+                gap: 1rem;
+            }
+
+            .transport-body {
+                padding-right: 1rem;
+            }
+
+            .divider {
+                margin-left: 80px;
+            }
+
+            .content {
+                padding: 1rem;
+            }
+
+            nav {
+                padding: 0.75rem 1rem;
+            }
+
+            nav a {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Password Gate -->
+    <div id="gate-overlay">
+        <div class="gate-container">
+            <h2>Tokyo Trip Guide</h2>
+            <p>Enter the access code to view your personalized itinerary.</p>
+            <input type="password" id="gate-pw" placeholder="Access code" />
+            <button class="gate-btn" onclick="checkGate()">Unlock</button>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <nav>
+        <a href="adrienne.html">← Back to Schedule</a>
+    </nav>
+
+    <div class="hero">
+        <div class="hero-tag">Day 3 · The Culture Day</div>
+        <h1>Temples, Art & East Tokyo</h1>
+        <p class="hero-subtitle">Ancient temples, immersive digital art, and the spiritual side of Tokyo. A day for stepping outside time.</p>
+        <div class="hero-date">Tuesday, November 17, 2026</div>
+    </div>
+
+    <div class="content">
+        <div class="timeline">
+            <!-- Stop 1: Senso-ji Temple -->
+            <div class="stop">
+                <div class="stop-time">7:30</div>
+                <div class="stop-body">
+                    <h3>Senso-ji Temple, Asakusa</h3>
+                    <p class="subtitle">Go early. Before 9am, the temple is nearly empty.</p>
+                    <p>Set an alarm. Go early. Before 9am, Senso-ji Temple is a sanctuary without the crowds. Approach through Kaminarimon (Thunder Gate) — the massive red lantern marks the entrance. Walk Nakamise shopping street where vendors sell temple snacks, fans, and crafts.</p>
+                    <p>The temple itself is free. Wander through the main hall, visit the five-story pagoda, watch locals burn incense and pray. The light at dawn is incredible. This is Tokyo's oldest temple, and at this hour it feels sacred and timeless.</p>
+                    <img src="https://images.pexels.com/photos/31021358/pexels-photo-31021358.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Senso-ji Temple" class="stop-image">
+                    <p class="tip">Tip: Buy a coin-operated fortune (omikuji) and tie it to the designated area if you get a bad one. Tradition says it'll improve your luck.</p>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- Stop 2: Nakamise & Asakusa -->
+            <div class="stop">
+                <div class="stop-time">9:30</div>
+                <div class="stop-body">
+                    <h3>Nakamise & Asakusa Side Streets</h3>
+                    <p class="subtitle">Market stalls, hidden shops, morning energy</p>
+                    <p>After the temple, wander the market stalls on Nakamise. Ningyo-yaki (sweet cakes shaped like dolls), fans, chopsticks, crackers, traditional crafts. Then slip into the side streets off Nakamise — this is where the good stuff hides.</p>
+                    <p>Tiny coffee shops serving excellent coffee in vintage surroundings. Traditional craft stores. Rice cracker shops. Antique bookstalls. Old Tokyo is here, in these narrow alleyways. Walk slowly. This is the neighbourhood's real personality.</p>
+                    <p class="tip">Tip: Get a coffee and a pastry from one of the side-street cafés and eat it while you walk. It's a perfect morning.</p>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- Stop 3: Optional Skytree -->
+            <div class="stop">
+                <div class="stop-time">11:00</div>
+                <div class="stop-body">
+                    <h3>Tokyo Skytree (Optional)</h3>
+                    <p class="subtitle">634m up, or walk below?</p>
+                    <p><strong>Option A:</strong> Tokyo Skytree (¥2,100–3,400) is the world's tallest tower. On a clear November day you can see Mt. Fuji. It's touristy but undeniably impressive.</p>
+                    <p><strong>Option B:</strong> Walk along the Sumida River instead. The views of Skytree from below are just as good for photos, and it's free. The river path is peaceful and connects to other neighbourhoods.</p>
+                    <p>Your choice entirely. Both are good.</p>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- Stop 4: Lunch -->
+            <div class="stop">
+                <div class="stop-time">12:00</div>
+                <div class="stop-body">
+                    <h3>Lunch in Asakusa</h3>
+                    <p class="subtitle">Tempura — the local specialty</p>
+                    <p>Asakusa has been famous for tempura for centuries. Find a tempura restaurant and order the set meal — shrimp, vegetables, white fish, all lightly fried and dipped in sauce. It's simple, perfect, and exactly what Asakusa is known for.</p>
+                    <p>Or grab street food and keep moving. Takoyaki (octopus balls), okonomiyaki (savoury pancakes), yakitori (grilled skewers) — all available on the main streets.</p>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- Transport to teamLab -->
+            <div class="transport">
+                <div class="transport-time">14:00</div>
+                <div class="transport-body">
+                    <p>Train to Azabudai Hills (~30 min via Ginza Line to Roppongi, then a short walk).</p>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- Stop 5: teamLab Borderless -->
+            <div class="stop">
+                <div class="stop-time">14:00</div>
+                <div class="stop-body">
+                    <h3>teamLab Borderless at Azabudai Hills</h3>
+                    <p class="subtitle">Immersive digital art that moves around you</p>
+                    <p>Their newest permanent museum — and it's extraordinary. teamLab Borderless is an immersive art experience where digital projections respond to you, move around you, blur the boundary between you and the artwork. Flowers bloom when you touch them. Waterfalls react to your presence. It feels like stepping into another dimension.</p>
+                    <img src="https://cdn.concreteplayground.com/content/uploads/2023/08/teamLab_Universe-of-Water-Particles_Transcending-Boundaries_supplied.jpg" alt="teamLab Borderless immersive art" class="stop-image">
+                    <p>Book tickets ahead (¥3,800). Allow 2-3 hours. Wear comfortable shoes and dark clothing (the art reflects better on dark colours). Find a room that speaks to you and sit down. Let the art wash over you. Lose track of time. That's the whole point.</p>
+                    <p class="tip">Tip: The Chrysalis room and the Universe of Water Particles are not to be missed. Both are transcendent.</p>
+                    <p class="solo-tip">Solo tip: teamLab is best experienced slowly. Don't rush. Solo travelers have the advantage — you can sit for 20 minutes in one room if you want. Do it.</p>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- Stop 6: Dinner -->
+            <div class="stop">
+                <div class="stop-time">18:00</div>
+                <div class="stop-body">
+                    <h3>Dinner Options</h3>
+                    <p class="subtitle">Roppongi or back to Shinjuku?</p>
+                    <p><strong>Option A — Roppongi:</strong> You're already nearby. It's upscale, international, and lively. Excellent restaurants and bars, though pricier than Shinjuku. Good if you want something special.</p>
+                    <p><strong>Option B — Head Back to Shinjuku:</strong> If you're feeling social, find a standing bar (tachinomi). Cheap drinks, easy to chat with locals and other travellers. Standing bars are designed for conversation and spontaneity.</p>
+                    <p>Either direction, you'll eat well and have a great evening.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Adrienne's Tokyo Trip</p>
+        <p><a href="adrienne.html">Back to Schedule</a></p>
+    </footer>
+
+    <script>
+        function checkGate() {
+            const pw = document.getElementById('gate-pw').value;
+            if (pw === 'sanche') {
+                sessionStorage.setItem('jp26', '1');
+                document.getElementById('gate-overlay').classList.add('hidden');
+            } else {
+                alert('Incorrect code. Try again.');
+            }
+        }
+
+        // Auto-check on load
+        window.addEventListener('load', function() {
+            if (sessionStorage.getItem('jp26') === '1') {
+                document.getElementById('gate-overlay').classList.add('hidden');
+            }
+        });
+
+        // Allow Enter key to unlock
+        document.getElementById('gate-pw').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                checkGate();
+            }
+        });
+    </script>
+</body>
+</html>

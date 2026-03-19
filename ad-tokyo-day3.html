@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Last Day, Your Way | Adrienne's Tokyo Trip</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ink: #1a1a1a;
+            --cream: #faf8f4;
+            --warm: #d4a574;
+            --sage: #8b9e7e;
+            --slate: #4a5568;
+            --red: #c0392b;
+            --gold: #b8860b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            color: var(--ink);
+            background-color: var(--cream);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        a {
+            color: var(--warm);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Password Gate */
+        #gate-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--cream);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+
+        #gate-overlay.hidden {
+            display: none;
+        }
+
+        .gate-container {
+            text-align: center;
+            padding: 2rem;
+            max-width: 400px;
+        }
+
+        .gate-container h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--ink);
+        }
+
+        .gate-container p {
+            margin-bottom: 1.5rem;
+            color: var(--slate);
+        }
+
+        #gate-pw {
+            width: 100%;
+            padding: 0.75rem;
+            font-family: 'Outfit', sans-serif;
+            border: 2px solid var(--warm);
+            border-radius: 4px;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .gate-btn {
+            background-color: var(--warm);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .gate-btn:hover {
+            opacity: 0.9;
+        }
+
+        /* Navigation */
+        nav {
+            background-color: var(--ink);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav a {
+            color: var(--cream);
+        }
+
+        nav a:hover {
+            color: var(--warm);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 60vh;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('https://japan-forward.com/wp-content/uploads/2022/10/shinjuku_gyoen.jpg');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 3rem 2rem;
+            color: white;
+        }
+
+        .hero-tag {
+            font-size: 0.9rem;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            opacity: 0.9;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            line-height: 1.1;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            font-weight: 300;
+            max-width: 600px;
+        }
+
+        .hero-date {
+            font-size: 1rem;
+            margin-top: 1rem;
+            opacity: 0.95;
+        }
+
+        /* Info Box */
+        .info-box {
+            background-color: #f5ede3;
+            border-left: 4px solid var(--warm);
+            padding: 1.5rem;
+            margin: 2rem auto;
+            max-width: 900px;
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        .info-box h4 {
+            color: var(--warm);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        /* Content Wrapper */
+        .content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Timeline */
+        .timeline {
+            margin: 2rem 0;
+        }
+
+        .stop {
+            display: grid;
+            grid-template-columns: 80px 1fr;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .stop-time {
+            font-weight: 600;
+            color: var(--warm);
+            font-size: 0.95rem;
+            padding-top: 0.25rem;
+        }
+
+        .stop-body {
+            border-right: 2px solid #e0d8ce;
+            padding-right: 1.5rem;
+            padding-bottom: 2rem;
+        }
+
+        .stop-body h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.3rem;
+            color: var(--ink);
+        }
+
+        .stop-body .subtitle {
+            font-size: 0.95rem;
+            color: var(--slate);
+            font-style: italic;
+            margin-bottom: 1rem;
+        }
+
+        .stop-body p {
+            margin-bottom: 1rem;
+            color: var(--ink);
+        }
+
+        .stop-image {
+            width: 100%;
+            max-width: 600px;
+            height: auto;
+            border-radius: 4px;
+            margin: 1rem 0;
+        }
+
+        .tip {
+            font-size: 13px;
+            color: var(--gold);
+            font-style: italic;
+            margin-top: 6px;
+        }
+
+        .solo-tip {
+            font-size: 13px;
+            color: var(--gold);
+            font-style: italic;
+            margin-top: 6px;
+        }
+
+        .map-link {
+            display: inline-block;
+            margin-top: 0.5rem;
+            padding: 0.5rem 1rem;
+            background-color: #f5ede3;
+            border-radius: 3px;
+            font-size: 0.9rem;
+        }
+
+        /* Options */
+        .options {
+            background-color: #faf8f4;
+            padding: 1.5rem;
+            border-radius: 4px;
+            margin: 1.5rem 0;
+            border-left: 4px solid var(--sage);
+        }
+
+        .options h4 {
+            color: var(--sage);
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+
+        .option {
+            margin-bottom: 1.5rem;
+        }
+
+        .option:last-child {
+            margin-bottom: 0;
+        }
+
+        .option h5 {
+            font-size: 1rem;
+            color: var(--ink);
+            margin-bottom: 0.5rem;
+        }
+
+        .option p {
+            font-size: 0.95rem;
+            color: var(--slate);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Divider */
+        .divider {
+            height: 1px;
+            background: #e0d8ce;
+            margin: 0 0 0 104px;
+            margin-bottom: 2rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--ink);
+            color: var(--cream);
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        footer a {
+            color: var(--warm);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+
+            .stop {
+                grid-template-columns: 60px 1fr;
+                gap: 1rem;
+            }
+
+            .stop-body {
+                padding-right: 1rem;
+            }
+
+            .divider {
+                margin-left: 80px;
+            }
+
+            .content {
+                padding: 1rem;
+            }
+
+            nav {
+                padding: 0.75rem 1rem;
+            }
+
+            nav a {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Password Gate -->
+    <div id="gate-overlay">
+        <div class="gate-container">
+            <h2>Tokyo Trip Guide</h2>
+            <p>Enter the access code to view your personalized itinerary.</p>
+            <input type="password" id="gate-pw" placeholder="Access code" />
+            <button class="gate-btn" onclick="checkGate()">Unlock</button>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <nav>
+        <a href="adrienne.html">← Back to Schedule</a>
+    </nav>
+
+    <div class="hero">
+        <div class="hero-tag">Day 4 · The Farewell Day</div>
+        <h1>Your Last Day, Your Way</h1>
+        <p class="hero-subtitle">Gardens, spas, shopping, and one last electric night. Tokyo, the way you want it.</p>
+        <div class="hero-date">Wednesday, November 18, 2026</div>
+    </div>
+
+    <div class="content">
+        <div class="timeline">
+            <!-- Stop 1: Shinjuku Gyoen -->
+            <div class="stop">
+                <div class="stop-time">9:00</div>
+                <div class="stop-body">
+                    <h3>Shinjuku Gyoen National Garden</h3>
+                    <p class="subtitle">Three gardens in one, stunning autumn colour</p>
+                    <p>Start your final day in a place of beauty. Shinjuku Gyoen (¥500) is one of Tokyo's most beautiful parks — and mid-November should be stunning with autumn colours. Japanese maple trees glow deep red. Ginkgo trees turn golden. The landscape is painted in fire.</p>
+                    <img src="https://www.erikastravelventures.com/wp-content/uploads/2019/06/IMG_0572-1024x768.jpg" alt="Shinjuku Gyoen autumn garden" class="stop-image">
+                    <p>The park has three distinct garden styles: Japanese traditional gardens, English landscape gardens, and French formal gardens. Walk all three. Sit by the pond. Watch the ducks. Breathe. You have one more day in Tokyo, and this is a perfect way to spend the morning — slowly, peacefully.</p>
+                    <p class="tip">Tip: Bring a coffee or tea from a convenience store and enjoy it on a bench. It's a simple pleasure that feels luxurious.</p>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- Stop 2: Optional Onsen -->
+            <div class="stop">
+                <div class="stop-time">11:00</div>
+                <div class="stop-body">
+                    <h3>Optional: Thermae-Yu Onsen Spa</h3>
+                    <p class="subtitle">Soak away three days of walking</p>
+                    <p><strong>Option A:</strong> Thermae-Yu (near Shinjuku station, ~¥2,600) is a multi-floor onsen complex with indoor and outdoor baths, saunas, and rest areas. Perfect after three days of walking Tokyo's streets. Solo-friendly — everyone's on their own in the communal baths. This is healing.</p>
+                    <p><strong>Option B:</strong> Spa LaQua in Tokyo Dome area if you want to combine a soak with exploring a new neighbourhood. Also excellent.</p>
+                    <p><strong>Option C:</strong> Skip the spa and do something else. Your choice, your day.</p>
+                    <p class="tip">Tip: Bring your own small towel and toiletries. Most onsen provide towels but your own makes it easier.</p>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- Stop 3: Last Shopping Run -->
+            <div class="stop">
+                <div class="stop-time">13:00</div>
+                <div class="stop-body">
+                    <h3>Last Shopping Run</h3>
+                    <p class="subtitle">Souvenirs, gifts, or just wandering</p>
+                    <p><strong>Option A — Isetan Department Store:</strong> The basement food hall (depachika) is incredible — high-end snacks, sweets, prepared foods. Perfect for buying omiyage (gifts) for Sam and the kids. Several locations, main one near Shinjuku.</p>
+                    <p><strong>Option B — Don Quijote:</strong> The chaotic mega-store with everything. Weird, fun, kitschy souvenirs, snacks, toys, gadgets. It's more fun than elegant, but it's pure Tokyo.</p>
+                    <p><strong>Option C — Takashimaya:</strong> High-end department store if you want something special and elegant.</p>
+                    <p><strong>Option D — Back to Harajuku or Shimokitazawa:</strong> Revisit your favourite neighbourhood. Buy something that made you happy the first time you saw it.</p>
+                    <p>Get what you came for, then stop. You don't need to fill the space with things. Take memories.</p>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- Stop 4: Free Time -->
+            <div class="stop">
+                <div class="stop-time">16:00</div>
+                <div class="stop-body">
+                    <h3>Free Time</h3>
+                    <p class="subtitle">Rest, revisit, or wander</p>
+                    <p>You have a few hours before you need to think about your last night. Pack your bag. Take a nap. Walk around Shinjuku one more time and say goodbye to the places that caught your eye. Sit in a café and write postcards. Recharge your phone. Call Sam and let her know you're safe and happy.</p>
+                    <p>Or do nothing. Sometimes doing nothing is the best use of time.</p>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- Stop 5: Golden Gai -->
+            <div class="stop">
+                <div class="stop-time">19:00</div>
+                <div class="stop-body">
+                    <h3>Golden Gai for Your Last Night</h3>
+                    <p class="subtitle">6 narrow alleys, 200 tiny bars, pure Tokyo soul</p>
+                    <p>Golden Gai is Shinjuku's hidden heart — six narrow alleyways lined with tiny bars, each one seating 6-8 people. Some bars have cover charges (¥500-1000), some don't. The signs are in Japanese. You can't see inside. It's intimidating from the outside.</p>
+                    <p>Just pick a door and open it. Seriously. The bartenders are used to solo travellers. They'll pour you a drink, ask where you're from, and you'll leave with a story. This is where Tokyo's soul lives — distilled into a few square metres of neon-lit intimacy.</p>
+                    <img src="https://images.pexels.com/photos/19758359/pexels-photo-19758359.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Golden Gai lantern alley" class="stop-image">
+                    <p>Have a whisky or a beer or a shochu. Talk to the bartender. The couple next to you. The salarymen in the corner. You're not a tourist anymore. You're a traveller who has earned the right to sit in one of Tokyo's most legendary bars on your last night.</p>
+                    <p class="solo-tip">Solo tip: Golden Gai is intimidating from the outside — tiny doors, no English signs, you can't see in. Just pick a door and open it. The bartenders are used to solo travellers. You'll leave with a story.</p>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- Stop 6: Tomorrow -->
+            <div class="stop">
+                <div class="stop-time">21:00</div>
+                <div class="stop-body">
+                    <h3>Pack Up. Tomorrow Awaits.</h3>
+                    <p class="subtitle">Green Car Shinkansen to Osaka in the morning</p>
+                    <p>Head back to your hotel. Pack your bag. Set an alarm for a checkout time that gives you plenty of time in the morning. Aim to be at Tokyo Station by 9am for a mid-morning shinkansen departure.</p>
+                    <p>Remember: your Green Car ticket is included in your package. It's first-class. You earned this. The seats are spacious, there's a table, there's free WiFi, and the ride from Tokyo Station to Shin-Osaka (~2.5 hours) is smooth, fast, and luxurious.</p>
+                    <p>Sam and the kids are waiting in Osaka. But tonight, Tokyo is still yours.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-box" style="margin-top: 3rem;">
+            <h4>Tomorrow: Green Car Shinkansen to Osaka</h4>
+            <p>Your ticket is included in your package. Tokyo Station → Shin-Osaka (~2.5 hours in the lap of luxury). The Green Car seats recline, there's space for your luggage, and you can order bento boxes and drinks from the trolley. Sit back and watch Japan unfold from your window.</p>
+            <p>Sam and the kids will be waiting. But know that you did it. You came to Tokyo alone, you navigated the trains, you talked to strangers, you sat at counters in tiny bars, you climbed observation decks and walked through temples and got lost and found your way. You are braver than you were four days ago.</p>
+            <p>Tomorrow you rejoin the family. But you're going as someone who has tasted solo freedom in the most exciting city on earth.</p>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Adrienne's Tokyo Trip</p>
+        <p><a href="adrienne.html">Back to Schedule</a></p>
+    </footer>
+
+    <script>
+        function checkGate() {
+            const pw = document.getElementById('gate-pw').value;
+            if (pw === 'sanche') {
+                sessionStorage.setItem('jp26', '1');
+                document.getElementById('gate-overlay').classList.add('hidden');
+            } else {
+                alert('Incorrect code. Try again.');
+            }
+        }
+
+        // Auto-check on load
+        window.addEventListener('load', function() {
+            if (sessionStorage.getItem('jp26') === '1') {
+                document.getElementById('gate-overlay').classList.add('hidden');
+            }
+        });
+
+        // Allow Enter key to unlock
+        document.getElementById('gate-pw').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                checkGate();
+            }
+        });
+    </script>
+</body>
+</html>

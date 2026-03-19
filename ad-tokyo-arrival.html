@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>First Night in Tokyo | Adrienne's Tokyo Trip</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ink: #1a1a1a;
+            --cream: #faf8f4;
+            --warm: #d4a574;
+            --sage: #8b9e7e;
+            --slate: #4a5568;
+            --red: #c0392b;
+            --gold: #b8860b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            color: var(--ink);
+            background-color: var(--cream);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        a {
+            color: var(--warm);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Password Gate */
+        #gate-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--cream);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+
+        #gate-overlay.hidden {
+            display: none;
+        }
+
+        .gate-container {
+            text-align: center;
+            padding: 2rem;
+            max-width: 400px;
+        }
+
+        .gate-container h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--ink);
+        }
+
+        .gate-container p {
+            margin-bottom: 1.5rem;
+            color: var(--slate);
+        }
+
+        #gate-pw {
+            width: 100%;
+            padding: 0.75rem;
+            font-family: 'Outfit', sans-serif;
+            border: 2px solid var(--warm);
+            border-radius: 4px;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .gate-btn {
+            background-color: var(--warm);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .gate-btn:hover {
+            opacity: 0.9;
+        }
+
+        /* Navigation */
+        nav {
+            background-color: var(--ink);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav a {
+            color: var(--cream);
+        }
+
+        nav a:hover {
+            color: var(--warm);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 60vh;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('https://tabimaniajapan.com/wp-content/uploads/2025/02/Tokyo_Shibuya_dougenzaka_rain_street_night_neon-1.jpg');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 3rem 2rem;
+            color: white;
+        }
+
+        .hero-tag {
+            font-size: 0.9rem;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            opacity: 0.9;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            line-height: 1.1;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            font-weight: 300;
+            max-width: 600px;
+        }
+
+        .hero-date {
+            font-size: 1rem;
+            margin-top: 1rem;
+            opacity: 0.95;
+        }
+
+        /* Info Box */
+        .info-box {
+            background-color: #f5ede3;
+            border-left: 4px solid var(--warm);
+            padding: 1.5rem;
+            margin: 2rem auto;
+            max-width: 900px;
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        .info-box h4 {
+            color: var(--warm);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        /* Content Wrapper */
+        .content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Timeline */
+        .timeline {
+            margin: 2rem 0;
+        }
+
+        .stop {
+            display: grid;
+            grid-template-columns: 80px 1fr;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .stop-time {
+            font-weight: 600;
+            color: var(--warm);
+            font-size: 0.95rem;
+            padding-top: 0.25rem;
+        }
+
+        .stop-body {
+            border-right: 2px solid #e0d8ce;
+            padding-right: 1.5rem;
+            padding-bottom: 2rem;
+        }
+
+        .stop-body h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.3rem;
+            color: var(--ink);
+        }
+
+        .stop-body .subtitle {
+            font-size: 0.95rem;
+            color: var(--slate);
+            font-style: italic;
+            margin-bottom: 1rem;
+        }
+
+        .stop-body p {
+            margin-bottom: 1rem;
+            color: var(--ink);
+        }
+
+        .stop-image {
+            width: 100%;
+            max-width: 600px;
+            height: auto;
+            border-radius: 4px;
+            margin: 1rem 0;
+        }
+
+        .tip {
+            font-size: 13px;
+            color: var(--gold);
+            font-style: italic;
+            margin-top: 6px;
+        }
+
+        .solo-tip {
+            font-size: 13px;
+            color: var(--gold);
+            font-style: italic;
+            margin-top: 6px;
+        }
+
+        .map-link {
+            display: inline-block;
+            margin-top: 0.5rem;
+            padding: 0.5rem 1rem;
+            background-color: #f5ede3;
+            border-radius: 3px;
+            font-size: 0.9rem;
+        }
+
+        /* Transport Section */
+        .transport {
+            display: grid;
+            grid-template-columns: 80px 1fr;
+            gap: 1.5rem;
+            margin: 0;
+            position: relative;
+        }
+
+        .transport-time {
+            font-size: 0.85rem;
+            color: var(--slate);
+            padding-top: 0.25rem;
+        }
+
+        .transport-body {
+            border-right: 2px dashed #e0d8ce;
+            padding-right: 1.5rem;
+            padding-bottom: 2rem;
+            font-size: 0.95rem;
+            color: var(--slate);
+        }
+
+        /* Divider */
+        .divider {
+            height: 1px;
+            background: #e0d8ce;
+            margin: 0 0 0 104px;
+            margin-bottom: 2rem;
+        }
+
+        /* Options */
+        .options {
+            background-color: #faf8f4;
+            padding: 1.5rem;
+            border-radius: 4px;
+            margin: 1.5rem 0;
+            border-left: 4px solid var(--sage);
+        }
+
+        .options h4 {
+            color: var(--sage);
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+
+        .option {
+            margin-bottom: 1.5rem;
+        }
+
+        .option:last-child {
+            margin-bottom: 0;
+        }
+
+        .option h5 {
+            font-size: 1rem;
+            color: var(--ink);
+            margin-bottom: 0.5rem;
+        }
+
+        .option p {
+            font-size: 0.95rem;
+            color: var(--slate);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--ink);
+            color: var(--cream);
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        footer a {
+            color: var(--warm);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+
+            .stop {
+                grid-template-columns: 60px 1fr;
+                gap: 1rem;
+            }
+
+            .stop-body {
+                padding-right: 1rem;
+            }
+
+            .transport {
+                grid-template-columns: 60px 1fr;
+                gap: 1rem;
+            }
+
+            .transport-body {
+                padding-right: 1rem;
+            }
+
+            .divider {
+                margin-left: 80px;
+            }
+
+            .content {
+                padding: 1rem;
+            }
+
+            nav {
+                padding: 0.75rem 1rem;
+            }
+
+            nav a {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Password Gate -->
+    <div id="gate-overlay">
+        <div class="gate-container">
+            <h2>Tokyo Trip Guide</h2>
+            <p>Enter the access code to view your personalized itinerary.</p>
+            <input type="password" id="gate-pw" placeholder="Access code" />
+            <button class="gate-btn" onclick="checkGate()">Unlock</button>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <nav>
+        <a href="adrienne.html">← Back to Schedule</a>
+    </nav>
+
+    <div class="hero">
+        <div class="hero-tag">Adrienne · Solo Tokyo</div>
+        <h1>First Night in Tokyo</h1>
+        <p class="hero-subtitle">You've arrived. The neon glow, the energy, the endless possibilities. Welcome to Tokyo.</p>
+        <div class="hero-date">Sunday, November 15, 2026</div>
+    </div>
+
+    <div class="content">
+        <div class="info-box">
+            <h4>Your Narita Express Ticket</h4>
+            <p>Your Narita Express ticket is included in your package. It's a reserved seat — find yours and settle in. The ride is smooth, quiet, and scenic. You'll go from rice paddies to suburbs to Tokyo's glittering towers in 90 minutes. Charge your phone, enjoy the WiFi, and let the anticipation build.</p>
+        </div>
+
+        <div class="timeline">
+            <!-- Stop 1: Arrival -->
+            <div class="stop">
+                <div class="stop-time">Midday</div>
+                <div class="stop-body">
+                    <h3>Land at Narita</h3>
+                    <p class="subtitle">Immigration, luggage, SIM card or pocket WiFi</p>
+                    <p>You've landed. Take a breath. Clear immigration, collect your luggage, and head to the terminal shops. Grab a SIM card or pocket WiFi (both available at the airport). Then find your Narita Express platform.</p>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- Stop 2: Narita Express -->
+            <div class="stop">
+                <div class="stop-time">14:00</div>
+                <div class="stop-body">
+                    <h3>Narita Express to Shinjuku</h3>
+                    <p class="subtitle">~90 minutes, reserved seat, included</p>
+                    <p>Board the Narita Express with your pre-reserved seat. Watch the landscape transform: rice paddies give way to suburbs, then Tokyo's neon towers pierce the sky. The ride is smooth and quiet. There's WiFi and power outlets. Use this time to decompress, check your phone, or simply watch the city reveal itself.</p>
+                    <p class="tip">Tip: Get a drink at a station shop before boarding — it'll be the cheapest beverage you'll get in central Tokyo.</p>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- Stop 3: Check-in -->
+            <div class="stop">
+                <div class="stop-time">16:00</div>
+                <div class="stop-body">
+                    <h3>Shinjuku Hotel Check-in</h3>
+                    <p class="subtitle">Freshen up, rest, recover</p>
+                    <p>You've arrived at your hotel in Shinjuku. Check in, take a shower, and take a nap if you need it. Jet lag is real, and you have four full days ahead. There's no prize for pushing through exhaustion on your first night. Rest is part of the trip.</p>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- Stop 4: Evening Options -->
+            <div class="stop">
+                <div class="stop-time">18:00</div>
+                <div class="stop-body">
+                    <h3>Your First Evening</h3>
+                    <p class="subtitle">Two options: choose your own adventure</p>
+
+                    <div class="options">
+                        <h4>Option A: Shibuya Crossing & Nonbei Yokocho</h4>
+                        <p>Take the train from Shinjuku to Shibuya (about 5 minutes). Stand above the Starbucks overlooking the world's most famous intersection and watch the choreography of 2,500 people crossing at once. Then cross it yourself — you're part of the show now.</p>
+                        <p>For dinner, hunt down <strong>Nonbei Yokocho</strong>, a tiny alley of bars near Shibuya Station with yakitori joints seating 6-8 people. Sit at a counter, order skewers, and soak in the atmosphere. This is Tokyo's soul in miniature.</p>
+                        <img src="https://images.pexels.com/photos/5860950/pexels-photo-5860950.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Shibuya Crossing at night" class="stop-image">
+                        <p class="tip">Tip: Most places only have Japanese menus, but the pictures are clear — point and smile.</p>
+                    </div>
+
+                    <div class="options">
+                        <h4>Option B: Omoide Yokocho</h4>
+                        <p><strong>Don't even leave Shinjuku.</strong> Walk 2 minutes from the station to Omoide Yokocho ("Memory Lane"). It's a narrow, atmospheric alley lined with tiny grilled-skewer stalls — exactly what it sounds like. Smoky, loud, tight, and completely magical at night.</p>
+                        <p>Grab a stool at a yakitori counter. Order a beer. Watch the salarymen and travellers and locals. The bartenders are used to solo diners. This is where you become part of Tokyo on your first night.</p>
+                        <img src="https://www.tokyoweekender.com/wp-content/uploads/2024/03/omoide-yokocho-shinjuku-Finn-Pictures-Shutterstock.com_-2048x1367.jpg" alt="Omoide Yokocho alley" class="stop-image">
+                        <p class="tip">Tip: It's smaller and less touristy than similar alleys. Much more authentic.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- Stop 5: Late Night -->
+            <div class="stop">
+                <div class="stop-time">Late</div>
+                <div class="stop-body">
+                    <h3>Optional: Shibuya Sky or Just Wander</h3>
+                    <p class="subtitle">Tokyo doesn't sleep</p>
+                    <p>If you have energy left, <strong>Shibuya Sky</strong> (¥2,200, open until 10pm) is a 360° open-air observation deck offering panoramic city views. The neon, the lights, Tokyo unfolds beneath you.</p>
+                    <p>Or just walk around Shinjuku — Kabukicho, the pachinko parlours, the neon — and soak it in. There's no wrong choice here. Your body is running on adrenaline, and Tokyo is electric.</p>
+                    <p class="solo-tip">Solo tip: Your first night in Tokyo should feel electric. Pick ONE thing and do it well. Don't try to see everything tonight. You have three more days.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Adrienne's Tokyo Trip</p>
+        <p><a href="adrienne.html">Back to Schedule</a></p>
+    </footer>
+
+    <script>
+        function checkGate() {
+            const pw = document.getElementById('gate-pw').value;
+            if (pw === 'sanche') {
+                sessionStorage.setItem('jp26', '1');
+                document.getElementById('gate-overlay').classList.add('hidden');
+            } else {
+                alert('Incorrect code. Try again.');
+            }
+        }
+
+        // Auto-check on load
+        window.addEventListener('load', function() {
+            if (sessionStorage.getItem('jp26') === '1') {
+                document.getElementById('gate-overlay').classList.add('hidden');
+            }
+        });
+
+        // Allow Enter key to unlock
+        document.getElementById('gate-pw').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                checkGate();
+            }
+        });
+    </script>
+</body>
+</html>

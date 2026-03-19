@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Culture, Fashion & Skyline | Adrienne's Tokyo Trip</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ink: #1a1a1a;
+            --cream: #faf8f4;
+            --warm: #d4a574;
+            --sage: #8b9e7e;
+            --slate: #4a5568;
+            --red: #c0392b;
+            --gold: #b8860b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            color: var(--ink);
+            background-color: var(--cream);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        a {
+            color: var(--warm);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Password Gate */
+        #gate-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--cream);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+
+        #gate-overlay.hidden {
+            display: none;
+        }
+
+        .gate-container {
+            text-align: center;
+            padding: 2rem;
+            max-width: 400px;
+        }
+
+        .gate-container h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--ink);
+        }
+
+        .gate-container p {
+            margin-bottom: 1.5rem;
+            color: var(--slate);
+        }
+
+        #gate-pw {
+            width: 100%;
+            padding: 0.75rem;
+            font-family: 'Outfit', sans-serif;
+            border: 2px solid var(--warm);
+            border-radius: 4px;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .gate-btn {
+            background-color: var(--warm);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .gate-btn:hover {
+            opacity: 0.9;
+        }
+
+        /* Navigation */
+        nav {
+            background-color: var(--ink);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav a {
+            color: var(--cream);
+        }
+
+        nav a:hover {
+            color: var(--warm);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 60vh;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('https://urbanhype.net/wp-content/uploads/2024/01/Harajuku-min-1200x800.jpeg');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 3rem 2rem;
+            color: white;
+        }
+
+        .hero-tag {
+            font-size: 0.9rem;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            opacity: 0.9;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            line-height: 1.1;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            font-weight: 300;
+            max-width: 600px;
+        }
+
+        .hero-date {
+            font-size: 1rem;
+            margin-top: 1rem;
+            opacity: 0.95;
+        }
+
+        /* Content Wrapper */
+        .content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Timeline */
+        .timeline {
+            margin: 2rem 0;
+        }
+
+        .stop {
+            display: grid;
+            grid-template-columns: 80px 1fr;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .stop-time {
+            font-weight: 600;
+            color: var(--warm);
+            font-size: 0.95rem;
+            padding-top: 0.25rem;
+        }
+
+        .stop-body {
+            border-right: 2px solid #e0d8ce;
+            padding-right: 1.5rem;
+            padding-bottom: 2rem;
+        }
+
+        .stop-body h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.3rem;
+            color: var(--ink);
+        }
+
+        .stop-body .subtitle {
+            font-size: 0.95rem;
+            color: var(--slate);
+            font-style: italic;
+            margin-bottom: 1rem;
+        }
+
+        .stop-body p {
+            margin-bottom: 1rem;
+            color: var(--ink);
+        }
+
+        .stop-image {
+            width: 100%;
+            max-width: 600px;
+            height: auto;
+            border-radius: 4px;
+            margin: 1rem 0;
+        }
+
+        .tip {
+            font-size: 13px;
+            color: var(--gold);
+            font-style: italic;
+            margin-top: 6px;
+        }
+
+        .solo-tip {
+            font-size: 13px;
+            color: var(--gold);
+            font-style: italic;
+            margin-top: 6px;
+        }
+
+        .map-link {
+            display: inline-block;
+            margin-top: 0.5rem;
+            padding: 0.5rem 1rem;
+            background-color: #f5ede3;
+            border-radius: 3px;
+            font-size: 0.9rem;
+        }
+
+        /* Transport Section */
+        .transport {
+            display: grid;
+            grid-template-columns: 80px 1fr;
+            gap: 1.5rem;
+            margin: 0;
+            position: relative;
+        }
+
+        .transport-time {
+            font-size: 0.85rem;
+            color: var(--slate);
+            padding-top: 0.25rem;
+        }
+
+        .transport-body {
+            border-right: 2px dashed #e0d8ce;
+            padding-right: 1.5rem;
+            padding-bottom: 2rem;
+            font-size: 0.95rem;
+            color: var(--slate);
+        }
+
+        /* Divider */
+        .divider {
+            height: 1px;
+            background: #e0d8ce;
+            margin: 0 0 0 104px;
+            margin-bottom: 2rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--ink);
+            color: var(--cream);
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        footer a {
+            color: var(--warm);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+
+            .stop {
+                grid-template-columns: 60px 1fr;
+                gap: 1rem;
+            }
+
+            .stop-body {
+                padding-right: 1rem;
+            }
+
+            .transport {
+                grid-template-columns: 60px 1fr;
+                gap: 1rem;
+            }
+
+            .transport-body {
+                padding-right: 1rem;
+            }
+
+            .divider {
+                margin-left: 80px;
+            }
+
+            .content {
+                padding: 1rem;
+            }
+
+            nav {
+                padding: 0.75rem 1rem;
+            }
+
+            nav a {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Password Gate -->
+    <div id="gate-overlay">
+        <div class="gate-container">
+            <h2>Tokyo Trip Guide</h2>
+            <p>Enter the access code to view your personalized itinerary.</p>
+            <input type="password" id="gate-pw" placeholder="Access code" />
+            <button class="gate-btn" onclick="checkGate()">Unlock</button>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <nav>
+        <a href="adrienne.html">← Back to Schedule</a>
+    </nav>
+
+    <div class="hero">
+        <div class="hero-tag">Day 2 · Your First Full Day</div>
+        <h1>Culture, Fashion & Skyline</h1>
+        <p class="hero-subtitle">Sacred shrines, neon fashion, and views that take your breath away. Today you're diving into the best of Tokyo.</p>
+        <div class="hero-date">Monday, November 16, 2026</div>
+    </div>
+
+    <div class="content">
+        <div class="timeline">
+            <!-- Stop 1: Meiji Shrine -->
+            <div class="stop">
+                <div class="stop-time">9:00</div>
+                <div class="stop-body">
+                    <h3>Meiji Shrine</h3>
+                    <p class="subtitle">175 acres of forest in the city center</p>
+                    <p>Start your day with purpose. Walk through the massive wooden torii gate and into Meiji Shrine, a 175-acre forest sanctuary dedicated to Emperor Meiji. It's peaceful, spiritual, and the perfect way to ground yourself after jet lag. The main pathway is lined with towering cryptomeria trees. Write a wish on an ema (wooden plaque) and hang it with thousands of others. Completely free.</p>
+                    <img src="https://images.pexels.com/photos/31252465/pexels-photo-31252465.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Meiji Shrine torii gate" class="stop-image">
+                    <p class="tip">Tip: Go early (you're already here) to avoid crowds. The light through the trees is magical in the morning.</p>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- Stop 2: Harajuku & Takeshita Street -->
+            <div class="stop">
+                <div class="stop-time">10:30</div>
+                <div class="stop-body">
+                    <h3>Harajuku: Takeshita Street & Beyond</h3>
+                    <p class="subtitle">400 metres of pure chaos and fashion rebellion</p>
+                    <p>From Meiji Shrine, walk down the hill to Takeshita Street — 400 metres of visual overload. Crepe shops, kawaii fashion boutiques, costume stores, vintage vinyl, every imaginable subculture colliding on a single narrow street. It's chaotic, it's touristy, but it's also authentically Harajuku.</p>
+                    <img src="https://jw-webmagazine.com/wp-content/uploads/2017/05/laurentiu-morariu-LfzNupIIxD4-unsplash.jpg" alt="Takeshita Street" class="stop-image">
+                    <p>After Takeshita, slip into <strong>Cat Street</strong> (parallel to the main drag). It's cooler, quieter, and packed with independent boutiques, art galleries, coffee shops, and street art. This is where Harajuku's authentic personality lives.</p>
+                    <p class="tip">Tip: If you get a crepe, do it on Takeshita. It's a rite of passage. The fruit-filled ones are incredible.</p>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- Stop 3: Omotesando & Lunch -->
+            <div class="stop">
+                <div class="stop-time">12:00</div>
+                <div class="stop-body">
+                    <h3>Lunch on Omotesando</h3>
+                    <p class="subtitle">Tokyo's Champs-Élysées</p>
+                    <p>Head to Omotesando, Tokyo's answer to the Champs-Élysées. It's a tree-lined boulevard lined with designer flagships designed by famous architects. Browse Omotesando Hills (a luxury complex), then duck into one of the side-street cafés for lunch. Ramen, soba, tonkatsu, sushi — all excellent, all reasonably priced compared to tourist areas. Sit at a counter if you're alone and you'll probably strike up a conversation with someone.</p>
+                    <p class="solo-tip">Solo tip: Counter seating is your friend. You're never eating alone; you're eating solo in the middle of Tokyo. Big difference.</p>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- Stop 4: Free Afternoon -->
+            <div class="stop">
+                <div class="stop-time">14:00</div>
+                <div class="stop-body">
+                    <h3>Free Afternoon: Choose Your Own Adventure</h3>
+                    <p class="subtitle">The map is a suggestion</p>
+                    <p><strong>Option A — Museums:</strong> Visit the Nezu Museum (stunning traditional art, beautiful garden, ¥1,300). It's small, walkable, and feels like a secret.</p>
+                    <p><strong>Option B — Parks:</strong> Yoyogi Park is massive and perfect for people-watching, walking, and sitting by the pond. It's peaceful and social at the same time.</p>
+                    <p><strong>Option C — Neighbourhoods:</strong> Take the train to Shimokitazawa (2 stops from Shibuya) — a quirky, eclectic neighbourhood full of vintage shops, tiny bars, live music venues, and vintage clothing. Walk the backstreets and see what calls to you.</p>
+                    <p><strong>Option D — Just Wander:</strong> The best discoveries in Tokyo come from turning left instead of right. Pick a train line and see where it takes you.</p>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- Stop 5: Shibuya Sky -->
+            <div class="stop">
+                <div class="stop-time">17:00</div>
+                <div class="stop-body">
+                    <h3>Shibuya Sky at Sunset</h3>
+                    <p class="subtitle">360° views from 230 metres up</p>
+                    <p>Time this one for golden hour. Shibuya Sky is a stunning observation deck 230 metres up with a 360° open-air rooftop. On a clear November day, you can see Mt. Fuji in the distance. The sunset over Tokyo is unforgettable. Book tickets ahead online (¥2,200). Spend an hour up there. Watch the city light up as darkness falls. This is Tokyo at its most beautiful.</p>
+                    <img src="https://static.gltjp.com/glt/data/article/21000/20381/20230823_130103_cb928082_w1920.webp" alt="Shibuya Sky view" class="stop-image">
+                    <p class="tip">Tip: Book online to skip the queue. Bring a light jacket — it's windy up there.</p>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- Stop 6: Dinner in Ebisu -->
+            <div class="stop">
+                <div class="stop-time">19:00</div>
+                <div class="stop-body">
+                    <h3>Dinner in Ebisu</h3>
+                    <p class="subtitle">One stop from Shibuya — locals know this place</p>
+                    <p>Descend from the sky and take one train stop to Ebisu. It's more relaxed than Shibuya, full of locals, wine bars, izakayas, and excellent small restaurants without the tourist crush. Walk the back streets and pick somewhere that looks good. You don't need a reservation — just follow your instincts. The food will be delicious, the prices fair, and you'll be eating alongside salarymen and couples and other solo diners.</p>
+                    <p class="solo-tip">Solo tip: Tokyo rewards wandering. If something catches your eye — a side street, a shop, a smell, a laugh coming from a bar — follow it. The best moments aren't on any map.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Adrienne's Tokyo Trip</p>
+        <p><a href="adrienne.html">Back to Schedule</a></p>
+    </footer>
+
+    <script>
+        function checkGate() {
+            const pw = document.getElementById('gate-pw').value;
+            if (pw === 'sanche') {
+                sessionStorage.setItem('jp26', '1');
+                document.getElementById('gate-overlay').classList.add('hidden');
+            } else {
+                alert('Incorrect code. Try again.');
+            }
+        }
+
+        // Auto-check on load
+        window.addEventListener('load', function() {
+            if (sessionStorage.getItem('jp26') === '1') {
+                document.getElementById('gate-overlay').classList.add('hidden');
+            }
+        });
+
+        // Allow Enter key to unlock
+        document.getElementById('gate-pw').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                checkGate();
+            }
+        });
+    </script>
+</body>
+</html>
