@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Garbage Guide — Kasugadekita, Konohana Ward</title>
+<style>
+@media print {
+  #gate-overlay { display: none !important; }
+  body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .page { page-break-inside: avoid; box-shadow: none !important; }
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif; background: #f0f0f0; color: #1a1a1a; }
+.page { max-width: 700px; margin: 20px auto; background: white; padding: 40px; box-shadow: 0 2px 20px rgba(0,0,0,.1); }
+h1 { font-size: 28px; font-weight: 700; margin-bottom: 4px; }
+.subtitle { font-size: 13px; color: #888; margin-bottom: 6px; }
+.address { font-size: 13px; color: #555; margin-bottom: 24px; }
+.rule-banner { background: #fff3cd; border: 1px solid #ffc107; border-radius: 6px; padding: 12px 16px; margin-bottom: 24px; font-size: 13px; color: #664d03; line-height: 1.5; }
+.rule-banner strong { color: #1a1a1a; }
+
+.schedule { display: grid; gap: 12px; margin-bottom: 28px; }
+.day-row { display: grid; grid-template-columns: 110px 1fr; border-radius: 8px; overflow: hidden; border: 1px solid #e0e0e0; }
+.day-label { padding: 14px 16px; color: white; font-weight: 700; font-size: 15px; display: flex; flex-direction: column; justify-content: center; }
+.day-label .jp { font-size: 12px; font-weight: 400; opacity: .85; margin-top: 2px; }
+.day-content { padding: 12px 16px; }
+.day-content h3 { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
+.day-content .jp-name { font-size: 12px; color: #888; margin-bottom: 6px; }
+.day-content p { font-size: 12.5px; color: #555; line-height: 1.5; }
+.day-content .items { font-size: 12px; color: #777; font-style: italic; margin-top: 4px; }
+
+.mon-thu { background: #4a7c59; }
+.tue { background: #2e6da4; }
+.wed { background: #e67e22; }
+.sat { background: #7b5ea7; }
+
+.tips { margin-bottom: 20px; }
+.tips h2 { font-size: 16px; font-weight: 700; margin-bottom: 10px; padding-bottom: 6px; border-bottom: 2px solid #1a1a1a; }
+.tip-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.tip { background: #f8f8f8; border-radius: 6px; padding: 12px 14px; }
+.tip h4 { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
+.tip p { font-size: 11.5px; color: #555; line-height: 1.45; }
+.tip .jp-word { font-size: 18px; display: block; margin-bottom: 2px; }
+
+.no-collect { background: #f8d7da; border: 1px solid #f5c2c7; border-radius: 6px; padding: 12px 16px; margin-bottom: 20px; }
+.no-collect h4 { font-size: 13px; font-weight: 600; color: #842029; margin-bottom: 4px; }
+.no-collect p { font-size: 12px; color: #842029; line-height: 1.5; }
+
+.footer-note { text-align: center; font-size: 11px; color: #aaa; margin-top: 20px; padding-top: 16px; border-top: 1px solid #eee; }
+
+#gate-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:#1a1a1a;z-index:9999;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:16px}
+#gate-overlay h2{font-size:32px;color:#fff;font-weight:700}
+#gate-overlay p{color:rgba(255,255,255,.5);font-size:14px}
+#gate-overlay input{background:transparent;border:1px solid rgba(255,255,255,.3);color:#fff;padding:14px 24px;font-size:15px;text-align:center;outline:none;width:260px;letter-spacing:1px}
+#gate-overlay input::placeholder{color:rgba(255,255,255,.3)}
+#gate-overlay input:focus{border-color:rgba(255,255,255,.6)}
+#gate-overlay button{padding:12px 32px;background:transparent;border:1px solid rgba(255,255,255,.25);color:#fff;font-size:13px;letter-spacing:2px;text-transform:uppercase;cursor:pointer}
+#gate-overlay button:hover{background:rgba(255,255,255,.1)}
+.gate-error{color:#c0392b;font-size:13px;min-height:20px}
+</style>
+</head>
+<body>
+
+<div id="gate-overlay"><h2>Japan 2026</h2><p>Enter password to continue</p><input type="password" id="gate-pw" placeholder="Password" onkeydown="if(event.key==='Enter')checkGate()"><button onclick="checkGate()">Enter</button><div class="gate-error" id="gate-err"></div></div>
+
+<div id="content" style="display:none">
+<div class="page">
+  <h1>🗑️ Garbage Guide</h1>
+  <div class="subtitle">Konohana Ward, Osaka City</div>
+  <div class="address">Kasugadekita 2-chōme · Osaka 554-0021</div>
+
+  <div class="rule-banner">
+    <strong>Three rules:</strong> Use <strong>transparent bags</strong> only (no coloured/opaque bags). Put garbage out <strong>in the morning</strong> on collection day (not the night before). Place at the designated collection spot (ask host if unsure).
+  </div>
+
+  <div class="schedule">
+    <div class="day-row">
+      <div class="day-label mon-thu">Mon & Thu<div class="jp">月 ・ 木</div></div>
+      <div class="day-content">
+        <h3>Regular Garbage</h3>
+        <div class="jp-name">普通ごみ（ふつうごみ）</div>
+        <p>Kitchen scraps (squeeze out water), paper waste, diapers (bag separately), small electronics, toys, shoes, glass, ceramics, furniture under 30cm.</p>
+        <div class="items">Wrap sharp items in paper → write 危険 (danger) on bag</div>
+      </div>
+    </div>
+
+    <div class="day-row">
+      <div class="day-label tue">Tuesday<div class="jp">火</div></div>
+      <div class="day-content">
+        <h3>Paper & Clothing</h3>
+        <div class="jp-name">古紙衣類（こしいるい）</div>
+        <p>Newspapers, cardboard, paper cartons, magazines, misc paper — tie each type separately with string in a cross shape. Clothing goes in a transparent bag (washed & dried).</p>
+        <div class="items">Keep types separate — don't mix cardboard with newspapers</div>
+      </div>
+    </div>
+
+    <div class="day-row">
+      <div class="day-label wed">Wednesday<div class="jp">水</div></div>
+      <div class="day-content">
+        <h3>Plastic Resources</h3>
+        <div class="jp-name">プラスチック資源</div>
+        <p>Anything with the プラ mark (packaging, trays, bags, bottles, foam). Also 100% plastic products (utensils, storage bins, toothbrushes, toys). Rinse food residue off. If too dirty → regular garbage.</p>
+        <div class="items">Remove caps from bottles. Look for the プラ symbol.</div>
+      </div>
+    </div>
+
+    <div class="day-row">
+      <div class="day-label sat">Saturday<div class="jp">土</div></div>
+      <div class="day-content">
+        <h3>Resource Garbage</h3>
+        <div class="jp-name">資源ごみ（しげんごみ）</div>
+        <p>Cans, bottles, PET bottles & small metal items (pots, pans, foil) — all together in one transparent bag. Rinse, remove caps, crush PET bottles. <strong>Spray cans</strong> go in a separate bag (use up contents, no need to puncture).</p>
+        <div class="items">PET bottles: remove cap + label → crush → bag with cans/bottles</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="no-collect">
+    <h4>⛔ Don't put these in any garbage</h4>
+    <p>Lithium batteries & power banks → drop at public facility collection boxes. Gasoline, paint, fire extinguishers, car tires → not collected by the city. Large items over 30cm → call for oversized pickup.</p>
+  </div>
+
+  <div class="tips">
+    <h2>Quick Reference</h2>
+    <div class="tip-grid">
+      <div class="tip">
+        <h4>PET Bottle Steps</h4>
+        <p><span class="jp-word">🧴</span>1. Empty & rinse<br>2. Remove cap → plastic bag (Wed)<br>3. Remove label → plastic bag (Wed)<br>4. Crush bottle → resource bag (Sat)</p>
+      </div>
+      <div class="tip">
+        <h4>Cooking Oil</h4>
+        <p><span class="jp-word">🍳</span>Soak into paper/cloth, add water to prevent combustion, double-bag it → regular garbage (Mon/Thu)</p>
+      </div>
+      <div class="tip">
+        <h4>Oversized Items</h4>
+        <p><span class="jp-word">📦</span>Anything over 30cm or over 3 bags at once = oversized (粗大ごみ). Call to book: <strong>0120-79-0053</strong></p>
+      </div>
+      <div class="tip">
+        <h4>Useful Words</h4>
+        <p><span class="jp-word">🗾</span>ごみ = garbage<br>資源 = resources/recyclables<br>危険 = danger<br>透明 = transparent<br>袋 = bag</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    Source: gomi-calendar.com / Osaka City · Konohana Ward<br>
+    Covers Nov–Dec 2026 stay. No collection Jan 1–3 (doesn't affect trip).
+  </div>
+</div>
+</div>
+
+<script>
+function checkGate(){var p=document.getElementById('gate-pw').value.toLowerCase().trim();if(p==='sanche'){document.getElementById('gate-overlay').style.display='none';document.getElementById('content').style.display='block';sessionStorage.setItem('jp26','1')}else{document.getElementById('gate-err').textContent='Try again'}}if(sessionStorage.getItem('jp26')==='1'){document.getElementById('gate-overlay').style.display='none';document.getElementById('content').style.display='block'}
+</script>
+</body>
+</html>
