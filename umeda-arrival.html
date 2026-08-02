@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arrival Day — Dan &amp; Connie</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#1a1a1a;--cream:#faf8f4;--warm:#d4a574;--sage:#8b9e7e;--slate:#4a5568;--red:#c0392b;--gold:#b8860b}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Outfit',sans-serif;color:var(--ink);background:var(--cream);line-height:1.6}
+#gate-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:#1a1a1a;z-index:9999;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:16px;font-family:'Outfit',sans-serif}
+#gate-overlay h2{font-family:'Cormorant Garamond',serif;font-size:36px;color:white}
+#gate-overlay p{color:rgba(255,255,255,.5);font-size:14px;font-weight:300}
+#gate-overlay input{background:transparent;border:1px solid rgba(255,255,255,.3);color:white;padding:14px 24px;font-size:15px;text-align:center;font-family:'Outfit',sans-serif;outline:none;width:260px;letter-spacing:1px}
+#gate-overlay input::placeholder{color:rgba(255,255,255,.3)}
+#gate-overlay input:focus{border-color:rgba(255,255,255,.6)}
+#gate-overlay button{padding:12px 32px;background:transparent;border:1px solid rgba(255,255,255,.25);color:white;font-size:13px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;font-family:'Outfit',sans-serif;transition:all .3s}
+#gate-overlay button:hover{background:rgba(255,255,255,.1)}
+.gate-error{color:#c0392b;font-size:13px;font-weight:300;min-height:20px}
+.hero{position:relative;height:60vh;min-height:400px;background:linear-gradient(135deg,rgba(0,0,0,.4)0%,rgba(0,0,0,.15)50%,rgba(0,0,0,.5)100%),url('https://cdn.cheapoguides.com/wp-content/uploads/sites/3/2023/05/umeda-GettyImages-164742194-1024x600.jpg') center/cover;display:flex;align-items:flex-end;padding:60px}
+.hero-content{max-width:700px}
+.hero-tag{font-family:'Outfit';font-weight:300;font-size:13px;letter-spacing:4px;text-transform:uppercase;color:var(--warm);margin-bottom:12px}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:56px;font-weight:700;color:white;line-height:1.05;margin-bottom:12px}
+.hero p{font-family:'Outfit';font-weight:300;font-size:16px;color:rgba(255,255,255,.85);max-width:500px}
+.hero-date{display:inline-block;margin-top:20px;padding:8px 20px;border:1px solid rgba(255,255,255,.4);font-size:12px;letter-spacing:2px;text-transform:uppercase;color:white}
+.section{max-width:900px;margin:0 auto;padding:60px 40px}
+.section-label{font-weight:300;font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--warm);margin-bottom:10px}
+.section h2{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:600;margin-bottom:20px;line-height:1.15}
+.section p{font-size:15px;color:var(--slate);max-width:700px;margin-bottom:14px;font-weight:300}
+.intro-note{background:white;border-left:3px solid var(--warm);padding:20px 24px;border-radius:0 6px 6px 0;margin:24px 0;font-size:14px;color:var(--slate);font-weight:300;line-height:1.6}
+.intro-note strong{font-weight:500;color:var(--ink)}
+.stop{display:grid;grid-template-columns:80px 1fr;gap:0;margin-bottom:0;position:relative}
+.stop-time{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:600;color:var(--warm);padding:32px 0;text-align:right;padding-right:24px;border-right:2px solid #e0d8ce}
+.stop-body{padding:24px 0 24px 24px}
+.stop-body h3{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;margin-bottom:6px}
+.stop-body .subtitle{font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--sage);font-weight:500;margin-bottom:10px}
+.stop-body p{font-size:14px;color:var(--slate);font-weight:300;line-height:1.6;margin-bottom:8px}
+.stop-body .tip{font-size:13px;color:var(--gold);font-style:italic;margin-top:6px}
+.stop-img{width:100%;height:220px;object-fit:cover;border-radius:6px;margin-bottom:14px}
+.divider{height:1px;background:#e0d8ce;margin:0 0 0 104px}
+.transport{display:grid;grid-template-columns:80px 1fr;gap:0;margin:0}
+.transport-time{padding:12px 0;text-align:right;padding-right:24px;border-right:2px dashed #e0d8ce}
+.transport-body{padding:12px 0 12px 24px;font-size:13px;color:var(--sage);font-weight:300;font-style:italic}
+.map-link{display:inline-block;margin-top:8px;padding:6px 14px;border:1px solid var(--warm);border-radius:4px;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--warm);text-decoration:none;font-weight:500;transition:all .3s}
+.map-link:hover{background:var(--warm);color:white}
+.back-link{display:inline-block;margin-bottom:20px;font-size:13px;color:var(--warm);text-decoration:none;letter-spacing:1px;text-transform:uppercase;font-weight:400}
+.back-link:hover{text-decoration:underline}
+.footer{text-align:center;padding:40px;font-size:12px;color:var(--slate);font-weight:300;letter-spacing:1px}
+@media(max-width:768px){
+  .hero h1{font-size:36px}
+  .hero{padding:30px;height:50vh}
+  .section{padding:40px 20px}
+  .stop{grid-template-columns:60px 1fr}
+  .divider{margin-left:84px}
+  .transport{grid-template-columns:60px 1fr}
+}
+</style>
+</head>
+<body>
+
+<div id="gate-overlay"><h2>Japan 2026</h2><p>Enter password to continue</p><input type="password" id="gate-pw" placeholder="Password" onkeydown="if(event.key==='Enter')checkGate()"><button onclick="checkGate()">Enter</button><div class="gate-error" id="gate-err"></div></div>
+
+<div id="content" style="display:none">
+
+  <div class="hero">
+    <div class="hero-content">
+      <div class="hero-tag">Dan &amp; Connie · Day One</div>
+      <h1>Welcome to Japan</h1>
+      <p>Land, drop the bags, and go straight back out — the fastest way through jet lag is to stay upright until a normal bedtime.</p>
+      <div class="hero-date">Friday, November 6</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <a href="dan-and-connie.html" class="back-link">← Back to your tour</a>
+    <div class="section-label">Arrival Day</div>
+    <h2>Straight Off the Plane and Into Umeda</h2>
+    <p>You've been on a plane overnight and your body thinks it's the middle of yesterday. The plan is deliberately easy — get to the house, put the bags down, then head out for a few hours in Umeda. Nothing here is compulsory. If you'd rather sleep, sleep.</p>
+    <p>But the standing advice for eastbound jet lag is to stay up until a local bedtime, and an evening walking around a bright, busy district is a far easier way to do that than sitting in a quiet room fighting your eyelids.</p>
+
+    <div class="intro-note">
+      <strong>About the times below:</strong> they assume we're on the ground mid-afternoon. Flights shift, immigration queues vary, and the whole evening slides with them — treat the clock as a shape for the day rather than a schedule. The one genuinely fixed thing is that grenier closes at 20:00.
+    </div>
+    <div class="intro-note">
+      <strong>You'll want a Suica or ICOCA card.</strong> It's the tap-to-ride card that works on every train, subway and bus for the whole trip, and on most vending machines and convenience stores too. We're going by car from the airport so you won't need it to get home — but you will need it a few hours later to get into Umeda, so it's worth grabbing one from the machines in the arrivals hall while we're there. We'll show you where.
+    </div>
+  </div>
+
+  <!-- TIMELINE -->
+  <div class="section" style="padding-top:0">
+
+    <div class="stop">
+      <div class="stop-time">15:00</div>
+      <div class="stop-body">
+        <h3>Land at Kansai Airport</h3>
+        <div class="subtitle">KIX · Immigration, bags, IC cards</div>
+        <p>KIX is built on an artificial island in Osaka Bay, so the approach is all water right up until the wheels touch. Immigration and customs usually take about an hour on a busy afternoon — Japan's entry process is orderly and unhurried, and it goes faster if you fill in the arrival card on the plane.</p>
+        <p>Once you're through, a driver will be waiting for us in the arrivals hall. No train to find, no bags to haul up a platform — we walk out and get in a car.</p>
+        <p class="tip">Tip: There are free water fountains past customs, and the airport toilets are worth experiencing on their own terms. Consider it your first cultural encounter.</p>
+      </div>
+    </div>
+
+    <div class="transport">
+      <div class="transport-time"></div>
+      <div class="transport-body">🚗 Private car service, arrivals hall straight to the front door (~60 min). Booked ahead — all the luggage goes with us in one vehicle.</div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="stop">
+      <div class="stop-time">17:00</div>
+      <div class="stop-body">
+        <h3>The House in Konohana</h3>
+        <div class="subtitle">Kasugadekita · A short walk from Nishikujo Station</div>
+        <p>The drive out crosses the Sky Gate Bridge — the span that ties the airport island to the mainland — then runs up along the bay before the city closes in around you. An undemanding first look at Osaka through a car window.</p>
+        <p>Our Airbnb for the six weeks sits in a quiet residential pocket of Konohana Ward. It's a real neighbourhood rather than a tourist strip — vending machines on the corners, bicycles everywhere, a convenience store at the end of the road. Nishikujo Station is a few minutes' walk away and puts most of Kansai within an hour.</p>
+        <p>Drop the bags, take a shower if you want one, and resist the bed. We'll head out again shortly.</p>
+        <p class="tip">Tip: A shower and a change of clothes does more for jet lag than a nap does. The nap is a trap.</p>
+      </div>
+    </div>
+
+    <div class="transport">
+      <div class="transport-time"></div>
+      <div class="transport-body">🚃 JR Osaka Loop Line from Nishikujo → Osaka Station, 2 stops (~5 min). Umeda is the station district itself.</div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="stop">
+      <div class="stop-time">18:15</div>
+      <div class="stop-body">
+        <h3>Loft, Umeda</h3>
+        <div class="subtitle">Umeda · Free to browse · Typically until 21:00</div>
+        <p>Umeda is northern Osaka's centre of gravity — a dense knot of department stores, underground malls and railway lines stacked on top of each other. Loft is the best possible first stop: several floors of stationery, kitchen gadgets, skincare, stickers, pens and small clever objects you didn't know existed. It's the shop that explains why people come back from Japan with a suitcase of things they can't quite justify.</p>
+        <p>It's also a gentle place to be jet-lagged. Bright, warm, no decisions required, and you can leave whenever you've had enough.</p>
+        <p class="tip">Tip: The stationery floor is the one people lose an hour on. Consider yourself warned.</p>
+        <a href="https://maps.google.com/?q=Loft+Umeda+Osaka" target="_blank" class="map-link">Open in Maps</a>
+      </div>
+    </div>
+
+    <div class="transport">
+      <div class="transport-time"></div>
+      <div class="transport-body">🚶 A few minutes across to the Hankyu Grand Building.</div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="stop">
+      <div class="stop-time">19:00</div>
+      <div class="stop-body">
+        <h3>grenier</h3>
+        <div class="subtitle">Hankyu Grand Building 1F · 10:00–20:00 · Connie's request</div>
+        <p>A tiny French pastry shop on the ground floor of the Hankyu Grand Building, and the reason this stop is on the itinerary at all. Their mille-feuille is the thing to get — layers of very thin, very crisp pastry with custard cream, and a strawberry version that's the signature. They sell out of things, so it pays not to be last through the door.</p>
+        <p>It's takeaway only: no seating inside, just a small bench outside. So this is a grab-and-carry stop rather than a sit-down one, which is why it lands before dinner rather than after.</p>
+        <p class="tip">Tip: Closing time is 20:00 and their days off are irregular rather than fixed — worth a glance at Maps before we set out.</p>
+        <a href="https://www.google.com/maps/place/grenier+Umeda+branch/@34.7035422,135.4991909,17z/data=!3m1!4b1!4m6!3m5!1s0x6000e75d1aa06ba7:0x43cb95ce44fe58c7!8m2!3d34.7035422!4d135.4991909!16s%2Fg%2F11t7dq7v3y" target="_blank" class="map-link">Open in Maps</a>
+      </div>
+    </div>
+
+    <div class="transport">
+      <div class="transport-time"></div>
+      <div class="transport-body">🚶 Dinner is a short walk from here — we'll pick the spot on the night.</div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="stop">
+      <div class="stop-time">19:30</div>
+      <div class="stop-body">
+        <h3>Sushi Train Welcome Dinner</h3>
+        <div class="subtitle">Umeda · Your first meal in Japan</div>
+        <p>Conveyor-belt sushi is the right first dinner: no menu to decipher, no ordering to negotiate, and you eat as much or as little as jet lag allows. Plates come past on the belt, you take what you like, and the colour of the plate tells you the price. Most places also have a touchscreen for ordering something made fresh, usually with English.</p>
+        <p>Green tea is free — there's powdered matcha at the table and a hot water tap. Stack your plates as you go; they count them at the end.</p>
+        <p class="tip">Tip: Don't over-order at the start. It's easy to build a tower of plates before you notice you're full and it's 3am in your head.</p>
+      </div>
+    </div>
+
+    <div class="transport">
+      <div class="transport-time"></div>
+      <div class="transport-body">🚃 Osaka Station → Nishikujo on the Loop Line, 2 stops (~5 min), then the short walk home.</div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="stop">
+      <div class="stop-time">21:00</div>
+      <div class="stop-body">
+        <h3>Home, and Sleep</h3>
+        <div class="subtitle">Konohana · Day one done</div>
+        <p>That's enough for one day. You've crossed nine time zones, cleared customs, learned a train line and eaten your first sushi in Japan — and if the timing worked, you're going to bed at a genuinely reasonable local hour, which is the single best thing you can do for tomorrow.</p>
+        <p>The mille-feuille, if it made it this far, is best eaten tonight rather than saved.</p>
+        <p class="tip">Tip: Expect to wake at 4am anyway. It passes in a couple of days — and tomorrow's Osaka walking tour is the cure.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="section" style="padding-top:0">
+    <div class="intro-note">
+      <strong>If you'd rather bail:</strong> genuinely, it's fine. If you get to the house and the idea of going back out is unbearable, stay in — we'll bring you a pastry. There are five and a half more weeks of this and nobody is keeping score on day one.
+    </div>
+  </div>
+
+  <div class="footer">
+    Japan 2026 — Arrival Day · <a href="dan-and-connie.html" style="color:var(--warm)">Back to tour</a>
+  </div>
+
+</div>
+
+<script>
+function checkGate(){var p=document.getElementById('gate-pw').value.toLowerCase().trim();if(p==='sanche'){document.getElementById('gate-overlay').style.display='none';document.getElementById('content').style.display='block';sessionStorage.setItem('jp26','1')}else{document.getElementById('gate-err').textContent='Try again'}}if(sessionStorage.getItem('jp26')==='1'){document.getElementById('gate-overlay').style.display='none';document.getElementById('content').style.display='block'}
+</script>
+</body>
+</html>
