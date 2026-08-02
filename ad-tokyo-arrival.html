@@ -60,6 +60,13 @@
             display: none;
         }
 
+        .gate-error {
+            color: var(--red);
+            font-size: 0.9rem;
+            min-height: 1.2rem;
+            margin-top: 0.75rem;
+        }
+
         .gate-container {
             text-align: center;
             padding: 2rem;
@@ -391,6 +398,7 @@
             <p>Enter the access code to view your personalized itinerary.</p>
             <input type="password" id="gate-pw" placeholder="Access code" />
             <button class="gate-btn" onclick="checkGate()">Unlock</button>
+            <div class="gate-error" id="gate-err"></div>
         </div>
     </div>
 
@@ -498,12 +506,12 @@
 
     <script>
         function checkGate() {
-            const pw = document.getElementById('gate-pw').value;
+            const pw = document.getElementById('gate-pw').value.toLowerCase().trim();
             if (pw === 'sanche') {
                 sessionStorage.setItem('jp26', '1');
                 document.getElementById('gate-overlay').classList.add('hidden');
             } else {
-                alert('Incorrect code. Try again.');
+                document.getElementById('gate-err').textContent = 'Try again';
             }
         }
 
