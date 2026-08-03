@@ -1,7 +1,7 @@
 # Operational documents — never publish.
 # These carry booking references, phone numbers and the home address,
 # and the site's password gate is soft: page source is public.
-COORDINATOR-HANDBOOK.md
+COORDINATOR-HANDBOOK.*
 HANDOFF.md
 TRIP-NOTES.md
 FOLDER-INVENTORY.md
