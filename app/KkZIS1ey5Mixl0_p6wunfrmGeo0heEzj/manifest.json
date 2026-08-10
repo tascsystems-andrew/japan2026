@@ -1,6 +1,6 @@
 {
  "version": 1,
- "lastUpdated": "2026-08-10T15:55:26Z",
+ "lastUpdated": "2026-08-10T15:56:31Z",
  "encryption": {
   "cipher": "AES-256-GCM",
   "kdf": "PBKDF2-HMAC-SHA256 -> HKDF-SHA256",
@@ -10,31 +10,31 @@
  },
  "files": {
   "days.json.enc": {
-   "sha256": "3a1fefedbbe849a843cfa8706ea31f43d69e62beb443480716fb0d00bdd75124",
-   "bytes": 78536
+   "sha256": "29568c3d8ce741492e11ecf7c0d60487924a09e26c346f12f8d29dc2615e079d",
+   "bytes": 79197
   },
   "essentials.json.enc": {
-   "sha256": "a89ec502c0ebe9c330eb9d2364c6bc2e208222868ca342410f71d39e9b68f9b8",
+   "sha256": "020f3ee1bab24c532b8227e4c22af6aa595bfc4538dbfc4d9ffc32473590d400",
    "bytes": 1727
   },
   "guests.json.enc": {
-   "sha256": "71925d74f1029aa845217935884a778c5492a75fbb0df3bb0cfc1fcd187a1b5f",
+   "sha256": "e8dc0ad185ff0884ea754085cecbde785d43b82975635a96564c926b6b7b1fcd",
    "bytes": 1158
   },
   "phrases.json.enc": {
-   "sha256": "c132a4ec6c72e98d1965e9724d06ca6d5ad229eeaaadb265091180d01f8e1690",
+   "sha256": "0566f08645ae7bd6204fec6c6ff0b76953d3a0772dc3809d45fe95e6bfad820f",
    "bytes": 2950
   },
   "places.json.enc": {
-   "sha256": "0e594f0e84c8a0934a177d41c04f92de655161261be5db321b84573c6780a570",
+   "sha256": "c0cb8e14a6c02e0b9cec72f4b3d7d9b45b3c7bacd2b2bac014edabaa0aee5f8b",
    "bytes": 23158
   },
   "quests.json.enc": {
-   "sha256": "b659ef88754164f94692307cbcac4924182985cafc3c647f3341b0e14c408b53",
+   "sha256": "2dd50b9b9a7735c2e7889dcb997a3abd7f86d204d9c7ac66ed9f469ccb775aa3",
    "bytes": 56090
   },
   "trip.json.enc": {
-   "sha256": "f894bd0803235ff445ba58184122b6a626e6301a61d68ba920c7c69f08320abe",
+   "sha256": "c5b6b79c25425169f5be6d61a506a996cfb5ace21289df58e87ed15cf9b3ae45",
    "bytes": 282
   }
  }
