@@ -1,0 +1,41 @@
+{
+ "version": 1,
+ "lastUpdated": "2026-08-10T03:56:25Z",
+ "encryption": {
+  "cipher": "AES-256-GCM",
+  "kdf": "PBKDF2-HMAC-SHA256 -> HKDF-SHA256",
+  "rounds": 2000000,
+  "salt": "Vm33I2HbJ4c3HTg6w9z+rw==",
+  "info": "japan2026-content-v1"
+ },
+ "files": {
+  "days.json.enc": {
+   "sha256": "2a02c1e0b9c0906309e45b1c66351f86d89dced346da54194135fffc2b630181",
+   "bytes": 58099
+  },
+  "essentials.json.enc": {
+   "sha256": "5a289c9f3a36d52db8d099d27319ab6348897022440215e0adba8ac53648b8b9",
+   "bytes": 1727
+  },
+  "guests.json.enc": {
+   "sha256": "4c55345820439260276247b83ff9f87960f5a1347616a7d873885c63a8cc0d5a",
+   "bytes": 1158
+  },
+  "phrases.json.enc": {
+   "sha256": "b6b3ce42a7936a7fbaa0a3b69c4adcd0fb2bbc7dfd755bf1d0fefb6c376b3ebb",
+   "bytes": 2950
+  },
+  "places.json.enc": {
+   "sha256": "321e8a69ffafe55195dbad0a44e51052d8c8c12bf8c627a647d406c9c4bab292",
+   "bytes": 11344
+  },
+  "quests.json.enc": {
+   "sha256": "f037578786f2267e432a0db0289dfaa6f079ca5c55c0e0e32b42e79148e48d2c",
+   "bytes": 50544
+  },
+  "trip.json.enc": {
+   "sha256": "48545c05266230e065394ec911a431f6e03cd307a71f5dc6b80707b09d02c154",
+   "bytes": 282
+  }
+ }
+}
