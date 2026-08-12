@@ -1,6 +1,6 @@
 {
  "version": 1,
- "lastUpdated": "2026-08-12T15:35:51Z",
+ "lastUpdated": "2026-08-12T15:37:58Z",
  "encryption": {
   "cipher": "AES-256-GCM",
   "kdf": "PBKDF2-HMAC-SHA256 -> HKDF-SHA256",
@@ -10,43 +10,43 @@
  },
  "files": {
   "days.json.enc": {
-   "sha256": "c89b4a619731116953b065f56af1914203bef711725f21904cdab191c4bf732b",
+   "sha256": "29932a3f4331b07195f2fa35658a6e388fd8ce87470bf77e61615390756a65ae",
    "bytes": 79803
   },
   "essentials.json.enc": {
-   "sha256": "a2502a674134345d07d424225b1befc9e4ed74df6dc726e01813bf9d40344a86",
+   "sha256": "02e50aa9b3f8a3af4ca35f64d981d2fc453b5802e96ffdfc457b4845700aefa4",
    "bytes": 4887
   },
   "guests.json.enc": {
-   "sha256": "734213ef342ec34cfe7b1c17903d057482f4305e20c093a7539ddef5235a8a08",
+   "sha256": "62df7faa744cecd4833a8a5d8c90f5b36de395ed3970493266970c2b46055173",
    "bytes": 1191
   },
   "insights.json.enc": {
-   "sha256": "04dd79dcbefb3de9a4e08e61d85ea75f285cbb7acca84c59d7d6b451683f53d2",
+   "sha256": "a5e6ae83faea8ee41699254a1fd76f4b24ef7bc518c2b484df7cf0da4de0576e",
    "bytes": 32644
   },
   "lore.json.enc": {
-   "sha256": "4c7ee928fa2745cf3601f78b1fca7ad48468b08049e3db519960d0ac19068b33",
+   "sha256": "6a2999eade44e90aaefeed73296bd19045b5dd57866b1fe1afa340b974866a66",
    "bytes": 66475
   },
   "phrases.json.enc": {
-   "sha256": "59c5f341c8c83fce44bd9ea2686cb0d08218046f1b14f796e45c1ef764683477",
+   "sha256": "9534ac3a1f539ce42e37772a7c967428e01a0d815bc56b09f36291c48c2f503d",
    "bytes": 2950
   },
   "places.json.enc": {
-   "sha256": "1a9b00c88f36d80ced4bc0652c80ef6758e873953971a00c34226d5ac74c04c8",
+   "sha256": "71d9dbe0e926bdc83b97b7ca4b75c7f32377ab8e3738f93010cf717d00682d3e",
    "bytes": 25677
   },
   "quests.json.enc": {
-   "sha256": "8ade8ca74c5afe56fda4b4c67f804ce6704431e1f6b4f049260294f660e2eeef",
-   "bytes": 195497
+   "sha256": "b28b3cf6ff6eda0750df4c1edbc0a2b9951fcf32d3fd2356055370fbd7f83c4f",
+   "bytes": 194977
   },
   "runs.json.enc": {
-   "sha256": "948202760b2fb5319e59e09a124b2f1dfa9b2cf3debc657f8b513a4de9f1a79f",
+   "sha256": "86ea18e6f9fb369eb00bc2c2a40771633cf4aaac2bbda594082ecb0c1294803f",
    "bytes": 66227
   },
   "trip.json.enc": {
-   "sha256": "fdc4f8bb8f23836a4fe325815859f1860cbe90eb4c8832ac1c7af4c7af291adc",
+   "sha256": "510249065d045fd0dc10558e1b244ca1b1ad55442ffc9967ca383c8fab86c238",
    "bytes": 282
   }
  }
