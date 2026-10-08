@@ -1,6 +1,6 @@
 {
  "version": 1,
- "lastUpdated": "2026-10-08T02:07:33Z",
+ "lastUpdated": "2026-10-08T02:59:53Z",
  "encryption": {
   "cipher": "AES-256-GCM",
   "kdf": "PBKDF2-HMAC-SHA256 -> HKDF-SHA256",
@@ -10,55 +10,55 @@
  },
  "files": {
   "days.json.enc": {
-   "sha256": "437b07dde7df5c79d2a0912feb237c95ac9f4658ab14edf138f6fb226c98815d",
-   "bytes": 173551
+   "sha256": "54101443dbedf774d4709781e43b9c4ae074931fe70045c97cb883cdc1a06783",
+   "bytes": 173592
   },
   "essentials.json.enc": {
-   "sha256": "94f10a5e9bbb73006123d8e7c89d9829b3d638285fc719e3b73aa309f58b85c8",
+   "sha256": "c697adfe8e27488392f27b288af412f39db6e81568004c123294939babf2bc10",
    "bytes": 4887
   },
   "food-nearby.json.enc": {
-   "sha256": "ad9bb2272a517bd755551f44589e1c666f597fcde81f80f2fde85760b45fea6e",
+   "sha256": "e0220d9fa5ee2b6fbc470c9d09b494c40fe65eb869c9cd158c3042cab6052a93",
    "bytes": 19789
   },
   "guests.json.enc": {
-   "sha256": "59e092b1004afafa12be743ff97cdfde7e3b7c675afbb302277de7df7c54ce19",
+   "sha256": "39ec0ebd53c83ea2e1baa0369cd576a64abe7564535a1d4ccc6b319e4aade1ee",
    "bytes": 833
   },
   "insights.json.enc": {
-   "sha256": "6dc8642c461d3dda95f6d096d24a0862cc91eb3057b50b330cdfa12c0721b620",
+   "sha256": "77005780a552509919ed78e5ae70355004be6187a9d984d0d656505f7f8137b2",
    "bytes": 31820
   },
   "language.json.enc": {
-   "sha256": "8aeb339c15f44d36fb1829145abb397208af4372dd98b99007d92d39e32285e0",
+   "sha256": "c0a69ee451b0fa1a2dca54d5cc5009f163b9febca5da2123df774c02a93fc5f0",
    "bytes": 134885
   },
   "lore.json.enc": {
-   "sha256": "c99f992da594c9e11482a6dec28934decb800fb4cc2ac249c79c6b997ef65790",
+   "sha256": "40625cd7d639cb7fc40ee2c1c1122075d2927f86ea7174f68c0beb9a18926d2c",
    "bytes": 81343
   },
   "phrases.json.enc": {
-   "sha256": "50e2146f14ab59bc17db3f26a97c5e56c20f5affab062047415317bd5a38fdce",
+   "sha256": "b4397b9240004a6da8eafff429561a52ff138f8ee5281958ca5f1c63092d1494",
    "bytes": 42632
   },
   "places.json.enc": {
-   "sha256": "9ad385fc5980869cddcdcf5c1358fa040ad5264c22bce2e0534c17910c07f888",
+   "sha256": "3a6f96b0afe45341b43128b70a0803c869b5a2b306cd7621837d5a8de4185d31",
    "bytes": 66460
   },
   "quests.json.enc": {
-   "sha256": "512e9469e9c3f5e0f0347030184a8e5426a7bfa3f5365590e0d468b278d26b80",
+   "sha256": "0c079e25d7e2fcc86b504bd974179e30491a235ebeab457988c8223dea9872c7",
    "bytes": 123510
   },
   "runs.json.enc": {
-   "sha256": "6969f60668e81756a9fe44d63cfe95752bbd710bbf42cc0feaf476152b353520",
+   "sha256": "d3f616794e129ab7175e6de9034951b405bb917f8bbddaf7e3d0344f7afa529a",
    "bytes": 66156
   },
   "stories.json.enc": {
-   "sha256": "aebfad7134766d4fc340aca837fa8dd9e72c4ced623f8f4400911463f20993a0",
+   "sha256": "1b1aace64dd4b785fb922cfaa2849ab7c3102678a57776102ea2bf16d936ef78",
    "bytes": 21774
   },
   "trip.json.enc": {
-   "sha256": "04b7d5bbaa7d34f885ee7bf7136ba1f497ca704282455a53fed9480a359d4952",
+   "sha256": "d09d7213c8ee635a055b66ad64867ecbfa9d428af8f861ab28ab248827a10d14",
    "bytes": 282
   }
  }
