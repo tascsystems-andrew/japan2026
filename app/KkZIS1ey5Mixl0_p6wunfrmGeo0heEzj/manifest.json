@@ -1,6 +1,6 @@
 {
  "version": 1,
- "lastUpdated": "2026-11-21T13:29:11Z",
+ "lastUpdated": "2026-11-22T08:13:53Z",
  "encryption": {
   "cipher": "AES-256-GCM",
   "kdf": "PBKDF2-HMAC-SHA256 -> HKDF-SHA256",
@@ -14,8 +14,8 @@
    "bytes": 116038
   },
   "days.json.enc": {
-   "sha256": "ec2688ff54fc49f3cbf877278be380c3f420fb1c72526a206c08948aa2b9c07c",
-   "bytes": 232657
+   "sha256": "0328380878c44e31e7fdfcbab54b39966522dfb837ab30c443f846e2136d2f9f",
+   "bytes": 232611
   },
   "essentials.json.enc": {
    "sha256": "42fb7b3193551409e7163408ba804ff9b6e8f7b263995741847b0cb672506e44",
@@ -46,16 +46,16 @@
    "bytes": 42632
   },
   "places.json.enc": {
-   "sha256": "6c8c5edb809f17116d203675a98e37ece8bd64831b5f7f017a8263c28c1d1c7c",
-   "bytes": 91368
+   "sha256": "2dfaae6553c77878a8f8402babfe9fb23bfcd8373c3172a74c6fd6aabab71c1b",
+   "bytes": 91338
   },
   "quests.json.enc": {
    "sha256": "5259381ec8d20629a5f1bf61de64fd66a60f0d9668525b3fcb049e3c04412fc4",
    "bytes": 168114
   },
   "runs.json.enc": {
-   "sha256": "6a85bc31179e8517bd3b0d5bb327ce91ae826ae53c417db732d7dbfa0377c119",
-   "bytes": 67730
+   "sha256": "b32e7fbfda98867e4a3a189e989a560545295f3119e180767a42944aa15f6915",
+   "bytes": 68122
   },
   "stories.json.enc": {
    "sha256": "ee67e2c546f324a3a88f79e12d8f8f8ec88ecb3dddfda177116fafe7ef412bd8",
